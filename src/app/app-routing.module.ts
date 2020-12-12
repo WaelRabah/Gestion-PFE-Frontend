@@ -1,3 +1,4 @@
+import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './utils/not-found/not-found.component';
 import { AuthGuard } from './utils/guards/auth.guard';
 import { AdministrationGuard } from './utils/guards/administration.guard';
@@ -26,7 +27,7 @@ const routes: Routes = [
   {
     path: '',
     canActivate: [AuthGuard],
-    component: NotFoundComponent
+    component: LoginComponent
   },
   {
     path: '**',

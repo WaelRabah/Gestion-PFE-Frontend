@@ -1,0 +1,34 @@
+<!-- Start Landing Section-->
+<div class="welcom">
+  <img src="assets/insat.png" class="img-fluid" alt="Responsive image">
+  <div class="d-flex flex-column align-items-center landing border border-light p-5">
+    <form #loginForm="ngForm">
+      <h2 class="h4 mb-4 font-weight-bold text-center" style="color: aliceblue;">Sign in</h2>
+      <p style="color: aliceblue;" class="lead font-weight-bold">Email:</p>
+      <input email type="email" class="form-control" ngModel name="email" required #emailInput="ngModel"/>
+      <div *ngIf="emailInput.invalid && emailInput.dirty" class="alert alert-danger" placeholder="E-mail INSAT">
+        L'email est obligatoire et il doit etre valide
+      </div>
+      <p class="lead font-weight-bold mt-2" style="color: aliceblue;">Password:</p>
+      <input type="password" minlength="4" class="form-control" name="password" ngModel required #pwdInput="ngModel"/>
+      <div *ngIf="pwdInput.invalid && pwdInput.dirty" class="alert alert-danger" placeholder="Password">
+        Le password est obligatoire et il doit avoir au moins caractères
+      </div>
+    </form>
+
+    <button
+      (click)="login(loginForm)"
+      class="btn btn-light mt-3" type="submit"
+    >
+      Login
+    </button>
+
+    </div>
+  </div>
+  <!--<div class="d-flex justify-content-center direction-column"
+   style="background:transparent url('img/desktop.jpg') no-repeat center center /cover">
+    <p>WELCOME</p>
+    <p>BOOTSTRAP 4 COURSE</p>
+    <button type="button" class="btn btn-outline-secondary">GET STARTED</button>
+  </div>-->
+<!-- End Landing Section-->
