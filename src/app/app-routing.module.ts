@@ -25,13 +25,13 @@ const routes: Routes = [
     loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
   },
   {
-    path: '',
+    path: 'login',
     canActivate: [AuthGuard],
     component: LoginComponent
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: LoginComponent
   }
 ];
 
