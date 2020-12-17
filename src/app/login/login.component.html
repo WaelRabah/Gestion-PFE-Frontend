@@ -1,9 +1,9 @@
 
 <div class="login-panel row align-items-center">
-  <div class="col-md-6">
-    <img src="assets/logo.png" alt="">
+  <div class="col-md-6 col-12">
+    <img class="img-responsive" style="width:100%" src="assets/logo.png" alt="">
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 col-12">
     <form fxLayout="column" fxLayoutAlign="space-evenly center" #loginForm="ngForm" class="z-depth-2 text-center border border-light p-5 rounded" action="#!">
 
       <p class="h4 mb-4 display-4">Bienvenu!</p>
@@ -31,7 +31,7 @@
       </div>
 
       <!-- Sign in button -->
-      <button (click)="login(loginForm)" class="btn btn-info btn-block my-4 z-depth-2" type="submit">Log in</button>
+      <button (click)="login(loginForm)" style="background-color: #dd4b39;border-color: #dd4b39;"  class="btn btn-primary btn-block my-4" type="submit">Login</button>
 
     </form>
   </div>
