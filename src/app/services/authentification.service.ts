@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { baseUrl } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthentificationService {
 
   login(data): Observable<any>{
     console.log("I am the server here")
-    return this.http.post(`${baseUrl}auth/login`,data);
+    return this.http.post(`${environment.backendUrl}auth/login`,data);
   }
 
   isAuthenticated(): boolean {
