@@ -6,13 +6,13 @@
   <div class="col-md-6 col-12">
     <form fxLayout="column" fxLayoutAlign="space-evenly center" #loginForm="ngForm" class="z-depth-2 text-center border border-light p-5 rounded" action="#!">
 
-      <p class="h4 mb-4 display-4">Bienvenu!</p>
+      <p class="h4 mb-4 display-4">Bienvenu</p>
 
       <!-- Email -->
       <div class="email-container mb-4 mt-5">
-        <input email type="email" ngModel name="email" required #emailInput="ngModel" class="form-control mb-1" placeholder="E-mail">
+        <input email type="email" ngModel name="email" required #emailInput="ngModel" class="form-control mb-1" placeholder="E-mail" autofocus>
         <div *ngIf="emailInput.invalid && emailInput.dirty">
-          L'email doit etre valide
+          L'email doit être valide
         </div>
       </div>
       <!-- Password -->
@@ -31,7 +31,22 @@
       </div>
 
       <!-- Sign in button -->
-      <button (click)="login(loginForm)" style="background-color: #dd4b39;border-color: #dd4b39;"  class="btn btn-primary btn-block my-4" type="submit">Login</button>
+      <button 
+      *ngIf="!submitted"
+      (click)="login(loginForm)" 
+      style="background-color: #dd4b39;border-color: #dd4b39;" 
+      class="btn btn-primary btn-block my-4" 
+      type="submit"
+      [disabled]="loginForm.invalid"
+      >Login</button>
+
+      <div class="spinner-border text-danger" role="status" *ngIf="submitted">
+        <span class="sr-only">Loading...</span>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorMessage">
+        {{errorMessage}}
+      </div>
 
     </form>
   </div>

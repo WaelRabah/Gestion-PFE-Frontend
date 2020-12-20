@@ -5,12 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { NotFoundComponent } from './utils/not-found/not-found.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import {HttpClientModule} from "@angular/common/http";
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JwtModule } from "@auth0/angular-jwt";
+import { AccesRefuseComponent } from './acces-refuse/acces-refuse.component';
 
 export function tokenGetter(){
   return localStorage.getItem("token");
@@ -22,6 +23,7 @@ export function tokenGetter(){
     LoginComponent,
     HeaderComponent,
     FooterComponent,
+    AccesRefuseComponent,
   ],
   imports: [
     BrowserModule,

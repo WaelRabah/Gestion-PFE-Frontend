@@ -15,13 +15,19 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 
 export class LoginComponent implements OnInit {
 
+  submitted = false;
+
+  errorMessage : string;
+
   constructor(private authentificationService: AuthentificationService,
-    private router: Router
+    private router: Router,
     ){ }
 
   ngOnInit(): void {}
-
   login(loginForm: NgForm) {
+    this.submitted = true;
+    this.errorMessage = null;
+
     this.authentificationService.login(loginForm.value).subscribe(
       (response) => {
         // Storing the token
@@ -30,16 +36,16 @@ export class LoginComponent implements OnInit {
         const helper = new JwtHelperService();
         //Decoded Token
         const decodedToken = helper.decodeToken(response.token);
-        console.log(decodedToken)
         localStorage.setItem('user', JSON.stringify(decodedToken));
         //Check if the token is expired
         const isExpired = helper.isTokenExpired(response.token);
         if (isExpired == false){
-        this.router.navigate(['etudiant']);
+        this.router.navigate([this.authentificationService.getRole()]);
       }
       },
       (erreur) => {
-        alert('Veuillez vérifier vos credentials');
+        this.errorMessage = 'Veuillez vérifier vos identifiants';
+        this.submitted = false;
       }
     );
   }

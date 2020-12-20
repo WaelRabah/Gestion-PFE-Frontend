@@ -16,11 +16,13 @@ export class AuthentificationService {
   }
 
   login(data): Observable<any>{
-    console.log("I am the server here")
     return this.http.post(`${environment.backendUrl}auth/login`,data);
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+  getRole(): string {
+    return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).role : ''
   }
 }
