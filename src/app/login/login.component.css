@@ -1,0 +1,41 @@
+a{
+  text-decoration: none;
+}
+.login-panel{
+  min-height: 100vh;
+}
+.login-panel form{
+  background-color: #fff2ee;
+  height: 500px;
+}
+
+.ng-dirty.ng-invalid{
+  border: 1px solid #ffd9d9;
+  box-shadow: 0px 0px 5px #CC0000;
+}
+
+.ng-dirty.ng-valid{
+  border: 1px solid #e2ffee;
+  box-shadow: 0px 0px 5px #007E33;
+}
+
+.email-container,.pass-container{
+  height:50px;
+}
+
+.email-container div,.pass-container div{
+  color:#CC0000;
+  text-align:left !important
+}
+
+button:hover{
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+button{
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12) !important;
+}
+
+a{
+  color: #7e0304;
+
+}

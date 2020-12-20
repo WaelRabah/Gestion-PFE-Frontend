@@ -7,7 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Gestion-PFE-Frontend';
-  administrateur=true;
-  enseignant=false;
-  etudiant=false;
+  loggedIn=true;
 }
