@@ -11,17 +11,18 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'Etudiant',
+
+    path: 'etudiant',
     canActivate: [EtudiantGuard],
     loadChildren: () => import('./etudiant/etudiant.module').then(m => m.EtudiantModule)
   },
   {
-    path: 'Enseignant',
+    path: 'enseignant',
     canActivate: [EnseignantGuard],
     loadChildren: () => import('./enseignant/enseignant.module').then(m => m.EnseignantModule)
   },
   {
-    path: 'Administrateur',
+    path: 'administration',
     canActivate: [AdministrationGuard],
     loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
   },
@@ -41,7 +42,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFoundComponent
+    component: LoginComponent
   }
 ];
 

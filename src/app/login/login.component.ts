@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   login(loginForm: NgForm) {
     this.submitted = true;
     this.errorMessage = null;
+
     this.authentificationService.login(loginForm.value).subscribe(
       (response) => {
         // Storing the token

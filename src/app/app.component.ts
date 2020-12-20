@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Gestion-PFE-Frontend';
-  loggedIn=true;
+  loggedIn=false;
 }

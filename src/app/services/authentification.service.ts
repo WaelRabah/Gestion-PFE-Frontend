@@ -22,7 +22,6 @@ export class AuthentificationService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
-
   getRole(): string {
     return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).role : ''
   }
