@@ -36,6 +36,16 @@ button{
 }
 
 a{
-  color: #7e0304;
+  color: #830809;
 
 }
+
+#login{
+  background-color: #273a48;
+  border-color: #273a48;
+  color:white;
+}
+.title{
+  color:#273a48;
+}
+

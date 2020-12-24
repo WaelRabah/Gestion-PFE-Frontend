@@ -1,12 +1,12 @@
 
 <div class="login-panel row align-items-center">
   <div class="col-md-6 col-12">
-    <img class="img-responsive" style="width:100%" src="assets/logo.png" alt="">
+    <img class="img-responsive" style="width:100%" src="assets/insat.png" alt="">
   </div>
   <div class="col-md-6 col-12">
     <form fxLayout="column" fxLayoutAlign="space-evenly center" #loginForm="ngForm" class="z-depth-2 text-center border border-light p-5 rounded" action="#!">
 
-      <p class="h4 mb-4 display-4">Bienvenu</p>
+      <p class="title h4 mb-4 display-4">Bienvenue</p>
 
       <!-- Email -->
       <div class="email-container mb-4 mt-5">
@@ -33,14 +33,14 @@
       <!-- Sign in button -->
       <button 
       *ngIf="!submitted"
+      id="login"
       (click)="login(loginForm)" 
-      style="background-color: #dd4b39;border-color: #dd4b39;" 
-      class="btn btn-primary btn-block my-4" 
+      class="btn btn-block my-4" 
       type="submit"
       [disabled]="loginForm.invalid"
       >Login</button>
 
-      <div class="spinner-border text-danger m-4" role="status" *ngIf="submitted">
+      <div class="spinner-border m-4" role="status" *ngIf="submitted">
         <span class="sr-only">Loading...</span>
       </div>
 

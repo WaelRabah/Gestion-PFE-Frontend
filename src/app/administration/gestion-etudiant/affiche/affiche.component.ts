@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MdbTablePaginationComponent, MdbTableDirective } from 'angular-bootstrap-md';
+import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { EditComponent } from '../edit/edit.component';
 
 @Component({
   selector: 'affiche',
@@ -12,24 +13,40 @@ export class AfficheComponent implements OnInit, AfterViewInit {
   @ViewChild('row', { static: true }) row: ElementRef;
 
   elements: any = [];
-  headElements = ['id', 'first', 'last', 'handle','action'];
-
+  headElements = ['nom', 'prenom', 'filiere', 'niveau','email','action'];
   searchText: string = '';
   previous: string;
 
   maxVisibleItems: number = 8;
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(private cdRef: ChangeDetectorRef,private modalService: MDBModalService) {}
+  modalRef: MDBModalRef;
+
+
+  openModal(data) {
+    this.modalRef = this.modalService.show(EditComponent, {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        class: 'modal-dialog cascading-modal',
+        containerClass: 'largeModal',
+        animated: true,
+        data: {data:data}
+    });
+    this.modalRef.content.action.subscribe( (result: any) => { console.log(result); });
+  }
 
   @HostListener('input') oninput() {
     this.mdbTablePagination.searchText = this.searchText;
   }
 
   ngOnInit() {
+    //getting students from the backend
     for (let i = 1; i <= 25; i++) {
-      this.elements.push({id: i.toString(), first: 'Wpis ' + i, last: 'Last ' + i, handle: 'Handle ' + i});
+      this.elements.push({nom: i.toString(), lastname: 'Wpis ' + i, firstname: 'Last ' + i, filiere: 'Handle ' + i,niveau: 'Handle ' + i,email: 'Handle ' + i});
     }
-
     this.mdbTable.setDataSource(this.elements);
     this.elements = this.mdbTable.getDataSource();
     this.previous = this.mdbTable.getDataSource();
@@ -37,7 +54,6 @@ export class AfficheComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
