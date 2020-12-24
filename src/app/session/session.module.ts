@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SessionComponent } from './session.component';
 import { SessionRoutingModule} from './session-routing.module';
-
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 
 @NgModule({
@@ -14,7 +14,8 @@ import { SessionRoutingModule} from './session-routing.module';
     CommonModule,
     MDBBootstrapModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FilterPipeModule
   ],
 })
 export class SessionModule { }

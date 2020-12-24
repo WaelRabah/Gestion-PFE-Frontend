@@ -7,28 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SessionComponent implements OnInit {
   elements: any = [
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-    {id: 1, first: 'Mark', last: '25/07/2020', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-    {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
+    {numero: 1, filiere: 'GL', date: '2018-01-01' },
+    {numero: 2, filiere: 'GL', date: '2018-01-01' },
+    {numero: 3, filiere: 'IMI', date: '2018-01-01' },
+    {numero: 4, filiere: 'IIA', date: '2018-01-01' },
+    {numero: 5, filiere: 'RT', date: '2018-01-01'},
   ];
   headElements = ['Numero', 'Filiere', 'Date', 'Actions'];
-  searchText: {
-    numero?: string;
-    president?: string;
-    date?: Date
-  } = {};
+  searchText: any = {}
   constructor() { }
 
   ngOnInit(): void {

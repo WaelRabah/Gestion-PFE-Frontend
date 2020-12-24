@@ -7,17 +7,17 @@
   </div>
   <div class="col-md-2">
     <div class="md-form">
-      <input mdbInput type="text" id="form59" class="form-control" [(ngModel)]="searchText.president">
-      <label for="form59">President</label>
+      <input mdbInput type="text" id="form59" class="form-control" [(ngModel)]="searchText.filiere">
+      <label for="form59">Filiere</label>
     </div>
   </div>
   <div class="col-md-2">
     <div class="md-form">
       <input type="date" id="input" class="form-control" mdbInput [(ngModel)]="searchText.date">
       <label for="input">Date</label>
+      <p>{{searchText.date}}</p>
     </div>
   </div>
-  <button class="adjust" mdbBtn type="button" color="primary"  outline="true"  mdbWavesEffect>Filtrer</button>
   <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
 </div>
 <hr>
@@ -30,10 +30,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr mdbTableCol *ngFor="let el of elements">
-      <th scope="row">{{el.id}}</th>
-      <td>{{el.first}}</td>
-      <td>{{el.last}}</td>
+    <tr mdbTableCol *ngFor="let el of elements | filterBy: searchText ">
+      <th scope="row">{{el.numero}}</th>
+      <td>{{el.filiere}}</td>
+      <td>{{el.date}}</td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button  mdbBtn type="button" color="primary" color="success" class="buttontab" mdbWavesEffect>
@@ -50,6 +50,8 @@
     </tr>
   </tbody>
 </table>
-  </div>
 </div>
+</div>
+<!-- another component just putting it here for now-->
+
 
