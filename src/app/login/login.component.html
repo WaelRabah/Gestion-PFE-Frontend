@@ -40,13 +40,10 @@
       [disabled]="loginForm.invalid"
       >Login</button>
 
-      <div class="spinner-border text-danger" role="status" *ngIf="submitted">
+      <div class="spinner-border text-danger m-4" role="status" *ngIf="submitted">
         <span class="sr-only">Loading...</span>
       </div>
 
-      <div class="alert alert-danger" *ngIf="errorMessage">
-        {{errorMessage}}
-      </div>
 
     </form>
   </div>

@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +17,15 @@ export class LoginComponent implements OnInit {
 
   submitted = false;
 
-  errorMessage : string;
 
   constructor(private authentificationService: AuthentificationService,
     private router: Router,
+    private toastr: ToastrService
     ){ }
 
   ngOnInit(): void {}
   login(loginForm: NgForm) {
     this.submitted = true;
-    this.errorMessage = null;
 
     this.authentificationService.login(loginForm.value).subscribe(
       (response) => {
@@ -40,11 +39,12 @@ export class LoginComponent implements OnInit {
         //Check if the token is expired
         const isExpired = helper.isTokenExpired(response.token);
         if (isExpired == false){
+        this.authentificationService.loggedInSubject.next(true);
         this.router.navigate([this.authentificationService.getRole()]);
       }
       },
       (erreur) => {
-        this.errorMessage = 'Veuillez vérifier vos identifiants';
+        this.toastr.error('Veuillez vérifier vos identifiants',"Erreur d'authentification",{positionClass:'toast-bottom-right'});
         this.submitted = false;
       }
     );

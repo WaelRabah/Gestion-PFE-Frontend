@@ -12,6 +12,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AccesRefuseComponent } from './acces-refuse/acces-refuse.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 export function tokenGetter(){
   return localStorage.getItem("token");
@@ -31,6 +33,8 @@ export function tokenGetter(){
     NgbModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
     JwtModule.forRoot({
       config:{

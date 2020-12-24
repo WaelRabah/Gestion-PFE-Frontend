@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -9,10 +9,15 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthentificationService {
 
-  constructor(private http: HttpClient) { }
+  loggedInSubject = new Subject<boolean>();
+
+  constructor(private http: HttpClient) { 
+    this.loggedInSubject.next(!!localStorage.getItem('user'));
+  }
 
   logout() {
     localStorage.removeItem('token');
+    this.loggedInSubject.next(false);
   }
 
   login(data): Observable<any>{
