@@ -1,0 +1,61 @@
+<button type="button" mdbBtn color="primary" class="waves-light" (click)="form.show()" mdbWavesEffect>
+    Ajouter Etudiant</button>
+<button type="button" mdbBtn color="info" class="waves-light" mdbWavesEffect>
+    Uploader fichier Excel</button>
+  <!--Modal: Contact form-->
+  <div mdbModal #form="mdb-modal" class="modal fade" id="modalContactForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog cascading-modal" role="document">
+      <!--Content-->
+      <div class="modal-content">
+  
+        <!--Header-->
+        <div class="modal-header light-blue darken-3 white-text">
+          <h4 class="title">
+              <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+              Contact
+          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="form.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          </h4>
+        </div>
+        <!--Body-->
+        <div class="modal-body mb-0">
+          <form [formGroup]="modalForm">
+            <div class="md-form form-sm">
+              <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
+              <input mdbInput type="text" id="modalFormNameEx" formControlName="modalFormNameEx" class="form-control">
+              <label for="modalFormNameEx">Your name</label>
+            </div>
+  
+            <div class="md-form form-sm">
+                <mdb-icon icon="lock" class="prefix"></mdb-icon>
+              <input mdbInput type="email" id="modalFormEmailEx" formControlName="modalFormEmailEx" class="form-control">
+              <label for="modalFormEmailEx">Your email</label>
+            </div>
+  
+            <div class="md-form form-sm">
+                <mdb-icon icon="tag" class="prefix"></mdb-icon>
+              <input mdbInput type="text" id="modalFormSubjectEx" formControlName="modalFormSubjectEx" class="form-control">
+              <label for="modalFormSubjectEx">Subject</label>
+            </div>
+  
+            <div class="md-form form-sm">
+                <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+              <textarea mdbInput type="text" id="modalFormTextEx" formControlName="modalFormTextEx" class="md-textarea mb-0"></textarea>
+              <label for="modalFormTextEx">Your message</label>
+            </div>
+  
+            <div class="text-center mt-1-half">
+              <button mdbBtn color="info" class="mb-2 waves-light" mdbWavesEffect>Send
+                  <mdb-icon fas icon="paper-plane" class="prefix ml-1"></mdb-icon>
+              </button>
+            </div>
+          </form>
+  
+        </div>
+      </div>
+      <!--/.Content-->
+    </div>
+  </div>
+  <!--Modal: Contact form-->
