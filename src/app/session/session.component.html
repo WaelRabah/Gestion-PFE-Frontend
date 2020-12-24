@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="md-form">
+      <input mdbInput type="text" id="form58" class="form-control" [(ngModel)]="searchText.numero">
+      <label for="form58">Numero</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="md-form">
+      <input mdbInput type="text" id="form59" class="form-control" [(ngModel)]="searchText.president">
+      <label for="form59">President</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="md-form">
+      <input type="date" id="input" class="form-control" mdbInput [(ngModel)]="searchText.date">
+      <label for="input">Date</label>
+    </div>
+  </div>
+  <button class="adjust" mdbBtn type="button" color="primary"  outline="true"  mdbWavesEffect>Filtrer</button>
+  <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-5">
+<table mdbTable mdbTableScroll scrollY="true" maxHeight="500" >
+  <thead class="black white-text">
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of elements">
+      <th scope="row">{{el.id}}</th>
+      <td>{{el.first}}</td>
+      <td>{{el.last}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button  mdbBtn type="button" color="primary" color="success" class="buttontab" mdbWavesEffect>
+            <mdb-icon fas icon="eye"></mdb-icon>
+          </button>
+          <button  mdbBtn type="button" color="primary" class="buttontab" mdbWavesEffect>
+            <mdb-icon fas icon="pencil-alt"></mdb-icon>
+          </button>
+          <button  mdbBtn type="button" color="primary" color="danger" class="buttontab" mdbWavesEffect>
+            <mdb-icon far icon="trash-alt"></mdb-icon>
+          </button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+</div>
+

@@ -8,8 +8,11 @@ import { EtudiantGuard } from './guards/etudiant.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
 const routes: Routes = [
+  {
+    path: 'Session',
+    loadChildren: () => import('./session/session.module').then(m => m.SessionModule)
+  },
   {
 
     path: 'Etudiant',

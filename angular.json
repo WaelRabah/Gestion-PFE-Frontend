@@ -130,6 +130,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Gestion-PFE-Frontend"
+    }
+  },
+  "defaultProject": "Gestion-PFE-Frontend",
+  "cli": {
+    "analytics": false
+  }
 }
