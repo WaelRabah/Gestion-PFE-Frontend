@@ -16,15 +16,16 @@
       </thead>
       <tbody #row>
       <tr mdbTableCol (rowCreated)="onRowCreate($event)" (rowRemoved)="onRowRemove($event)" *ngFor="let el of elements; let i = index">
-        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.id}}</th>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="red-text">{{el.first}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.last}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.handle}}</td>
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.lastname}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" class="red-text">{{el.firstname}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.filiere}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.niveau}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-            <button type="button" mdbBtn color="warning" class="btn-sm waves-light" mdbWavesEffect>
+            <button (click)="openModal(el)" type="button" mdbBtn color="warning" class="btn-sm waves-light" mdbWavesEffect>
                 <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
             </button>
-            <button type="button" mdbBtn color="danger" class="btn-sm waves-light" mdbWavesEffect>
+            <button  type="button" mdbBtn color="danger" class="btn-sm waves-light" mdbWavesEffect>
                 <mdb-icon fas icon="trash" class="prefix"></mdb-icon>
             </button>
         </td>

@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       }
       },
       (erreur) => {
-        this.toastr.error('Veuillez vérifier vos identifiants',"Erreur d'authentification",{positionClass:'toast-bottom-right'});
+        this.toastr.error('Veuillez vérifier vos identifiants',"Erreur d'authentification",{positionClass:'toast-bottom-left'});
         this.submitted = false;
       }
     );
