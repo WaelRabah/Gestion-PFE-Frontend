@@ -12,8 +12,11 @@ export class SessionComponent implements OnInit {
     {numero: 3, filiere: 'IMI', date: '2018-01-01' },
     {numero: 4, filiere: 'IIA', date: '2018-01-01' },
     {numero: 5, filiere: 'RT', date: '2018-01-01'},
+    {numero: 3, filiere: 'IMI', date: '2018-01-01' },
+    {numero: 4, filiere: 'IIA', date: '2018-01-01' },
+    {numero: 5, filiere: 'RT', date: '2018-01-01'},
   ];
-  headElements = ['Numero', 'Filiere', 'Date', 'Actions'];
+  headElements = ['#', 'Filiere', 'Date', 'Actions'];
   searchText: any = {}
   constructor() { }
 

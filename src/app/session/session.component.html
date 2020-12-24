@@ -15,7 +15,6 @@
     <div class="md-form">
       <input type="date" id="input" class="form-control" mdbInput [(ngModel)]="searchText.date">
       <label for="input">Date</label>
-      <p>{{searchText.date}}</p>
     </div>
   </div>
   <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
@@ -23,7 +22,7 @@
 <hr>
 <div class="row">
   <div class="col-md-5">
-<table mdbTable mdbTableScroll scrollY="true" maxHeight="500" >
+<table mdbTable mdbTableScroll scrollY="true" maxHeight="600" >
   <thead class="black white-text">
     <tr>
       <th *ngFor="let head of headElements" scope="col">{{head}} </th>
@@ -51,7 +50,77 @@
   </tbody>
 </table>
 </div>
-</div>
 <!-- another component just putting it here for now-->
+<div class="col-md">
+  <div class="row">
+  <table class="table table-striped table-responsive-md btn-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>President</th>
+        <th>Filiere</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Samir Hamza</td>
+        <td>IMI</td>
+        <td>25-07-1998</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+    <h4 style="margin-top:20px;">Modification Session</h4>
+    <hr>
+    <form action="/action_page.php" class="was-validated">
+      <div class="form-row">
+        <div class="col">
+          <label for="uname">Numero:</label>
+          <input type="number" class="form-control" id="uname" name="uname" required>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+      <div class="col">
+        <label for="pwd">President:</label>
+        <input type="texy" class="form-control" id="pwd" name="pswd" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <label for="uname">Filiere:</label>
+          <select class="form-control" id="exampleFormControlSelect1" required>
+            <option>GL</option>
+            <option>RT</option>
+            <option>IIA</option>
+            <option>IMI</option>
+            <option>BIO</option>
+            <option>CH</option>
+          </select>
+          <div class="valid-feedback">Valid.</div>
+          <div class="invalid-feedback">Please fill out this field.</div>
+        </div>
+      <div class="col">
+        <label for="pwd">Date:</label>
+        <input type="date" class="form-control" id="pwd"  name="pswd" required>
+        <div class="valid-feedback">Valid.</div>
+        <div class="invalid-feedback">Please fill out this field.</div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+      <button  class="ml-auto" type="button" mdbBtn color="primary" mdbWavesEffect>Modifier</button>
+      <button  type="button" mdbBtn color="danger" mdbWavesEffect>Annuler</button>
+    </div>
+    </form>
+    </div>
+</div>
+
+
+
+
 
 
