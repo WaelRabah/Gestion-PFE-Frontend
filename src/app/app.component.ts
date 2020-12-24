@@ -13,8 +13,10 @@ export class AppComponent {
 
   }
   ngOnInit(){
-    this.loggedIn = this.authService.isAuthenticated();
-    console.log(this.loggedIn);
+    this.loggedIn=this.authService.isAuthenticated();
+    this.authService.loggedInSubject.subscribe(
+      next => this.loggedIn=next
+    )
   }
  
 }
