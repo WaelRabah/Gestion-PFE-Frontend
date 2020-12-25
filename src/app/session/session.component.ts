@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Session } from './session.model';
+import { SessionService} from './session.service';
 
 @Component({
   selector: 'app-session',
@@ -6,21 +9,32 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./session.component.css']
 })
 export class SessionComponent implements OnInit {
-  elements: any = [
-    {numero: 1, filiere: 'GL', date: '2018-01-01' },
-    {numero: 2, filiere: 'GL', date: '2018-01-01' },
-    {numero: 3, filiere: 'IMI', date: '2018-01-01' },
-    {numero: 4, filiere: 'IIA', date: '2018-01-01' },
-    {numero: 5, filiere: 'RT', date: '2018-01-01'},
-    {numero: 3, filiere: 'IMI', date: '2018-01-01' },
-    {numero: 4, filiere: 'IIA', date: '2018-01-01' },
-    {numero: 5, filiere: 'RT', date: '2018-01-01'},
-  ];
+  elements:Session[] = [];
+  selectedSession: Session;
   headElements = ['#', 'Filiere', 'Date', 'Actions'];
   searchText: any = {}
-  constructor() { }
+  constructor( private sessionService: SessionService, private route:Router) { }
 
   ngOnInit(): void {
+    this.sessionService.fetchSessions().subscribe( data => {
+      this.sessionService.setSession(data);
+      this.elements = this.sessionService.getSessions();
+      console.log(this.elements)
+    });
+
+    this.sessionService.sessionChanged.subscribe( data => {
+      this.elements = this.sessionService.getSessions();
+    })
+
+  }
+
+  onClickSession(index: string){
+    this.selectedSession= this.elements.find( element => element._id == index)
+  }
+
+  onNavigate(){
+    this.route.navigate(["/Session/create"]);
+    console.log("hello")
   }
 
 }
