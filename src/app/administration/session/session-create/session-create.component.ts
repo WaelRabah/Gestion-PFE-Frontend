@@ -22,12 +22,12 @@ export class SessionCreateComponent implements OnInit {
       this.form.reset();
       data.date = data.date.slice(0,10);
       this.sessionService.addSession(data)
-      this.route.navigate(["/Session"]);
+      this.route.navigate(["/Administrateur/session"]);
     });
   }
 
   onClear(){
     this.form.reset();
-    this.route.navigate(["/Session"]);
+    this.route.navigate(["/Administrateur/session"]);
   }
 }
