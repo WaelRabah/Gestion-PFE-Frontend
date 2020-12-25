@@ -1,7 +1,7 @@
 
       <div class="modal-content">
         <!--Header-->
-        <div class="modal-header light-blue darken-3 white-text">
+        <div class="modal-header info-color-dark white-text">
           <h4 class="title">
               <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
               Modifier un etudiant
@@ -12,55 +12,78 @@
         </div>
         <!--Body-->
         <div class="modal-body mb-0">
-          <form >
+          <form action="#!" #etudiantForm="ngForm">
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
-              <input mdbInput type="text" id="nom"  class="form-control">
+              <input required  [(ngModel)]="data.lastname" #lastName="ngModel" name="lastname" mdbInput type="text" id="nom"  class="form-control">
               <label for="nom">Nom</label>
+              <div *ngIf="lastName.invalid && lastName.dirty">
+                required
+              </div>
             </div>
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
-              <input mdbInput type="text" id="prenom"  class="form-control">
+              <input required [(ngModel)]="data.firstname" #firstName="ngModel"  name="firstname" mdbInput type="text" id="prenom"  class="form-control">
               <label for="prenom">Prénom</label>
+              <div *ngIf="firstName.invalid && firstName.dirty">
+                required
+              </div>
             </div>
-            <div class="md-form form-sm">
-              <mdb-icon fas icon="id-card-alt" class="prefix"></mdb-icon>
-              <input mdbInput type="text" id="filiere"  class="form-control">
-              <label for="filiere">Filiere</label>
-            </div>
-            <div class="md-form form-sm">
-              <mdb-icon fas icon="user-graduate" class="prefix"></mdb-icon>
 
-              <select class="browser-default custom-select">
+            <div class="md-form form-sm">
+              <mdb-icon fas icon="user-graduate" class="prefix select"></mdb-icon>
+              <select required [(ngModel)]="data.filiere" #filiere="ngModel"  name="filiere" class="browser-default custom-select">
                 <option selected>Filiere</option>
-                <option value="1">GL</option>
-                <option value="2">RT</option>
-                <option value="3">IIA</option>
+                <option value="GL">GL</option>
+                <option value="RT">RT</option>
+                <option value="IIA">IIA</option>
               </select>
+              <div *ngIf="filiere.invalid && filiere.dirty">
+                required
+              </div>
             </div>
             <div class="md-form form-sm">
-              <mdb-icon fas icon="user-tie" class="prefix"></mdb-icon>
-              <select class="browser-default custom-select">
+              <mdb-icon fas icon="user-tie" class="prefix select"></mdb-icon>
+              <select required [(ngModel)]="data.niveau" #niveau="ngModel"  name="niveau" class="browser-default custom-select">
                 <option selected>Niveau</option>
-                <option value="1">2</option>
                 <option value="2">3</option>
-                <option value="3">4</option>
+                <option value="3">5</option>
               </select>
+              <div *ngIf="niveau.invalid && niveau.dirty">
+                required
+              </div>
             </div>
   
             <div class="md-form form-sm">
                 <mdb-icon fas icon="envelope" class="prefix"></mdb-icon>
-              <input mdbInput type="email" id="email"  class="form-control">
+              <input [(ngModel)]="data.email" required #email="ngModel"  mdbInput type="email" id="email" name="email" class="form-control">
               <label for="email">Email</label>
+              <div *ngIf="email.invalid && email.dirty">
+                required
+              </div>
+            </div>
+           
+            <div class="text-center mt-1-half">
+              <button 
+              *ngIf="!submitted"
+              type="submit" 
+              [disabled]="etudiantForm.invalid"
+              mdbBtn 
+              (click)="edit(etudiantForm)" 
+              class="add info-color-dark mb-2 waves-light" 
+              mdbWavesEffect>
+              Modifier
+                  <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>
+              </button>
+   
+              <div class="spinner-border m-4" role="status" *ngIf="submitted">
+                <span class="sr-only">Loading...</span>
+              </div>
+        
             </div>
           </form>
   
         </div>
-        <div class="modal-footer">
-            <button (click)="onYesClick()" mdbBtn color="info" class="mb-2 waves-light" mdbWavesEffect>Ajouter
-                <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>
-            </button>
-            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="modalRef.hide()" mdbWavesEffect>Close</button>
-        </div>
+      
       </div>
    
