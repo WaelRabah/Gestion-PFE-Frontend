@@ -15,6 +15,7 @@ import { AccesRefuseComponent } from './acces-refuse/acces-refuse.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+
 export function tokenGetter(){
   return localStorage.getItem("token");
 }

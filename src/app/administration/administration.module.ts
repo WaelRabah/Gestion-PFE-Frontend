@@ -10,10 +10,11 @@ import { AjouteComponent } from './gestion-etudiant/ajoute/ajoute.component';
 import { AfficheComponent } from './gestion-etudiant/affiche/affiche.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
+import { GestionEnseignantComponent } from './gestion-enseignant/gestion-enseignant.component';
 
 
 @NgModule({
-  declarations: [AdministrationComponent, GestionEtudiantComponent, AjouteComponent, AfficheComponent, EditComponent],
+  declarations: [AdministrationComponent, GestionEtudiantComponent, AjouteComponent, AfficheComponent, EditComponent, GestionEnseignantComponent],
   imports: [
     MDBBootstrapModule,
     FormsModule,

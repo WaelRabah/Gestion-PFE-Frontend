@@ -17,11 +17,12 @@
           <a routerLink="/Administrateur/gestion-etudiant" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect>Gestion Etudiant</a>
       </li>
       <li *ngIf="role==roles.admin" class="nav-item">
-        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion Enseignant</a>
+        <a  class="nav-link waves-light"routerLink="/Administrateur/gestion-enseignant"  routerLinkActive="active" mdbWavesEffect>Gestion Enseignant</a>
       </li>
       <li *ngIf="role==roles.admin" class="nav-item">
           <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion des PFEs</a>
       </li>
+
       <!-- Enseignant-->
       <li *ngIf="role==roles.enseignant" class="nav-item active">
         <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Encadrement<span class="sr-only">(current)</span></a>
