@@ -6,21 +6,22 @@ import { AdministrationComponent } from './administration.component';
 import { GestionEtudiantComponent } from './gestion-etudiant/gestion-etudiant.component';
 import { AjouteComponent } from './gestion-etudiant/ajoute/ajoute.component';
 import { AfficheComponent } from './gestion-etudiant/affiche/affiche.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { SessionCreateComponent } from './session/session-create/session-create.component';
 import { SessionComponent } from './session/session.component';
 import { SessionModifComponent} from './session/session-modif/session-modif.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
-import { RouterModule } from '@angular/router';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
-     GestionEtudiantComponent,
-      AjouteComponent,
-      AfficheComponent,
+    AdministrationComponent,
+     GestionEtudiantComponent, 
+    AjouteComponent, 
+    AfficheComponent, 
+    EditComponent,
       SessionModifComponent,
       SessionCreateComponent
     ],
@@ -32,7 +33,7 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     CommonModule,
     AdministrationRoutingModule
-  ],
-  entryComponents: [ EditComponent ]
+    ],
+  entryComponents: [ EditComponent,AjouteComponent ]
 })
 export class AdministrationModule { }
