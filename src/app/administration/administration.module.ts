@@ -12,6 +12,7 @@ import { SessionComponent } from './session/session.component';
 import { SessionModifComponent} from './session/session-modif/session-modif.component';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { RouterModule } from '@angular/router';
+import { EditComponent } from './gestion-etudiant/edit/edit.component';
 
 @NgModule({
   declarations: [AdministrationComponent,
@@ -26,10 +27,11 @@ import { RouterModule } from '@angular/router';
     FilterPipeModule,
     MDBBootstrapModule,
     FormsModule,
+    MatSelectModule,
     ReactiveFormsModule,
     CommonModule,
-    AdministrationRoutingModule,
-    RouterModule,
-  ]
+    AdministrationRoutingModule
+  ],
+  entryComponents: [ EditComponent ]
 })
 export class AdministrationModule { }

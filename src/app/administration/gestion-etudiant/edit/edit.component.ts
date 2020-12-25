@@ -5,28 +5,28 @@ import { Subject } from 'rxjs';
 import { EtudiantService } from '../services/etudiant.service';
 
 @Component({
-  selector: 'ajoute',
-  templateUrl: './ajoute.component.html',
-  styleUrls: ['./ajoute.component.css']
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.css']
 })
-export class AjouteComponent implements OnInit {
+export class EditComponent implements OnInit {
+  data:any;
   action: Subject<any> = new Subject();
-  submitted = false;
-
   constructor(private etudiantService:EtudiantService,public modalRef: MDBModalRef) {}
-  
-  add(etudiantForm: NgForm) {
-    this.submitted=true;
+  submitted=false;
+  edit(etudiantForm: NgForm) {
     etudiantForm.value.role="Etudiant";
+    etudiantForm.value._id=this.data._id;
+    this.submitted=true;
     etudiantForm.value.username=etudiantForm.value.firstname+etudiantForm.value.lastname;
     console.log(etudiantForm.value);
-    this.etudiantService.addEtudiant(etudiantForm.value).subscribe(
-      (etudiant)=>{this.submitted=false;this.action.next(etudiant);this.modalRef.hide();},
+    this.etudiantService.updateEtudiant(etudiantForm.value).subscribe(
+      (etudiant)=>{this.action.next(etudiant);this.modalRef.hide();this.submitted=false;},
       (error)=>{this.submitted=false;console.log(error);}
     )
   }
- 
-  ngOnInit(): void {
+  ngOnInit(){
+    console.log(this.data);
   }
 
 }
