@@ -17,7 +17,7 @@
       <label for="input">Date</label>
     </div>
   </div>
-  <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect  (click)="onNavigate()" ><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
+  <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect  (click)="onNavigateCreate()" ><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
 </div>
 <hr>
 <div class="row">
@@ -38,10 +38,10 @@
           <button (click)="onClickSession(el._id)" mdbBtn type="button" color="primary" color="success" class="buttontab" mdbWavesEffect>
             <mdb-icon fas icon="eye"></mdb-icon>
           </button>
-          <button  mdbBtn type="button" color="primary" class="buttontab" mdbWavesEffect>
+          <button  mdbBtn type="button" color="primary" class="buttontab" mdbWavesEffect (click)="onNavigateModif(el._id)">
             <mdb-icon fas icon="pencil-alt"></mdb-icon>
           </button>
-          <button  mdbBtn type="button" color="primary" color="danger" class="buttontab" mdbWavesEffect>
+          <button  mdbBtn type="button" color="primary" color="danger" class="buttontab" (click)="onDelete(el._id)" mdbWavesEffect>
             <mdb-icon far icon="trash-alt"></mdb-icon>
           </button>
       </div>

@@ -1,24 +1,24 @@
 <h4 style="margin-top:20px;">Modification Session</h4>
 <hr>
-<form action="/action_page.php" class="was-validated">
+<form #form="ngForm" (ngSubmit)="onSubmit(form)" class="was-validated">
   <div class="form-row">
     <div class="col">
-      <label for="uname">Numero:</label>
-      <input type="number" class="form-control" id="uname" name="uname" required>
+      <label for="numero">Numero:</label>
+      <input type="number" class="form-control" id="numero" name="numero" ngModel required >
       <div class="valid-feedback">Valid.</div>
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
   <div class="col">
-    <label for="pwd">President:</label>
-    <input type="texy" class="form-control" id="pwd" name="pswd" required>
+    <label for="president">President:</label>
+    <input type="text" class="form-control" id="president" name="president" ngModel required>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
   </div>
   </div>
   <div class="form-row">
     <div class="col">
-      <label for="uname">Filiere:</label>
-      <select class="form-control" id="exampleFormControlSelect1" required>
+      <label for="filiere">Filiere:</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="filiere" ngModel required>
         <option>GL</option>
         <option>RT</option>
         <option>IIA</option>
@@ -30,14 +30,14 @@
       <div class="invalid-feedback">Please fill out this field.</div>
     </div>
   <div class="col">
-    <label for="pwd">Date:</label>
-    <input type="date" class="form-control" id="pwd"  name="pswd" required>
+    <label for="date">Date:</label>
+    <input type="date" class="form-control" id="date"  name="date" ngModel required>
     <div class="valid-feedback">Valid.</div>
     <div class="invalid-feedback">Please fill out this field.</div>
   </div>
 </div>
 <div class="row" style="margin-top:20px;">
-  <button  class="ml-auto" type="button" mdbBtn color="primary" mdbWavesEffect>Modifier</button>
+  <button  class="ml-auto" type="submit" mdbBtn color="primary" mdbWavesEffect>Modifier</button>
   <button  type="button" mdbBtn color="danger" mdbWavesEffect>Annuler</button>
 </div>
 </form>

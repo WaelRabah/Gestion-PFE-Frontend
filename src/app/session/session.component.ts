@@ -16,7 +16,10 @@ export class SessionComponent implements OnInit {
   constructor( private sessionService: SessionService, private route:Router) { }
 
   ngOnInit(): void {
-    this.sessionService.fetchSessions().subscribe( data => {
+    this.sessionService.fetchSessions().subscribe( data  => {
+      data.map( session => {
+        session.date = session.date.slice(0,10);
+      })
       this.sessionService.setSession(data);
       this.elements = this.sessionService.getSessions();
       console.log(this.elements)
@@ -29,12 +32,21 @@ export class SessionComponent implements OnInit {
   }
 
   onClickSession(index: string){
+    this.route.navigate(['/Session'])
     this.selectedSession= this.elements.find( element => element._id == index)
   }
 
-  onNavigate(){
+  onNavigateCreate(){
     this.route.navigate(["/Session/create"]);
     console.log("hello")
+  }
+
+  onNavigateModif(index: string){
+    let element = this.elements.find( element => element._id == index);
+    this.route.navigate(['Session/modif',element._id])
+  }
+  onDelete(index: string){
+    this.sessionService.deleteSession(index)
   }
 
 }

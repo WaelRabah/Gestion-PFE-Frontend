@@ -18,8 +18,9 @@ export class SessionCreateComponent implements OnInit {
 
 
   onSubmit(form: NgForm){
-    this.sessionService.storeSession(form.value).subscribe( data => {
-      this.sessionService.addSession(data as Session)
+    this.sessionService.storeSession(form.value).subscribe( (data: Session )=> {
+      data.date = data.date.slice(0,10);
+      this.sessionService.addSession(data)
       this.route.navigate(["/Session"]);
     });
   }
