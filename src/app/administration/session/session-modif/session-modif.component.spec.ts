@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AfficheEnsComponent } from './affiche.component';
+import { SessionModifComponent } from './session-modif.component';
 
-describe('AfficheEnsComponent', () => {
-  let component: AfficheEnsComponent;
-  let fixture: ComponentFixture<AfficheEnsComponent>;
+describe('SessionModifComponent', () => {
+  let component: SessionModifComponent;
+  let fixture: ComponentFixture<SessionModifComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AfficheEnsComponent ]
+      declarations: [ SessionModifComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AfficheEnsComponent);
+    fixture = TestBed.createComponent(SessionModifComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

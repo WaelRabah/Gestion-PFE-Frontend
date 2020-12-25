@@ -8,7 +8,7 @@ import { EnseignantService } from '../services/enseignant.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent implements OnInit {
+export class EditEnsComponent implements OnInit {
   data:any;
   action: Subject<any> = new Subject();
   constructor(private enseignantService:EnseignantService,public modalRef: MDBModalRef) {}

@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core
 import { EnseignantService } from './services/enseignant.service';
 import { Subject } from 'rxjs';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
-import { AjouteComponent } from './ajoute/ajoute.component';
-import { EditComponent } from './edit/edit.component';
+import { AjouteEnsComponent } from './ajoute/ajoute.component';
+import { EditEnsComponent } from './edit/edit.component';
 
 @Component({
   selector: 'app-gestion-enseignant',
@@ -16,7 +16,7 @@ export class GestionEnseignantComponent implements OnInit {
 
 
   openEditModal(data) {
-    this.modalRef = this.modalService.show(EditComponent, {
+    this.modalRef = this.modalService.show(EditEnsComponent, {
         backdrop: true,
         keyboard: true,
         focus: true,
@@ -37,7 +37,7 @@ export class GestionEnseignantComponent implements OnInit {
   }
 
   openAddModal() {
-    this.modalRef = this.modalService.show(AjouteComponent, {
+    this.modalRef = this.modalService.show(AjouteEnsComponent, {
         backdrop: true,
         keyboard: true,
         focus: true,

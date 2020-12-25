@@ -8,7 +8,7 @@ import { EnseignantService } from '../services/enseignant.service';
   templateUrl: './ajoute.component.html',
   styleUrls: ['./ajoute.component.css']
 })
-export class AjouteComponent implements OnInit {
+export class AjouteEnsComponent implements OnInit {
   action: Subject<any> = new Subject();
   submitted = false;
 

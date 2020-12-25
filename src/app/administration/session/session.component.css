@@ -1,0 +1,19 @@
+.adjust {
+  height:40px;
+  margin-top:28px;
+  margin-right:15px;
+}
+
+
+.buttontab{
+  width:auto;
+  height:40px;
+  text-align: center;
+  padding:10px;
+  margin-right: 4px !important;
+}
+
+.btn-class button{
+  height: 10px !important;
+}
+

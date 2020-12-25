@@ -15,7 +15,7 @@
         </div>
         <!--Body-->
         <div class="modal-body mb-0">
-          <form action="#!" #enseigantForm="ngForm">
+          <form action="#!" #enseignantForm="ngForm">
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
               <input required  ngModel #lastName="ngModel" name="lastname" mdbInput type="text" id="nom"  class="form-control">
@@ -35,25 +35,29 @@
 
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-graduate" class="prefix select"></mdb-icon>
+              <label for="nom">Département</label>
               <select required ngModel #departement="ngModel"  name="departement" class="browser-default custom-select">
                 <option selected>Département</option>
-                <option value="PI">Génie Physique et Instrumentation</option>
-                <option value="IM">Génie Informatique et Mathématique</option>
-                <option value="BC">Génie Biologique et Chimie</option>
-                <option value="SSLF">Sciences Sociales, Langage et Formation Générale</option>
+                <option value="Génie Physique et Instrumentation">Génie Physique et Instrumentation</option>
+                <option value="Génie Informatique et Mathématique">Génie Informatique et Mathématique</option>
+                <option value="Génie Biologique et Chimie">Génie Biologique et Chimie</option>
+                <option value="Sciences Sociales, Langage et Formation Générale">Sciences Sociales, Langage et Formation Générale</option>
               </select>
-              <div *ngIf="filiere.invalid && filiere.dirty">
+              <div *ngIf="departement.invalid && departement.dirty">
                 required
               </div>
             </div>
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-tie" class="prefix select"></mdb-icon>
+              <label for="nom">Grade</label>
               <select required ngModel #grade="ngModel"  name="grade" class="browser-default custom-select">
                 <option selected>Grade</option>
-                <option value="2">proffes</option>
-                <option value="3">Else</option>
+                <option value="Professeur">Professeur</option>
+                <option value="Maître de Conférences">Maître de Conférences</option>
+                <option value=">Maître-assistant">Maître-assistant</option>
+                <option value="Assistant">Assistant</option>
               </select>
-              <div *ngIf="niveau.invalid && niveau.dirty">
+              <div *ngIf="grade.invalid && grade.dirty">
                 required
               </div>
             </div>

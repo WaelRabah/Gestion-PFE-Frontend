@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdministrationGuard } from '../guards/administration.guard';
-
 import { AdministrationComponent } from './administration.component';
 import { GestionEnseignantComponent } from './gestion-enseignant/gestion-enseignant.component';
 import { GestionEtudiantComponent } from './gestion-etudiant/gestion-etudiant.component';
+import { SessionComponent } from './session/session.component';
+import { SessionCreateComponent} from './session/session-create/session-create.component';
+import { SessionModifComponent} from './session/session-modif/session-modif.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,13 @@ const routes: Routes = [
       canActivate: [AdministrationGuard],
       component: GestionEnseignantComponent
     },
+    {
+      path: 'session',
+      component: SessionComponent, children:[
+        { path:"modif/:id" , component:SessionModifComponent },
+        { path:"create" , component:SessionCreateComponent }
+      ]
+    }
   ];
 
 @NgModule({

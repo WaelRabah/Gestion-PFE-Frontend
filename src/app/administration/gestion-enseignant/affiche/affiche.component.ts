@@ -9,7 +9,7 @@ import {EnseignantService} from '../services/enseignant.service';
   templateUrl: './affiche.component.html',
   styleUrls: ['./affiche.component.css']
 })
-export class AfficheComponent  implements OnInit, AfterViewInit {
+export class AfficheEnsComponent  implements OnInit, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('row', { static: true }) row: ElementRef;
