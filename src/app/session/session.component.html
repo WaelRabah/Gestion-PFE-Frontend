@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="md-form">
+      <input mdbInput type="text" id="form58" class="form-control" [(ngModel)]="searchText.numero">
+      <label for="form58">Numero</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="md-form">
+      <input mdbInput type="text" id="form59" class="form-control" [(ngModel)]="searchText.filiere">
+      <label for="form59">Filiere</label>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="md-form">
+      <input type="date" id="input" class="form-control" mdbInput [(ngModel)]="searchText.date">
+      <label for="input">Date</label>
+    </div>
+  </div>
+  <button class="ml-auto adjust" type="button" mdbBtn color="success" mdbWavesEffect  (click)="onNavigateCreate()" ><mdb-icon style="margin-right:10px" fas icon="plus"></mdb-icon>Ajout Session  </button>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-5">
+<table mdbTable mdbTableScroll scrollY="true" maxHeight="600" >
+  <thead class="black white-text">
+    <tr>
+      <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr mdbTableCol *ngFor="let el of elements  | filterBy: searchText ">
+      <th scope="row">{{el.numero}}</th>
+      <td>{{el.filiere}}</td>
+      <td>{{el.date}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button (click)="onClickSession(el._id)" mdbBtn type="button" color="primary" color="success" class="buttontab" mdbWavesEffect>
+            <mdb-icon fas icon="eye"></mdb-icon>
+          </button>
+          <button  mdbBtn type="button" color="primary" class="buttontab" mdbWavesEffect (click)="onNavigateModif(el._id)">
+            <mdb-icon fas icon="pencil-alt"></mdb-icon>
+          </button>
+          <button  mdbBtn type="button" color="primary" color="danger" class="buttontab" (click)="onDelete(el._id)" mdbWavesEffect>
+            <mdb-icon far icon="trash-alt"></mdb-icon>
+          </button>
+      </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="col-md">
+  <div class="row">
+  <table class="table table-striped table-responsive-md btn-table" *ngIf="selectedSession">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>President</th>
+        <th>Filiere</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <th scope="row">{{ selectedSession.numero}}</th>
+        <td>{{ selectedSession.president}}</td>
+        <td>{{ selectedSession.filiere}}</td>
+        <td>{{ selectedSession.date}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+
+
+
+
