@@ -13,6 +13,7 @@ import { SessionModifComponent} from './session/session-modif/session-modif.comp
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { RouterModule } from '@angular/router';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [AdministrationComponent,
