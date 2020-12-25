@@ -51,9 +51,9 @@ export class SessionService {
       president: doc.value.president,
       date : doc.value.date
     }
-    return this.http.put("http://localhost:3000/sessions/"+index,update).subscribe((data:Session) => {
+    this.http.put("http://localhost:3000/sessions/"+index,update).subscribe((data:Session) => {
+      data.date = data.date.slice(0,10);
       let idx = this.sessions.indexOf(this.getSessionById(index))
-      console.log(data)
       this.sessions[idx]= data
       this.sessionChanged.next(this.sessions.slice())
     })

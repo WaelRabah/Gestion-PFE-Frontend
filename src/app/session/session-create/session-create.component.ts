@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Session } from '../session.model';
@@ -10,7 +10,7 @@ import { SessionService } from '../session.service';
   styleUrls: ['./session-create.component.css']
 })
 export class SessionCreateComponent implements OnInit {
-
+  @ViewChild('f') form:NgForm;
   constructor( private sessionService:SessionService , private route : Router ) { }
 
   ngOnInit(): void {
@@ -19,6 +19,7 @@ export class SessionCreateComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.sessionService.storeSession(form.value).subscribe( (data: Session )=> {
+      this.form.reset();
       data.date = data.date.slice(0,10);
       this.sessionService.addSession(data)
       this.route.navigate(["/Session"]);
@@ -26,6 +27,7 @@ export class SessionCreateComponent implements OnInit {
   }
 
   onClear(){
+    this.form.reset();
     this.route.navigate(["/Session"]);
   }
 }

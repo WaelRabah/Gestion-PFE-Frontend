@@ -11,7 +11,7 @@ const routes: Routes = [
     component: AdministrationComponent },
     {
       path: 'gestion-etudiant',
-      /*canActivate: [AdministrationGuard],*/
+      canActivate: [AdministrationGuard],
       component: GestionEtudiantComponent
     },
   ];

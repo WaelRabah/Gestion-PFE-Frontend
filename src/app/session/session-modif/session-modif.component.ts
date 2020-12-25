@@ -46,4 +46,5 @@ export class SessionModifComponent implements OnInit  {
     this.router.navigate(['/Session']);
   }
 
+
 }

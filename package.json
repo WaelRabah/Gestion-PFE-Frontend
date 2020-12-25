@@ -35,6 +35,7 @@
     "ngx-filter-pipe": "^2.1.2",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.5.5",
+    "sweetalert2": "^10.12.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Session } from './session.model';
 import { SessionService} from './session.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-session',
@@ -42,11 +43,29 @@ export class SessionComponent implements OnInit {
   }
 
   onNavigateModif(index: string){
+    this.onClickSession(index);
     let element = this.elements.find( element => element._id == index);
     this.route.navigate(['Session/modif',element._id])
   }
   onDelete(index: string){
-    this.sessionService.deleteSession(index)
+    Swal.fire({
+      title: 'Tu es sure?',
+      text: "Vous ne pourrez pas revenir en arrière!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Oui, Supprime la session!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.sessionService.deleteSession(index);
+        Swal.fire(
+          'Supprimée!',
+          'La session est supprimé',
+          'success'
+        )
+      }
+    })
   }
 
 }
