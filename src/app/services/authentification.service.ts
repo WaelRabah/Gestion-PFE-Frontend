@@ -2,22 +2,31 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthentificationService {
+ 
+  setLoggedData(response: any) {
+    localStorage.setItem('token', response.token);
+    //JWT helper service to decode the token
+    const helper = new JwtHelperService();
+    //Decoded Token
+    const decodedToken = helper.decodeToken(response.token);
+    localStorage.setItem('user', JSON.stringify(decodedToken));
+    //Check if the token is expired
+    const isExpired = helper.isTokenExpired(response.token); 
+   }
 
-  loggedInSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient) { 
-    this.loggedInSubject.next(!!localStorage.getItem('user'));
   }
 
   logout() {
     localStorage.removeItem('token');
-    this.loggedInSubject.next(false);
   }
 
   login(data): Observable<any>{

@@ -1,51 +1,52 @@
 <!-- Start Nav Section-->
 <nav class="navbar navbar-expand-lg white z-depth-1">
-  <a class="navbar-brand" href="#">
-    <img src="assets/insatlogo.png" class="img-fluid z-depth-2" alt="Responsive image">
-  </a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-  <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNav">
-  <ul class="navbar-nav">
-    <!-- Administrateur-->
-    <li *ngIf="role==roles.admin" class="nav-item">
-      <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion Session/Soutenance</a>
-  </li>
-  <li *ngIf="role==roles.admin" class="nav-item">
-      <a routerLink="/Administrateur/gestion-etudiant" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect>Gestion Etudiant</a>
-  </li>
-  <li *ngIf="role==roles.admin" class="nav-item">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion Enseignant</a>
-  </li>
-  <li *ngIf="role==roles.admin" class="nav-item">
-      <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion des PFEs</a>
-  </li>
-  <!-- Enseignant-->
-  <li *ngIf="role==roles.enseignant" class="nav-item active">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Encadrement<span class="sr-only">(current)</span></a>
-  </li>
-  <li *ngIf="role==roles.enseignant" class="nav-item">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion PFE</a>
-  </li>
-   <!-- Etudiant-->
-  <li *ngIf="role==roles.etudiant" class="nav-item active">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Ancien PFEs<span class="sr-only">(current)</span></a>
-  </li>
-  <li *ngIf="role==roles.etudiant" class="nav-item">
-      <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Ajouter Sujet</a>
-  </li>
-  <li *ngIf="role==roles.etudiant" class="nav-item">
-      <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Suggestion PFE</a>
-  </li>
-  <li *ngIf="role==roles.etudiant" class="nav-item">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Upload PFE</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect (click)="logout()">LOGOUT</a>
-  </li>
-  </ul>
+  <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="assets/insatlogo.png" class="img-fluid" alt="Responsive image">
+      </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- Administrateur-->
+        <li *ngIf="role==roles.admin" class="nav-item">
+          <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion Session/Soutenance</a>
+      </li>
+      <li *ngIf="role==roles.admin" class="nav-item">
+          <a routerLink="/Administrateur/gestion-etudiant" routerLinkActive="active" class="nav-link waves-light" mdbWavesEffect>Gestion Etudiant</a>
+      </li>
+      <li *ngIf="role==roles.admin" class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion Enseignant</a>
+      </li>
+      <li *ngIf="role==roles.admin" class="nav-item">
+          <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion des PFEs</a>
+      </li>
+      <!-- Enseignant-->
+      <li *ngIf="role==roles.enseignant" class="nav-item active">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Encadrement<span class="sr-only">(current)</span></a>
+      </li>
+      <li *ngIf="role==roles.enseignant" class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Gestion PFE</a>
+      </li>
+      <!-- Etudiant-->
+      <li *ngIf="role==roles.etudiant" class="nav-item active">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Ancien PFEs<span class="sr-only">(current)</span></a>
+      </li>
+      <li *ngIf="role==roles.etudiant" class="nav-item">
+          <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Ajouter Sujet</a>
+      </li>
+      <li *ngIf="role==roles.etudiant" class="nav-item">
+          <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Suggestion PFE</a>
+      </li>
+      <li *ngIf="role==roles.etudiant" class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Upload PFE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect (click)="logout()">LOGOUT</a>
+      </li>
+      </ul>
+    </div>
 </div>
-
   <!-- End Nav Section-->
 </nav>
