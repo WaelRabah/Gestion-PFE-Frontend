@@ -10,10 +10,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'Session',
-    loadChildren: () => import('./session/session.module').then(m => m.SessionModule)
-  },
-  {
 
     path: 'Etudiant',
     canActivate: [EtudiantGuard],

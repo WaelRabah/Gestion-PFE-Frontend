@@ -33,19 +33,19 @@ export class SessionComponent implements OnInit {
   }
 
   onClickSession(index: string){
-    this.route.navigate(['/Session'])
+    this.route.navigate(['/Administrateur/session'])
     this.selectedSession= this.elements.find( element => element._id == index)
   }
 
   onNavigateCreate(){
-    this.route.navigate(["/Session/create"]);
+    this.route.navigate(["/Administrateur/session/create"]);
     console.log("hello")
   }
 
   onNavigateModif(index: string){
     this.onClickSession(index);
     let element = this.elements.find( element => element._id == index);
-    this.route.navigate(['Session/modif',element._id])
+    this.route.navigate(['/Administrateur/session/modif',element._id])
   }
   onDelete(index: string){
     Swal.fire({

@@ -43,7 +43,7 @@ export class SessionModifComponent implements OnInit  {
 
   onClear(){
     this.form.reset();
-    this.router.navigate(['/Session']);
+    this.router.navigate(['/Administrateur/session']);
   }
 
 
