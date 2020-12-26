@@ -1,3 +1,4 @@
+import { GestionEnseignantComponent } from './gestion-enseignant/gestion-enseignant.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,27 +14,35 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatSelectModule} from '@angular/material/select';
+import { EditEnsComponent } from './gestion-enseignant/edit/edit.component';
+import { AjouteEnsComponent } from './gestion-enseignant/ajoute/ajoute.component';
+import { AfficheEnsComponent } from './gestion-enseignant/affiche/affiche.component';
 import { GestionSoutenanceComponent } from './session/gestion-soutenance/gestion-soutenance.component';
 import { ListeComponent } from './session/gestion-soutenance/liste/liste.component';
 import { AjouterComponent } from './session/gestion-soutenance/ajouter/ajouter.component';
 import { DetailComponent } from './session/gestion-soutenance/detail/detail.component';
 import { FilterComponent } from './session/gestion-soutenance/filter/filter.component';
-
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
     AdministrationComponent,
-     GestionEtudiantComponent, 
-    AjouteComponent, 
-    AfficheComponent, 
+     GestionEtudiantComponent,
+    AjouteComponent,
+    AfficheComponent,
     EditComponent,
-      SessionModifComponent,
-      SessionCreateComponent,
-      GestionSoutenanceComponent,
-      ListeComponent,
-      AjouterComponent,
-      DetailComponent,
-      FilterComponent
+    EditEnsComponent,
+    AfficheEnsComponent,
+    AjouteEnsComponent,
+    SessionModifComponent,
+    SessionCreateComponent,
+    GestionEnseignantComponent,
+    SessionModifComponent,
+    SessionCreateComponent,
+    GestionSoutenanceComponent,
+    ListeComponent,
+    AjouterComponent,
+    DetailComponent,
+    FilterComponent
     ],
   imports: [
     FilterPipeModule,
@@ -44,6 +53,6 @@ import { FilterComponent } from './session/gestion-soutenance/filter/filter.comp
     CommonModule,
     AdministrationRoutingModule
     ],
-  entryComponents: [ EditComponent,AjouteComponent ]
+  entryComponents: [ EditComponent,AjouteComponent, EditEnsComponent, AjouteEnsComponent]
 })
 export class AdministrationModule { }
