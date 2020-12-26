@@ -13,6 +13,11 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatSelectModule} from '@angular/material/select';
+import { GestionSoutenanceComponent } from './session/gestion-soutenance/gestion-soutenance.component';
+import { ListeComponent } from './session/gestion-soutenance/liste/liste.component';
+import { AjouterComponent } from './session/gestion-soutenance/ajouter/ajouter.component';
+import { DetailComponent } from './session/gestion-soutenance/detail/detail.component';
+import { FilterComponent } from './session/gestion-soutenance/filter/filter.component';
 
 @NgModule({
   declarations: [AdministrationComponent,
@@ -23,7 +28,12 @@ import {MatSelectModule} from '@angular/material/select';
     AfficheComponent, 
     EditComponent,
       SessionModifComponent,
-      SessionCreateComponent
+      SessionCreateComponent,
+      GestionSoutenanceComponent,
+      ListeComponent,
+      AjouterComponent,
+      DetailComponent,
+      FilterComponent
     ],
   imports: [
     FilterPipeModule,
