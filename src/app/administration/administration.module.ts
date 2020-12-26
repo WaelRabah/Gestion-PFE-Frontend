@@ -19,9 +19,9 @@ import { AjouteEnsComponent } from './gestion-enseignant/ajoute/ajoute.component
 import { AfficheEnsComponent } from './gestion-enseignant/affiche/affiche.component';
 import { GestionSoutenanceComponent } from './session/gestion-soutenance/gestion-soutenance.component';
 import { ListeComponent } from './session/gestion-soutenance/liste/liste.component';
-import { AjouterComponent } from './session/gestion-soutenance/ajouter/ajouter.component';
 import { DetailComponent } from './session/gestion-soutenance/detail/detail.component';
-import { FilterComponent } from './session/gestion-soutenance/filter/filter.component';
+import { AjouterSoutenanceComponent } from './session/gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
+import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-soutenance/modify-soutenance.component';
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
@@ -40,9 +40,9 @@ import { FilterComponent } from './session/gestion-soutenance/filter/filter.comp
     SessionCreateComponent,
     GestionSoutenanceComponent,
     ListeComponent,
-    AjouterComponent,
     DetailComponent,
-    FilterComponent
+    AjouterSoutenanceComponent,
+    ModifySoutenanceComponent
     ],
   imports: [
     FilterPipeModule,

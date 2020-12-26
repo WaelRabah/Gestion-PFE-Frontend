@@ -101,68 +101,6 @@
       </tbody>
     </table>
   </div>
+  <router-outlet></router-outlet>
 
-  <div
-    class="col-md card tab-pane fade pt-3"
-    *ngIf="selectedSession"
-    [ngClass]="selectedSession && 'active show'"
-  >
-    <div class="row mb-3">
-      <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
-      <span class="badge badge-dark ml-3">Salle : 2B6</span>
-      <span class="badge badge-dark ml-3"
-        >President : {{ selectedSession.president }}</span
-      >
-      <span class="badge badge-dark ml-3"
-        >Filiere : {{ selectedSession.filiere }}</span
-      >
-      <span class="badge badge-dark ml-3"
-        >Date : {{ selectedSession.date }}</span
-      >
-      <button class="badge badge-primary ml-3" style="border: none">
-        Modifier session
-      </button>
-      <button
-        class="badge badge-danger d-flex align-items-center ml-3"
-        style="border: none"
-      >
-        <mdb-icon
-          style="margin-right: 10px"
-          class="pl-1"
-          fas
-          icon="trash"
-        ></mdb-icon>
-      </button>
-    </div>
-    <div class="row mb-3 justify-content-between">
-      <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
-
-      <button class="badge badge-primary ml-3" style="border: none">
-        Ajouter Soutenance
-        <mdb-icon
-          style="margin-right: 10px"
-          class="pl-1"
-          fas
-          icon="plus"
-        ></mdb-icon>
-      </button>
-      <button
-        class="badge badge-light d-flex align-items-center mr-3"
-        style="border-color: black"
-      >
-        Télécharger PDF
-        <mdb-icon
-          style="margin-right: 10px"
-          class="pl-1"
-          fas
-          icon="arrow-down"
-        ></mdb-icon>
-      </button>
-    </div>
-
-    <div class="row">
-      <app-gestion-soutenance></app-gestion-soutenance>
-    </div>
-    <router-outlet></router-outlet>
-  </div>
 </div>

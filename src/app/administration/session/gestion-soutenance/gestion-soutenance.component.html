@@ -1,1 +1,54 @@
-<app-liste></app-liste>
+<div
+  class="col-md card tab-pane fade pt-3"
+  *ngIf="selectedSession"
+  [ngClass]="selectedSession && 'active show'"
+>
+  <div class="row mb-3">
+    <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
+    <span class="badge badge-dark ml-3">Salle : 2B6</span>
+    <span class="badge badge-dark ml-3"
+      >President : {{ selectedSession.president }}</span
+    >
+    <span class="badge badge-dark ml-3"
+      >Filiere : {{ selectedSession.filiere }}</span
+    >
+    <span class="badge badge-dark ml-3">Date : {{ selectedSession.date }}</span>
+  </div>
+  <div class="row mb-3 justify-content-between">
+    <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
+
+    <button
+      class="badge badge-primary ml-3"
+      style="border: none"
+      (click)="onNavigateCreate()"
+    >
+      Ajouter Soutenance
+      <mdb-icon
+        style="margin-right: 10px"
+        class="pl-1"
+        fas
+        icon="plus"
+      ></mdb-icon>
+    </button>
+    <button
+      class="badge badge-light d-flex align-items-center mr-3"
+      style="border-color: black"
+    >
+      Télécharger PDF
+      <mdb-icon
+        style="margin-right: 10px"
+        class="pl-1"
+        fas
+        icon="arrow-down"
+      ></mdb-icon>
+    </button>
+  </div>
+
+  <div class="row">
+    <!-- <app-gestion-soutenance [sessionId]="selectedSession._id"></app-gestion-soutenance> -->
+  </div>
+  <app-liste
+    [sessionId]="sessionId"
+    [selectedSession]="selectedSession"
+  ></app-liste>
+</div>

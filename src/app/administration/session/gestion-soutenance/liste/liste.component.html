@@ -1,10 +1,9 @@
-<div class="row">
-  <div class="col-4">
+<div class="row" style="height: 300px;width: 40rem;">
+  <div class="col-3">
     <div
       class="list-group overflow-auto"
-      style="height: 300px"
-      id="list-tab"
-      role="tablist"
+      style="height: 300px;width: 9.0rem;"
+  
     >
       <button
         *ngFor="let item of soutenances; let idx = index"
@@ -12,25 +11,28 @@
         [ngClass]="selectedSoutenance === idx && 'active'"
         (click)="setSelected(idx)"
       >
-        {{ item.candidat }}
+        {{ item.displayable.candidat }}
       </button>
     </div>
   </div>
 
-  <div class="col-8">
-    <div class="tab-content" id="nav-tabContent">
+  <div class="col-9">
+    <div class="" id="nav-tabContent">
       <app-detail
         [ngClass]="selectedSoutenance === idx && 'active show'"
         *ngFor="let item of soutenances; let idx = index"
-        [item]="item"
+        [item]="item.displayable"
         [index]="idx"
         [selectedSoutenance]="selectedSoutenance"
+        [sessionId]="sessionId"
+        [original]="item.original"
+        [selectedSession]="selectedSession"
       ></app-detail>
       <div
         class="card tab-pane fade"
         *ngIf="selectedSoutenance === -1"
         [ngClass]="'active show'"
-        style="width: 27.3rem; height: 18.8rem"
+        style="width: 29rem; height: 18.8rem"
       >
         <div
           class="list-group card-body d-flex align-items-center"
