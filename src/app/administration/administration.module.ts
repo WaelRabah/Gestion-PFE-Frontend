@@ -1,3 +1,4 @@
+import { GestionEnseignantComponent } from './gestion-enseignant/gestion-enseignant.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,17 +14,23 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { EditComponent } from './gestion-etudiant/edit/edit.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import {MatSelectModule} from '@angular/material/select';
-
+import { EditEnsComponent } from './gestion-enseignant/edit/edit.component';
+import { AjouteEnsComponent } from './gestion-enseignant/ajoute/ajoute.component';
+import { AfficheEnsComponent } from './gestion-enseignant/affiche/affiche.component';
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
     AdministrationComponent,
-     GestionEtudiantComponent, 
-    AjouteComponent, 
-    AfficheComponent, 
+     GestionEtudiantComponent,
+    AjouteComponent,
+    AfficheComponent,
     EditComponent,
-      SessionModifComponent,
-      SessionCreateComponent
+    EditEnsComponent,
+    AfficheEnsComponent,
+    AjouteEnsComponent,
+    SessionModifComponent,
+    SessionCreateComponent,
+    GestionEnseignantComponent
     ],
   imports: [
     FilterPipeModule,
@@ -34,6 +41,6 @@ import {MatSelectModule} from '@angular/material/select';
     CommonModule,
     AdministrationRoutingModule
     ],
-  entryComponents: [ EditComponent,AjouteComponent ]
+  entryComponents: [ EditComponent,AjouteComponent, EditEnsComponent, AjouteEnsComponent]
 })
 export class AdministrationModule { }
