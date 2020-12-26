@@ -17,6 +17,11 @@ import {MatSelectModule} from '@angular/material/select';
 import { EditEnsComponent } from './gestion-enseignant/edit/edit.component';
 import { AjouteEnsComponent } from './gestion-enseignant/ajoute/ajoute.component';
 import { AfficheEnsComponent } from './gestion-enseignant/affiche/affiche.component';
+import { GestionSoutenanceComponent } from './session/gestion-soutenance/gestion-soutenance.component';
+import { ListeComponent } from './session/gestion-soutenance/liste/liste.component';
+import { DetailComponent } from './session/gestion-soutenance/detail/detail.component';
+import { AjouterSoutenanceComponent } from './session/gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
+import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-soutenance/modify-soutenance.component';
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
@@ -30,7 +35,14 @@ import { AfficheEnsComponent } from './gestion-enseignant/affiche/affiche.compon
     AjouteEnsComponent,
     SessionModifComponent,
     SessionCreateComponent,
-    GestionEnseignantComponent
+    GestionEnseignantComponent,
+    SessionModifComponent,
+    SessionCreateComponent,
+    GestionSoutenanceComponent,
+    ListeComponent,
+    DetailComponent,
+    AjouterSoutenanceComponent,
+    ModifySoutenanceComponent
     ],
   imports: [
     FilterPipeModule,

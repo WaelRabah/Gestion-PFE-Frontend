@@ -17,7 +17,10 @@ export class SessionService {
     return this.http.get<Session[]>("http://localhost:3000/sessions");
 
   }
+  fetchSessionById(id:string){
+    return this.http.get<Session>(`http://localhost:3000/sessions/${id}`);
 
+  }
   getSessionById(index:string) {
     return this.sessions.find( element => element._id == index);
   }

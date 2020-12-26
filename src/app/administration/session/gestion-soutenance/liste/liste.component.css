@@ -1,0 +1,8 @@
+button {
+  outline: none;
+  text-align: center;
+}
+button.active {
+  background-color: black;
+  border-color: black;
+}
