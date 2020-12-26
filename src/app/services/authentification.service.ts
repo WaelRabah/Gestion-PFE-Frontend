@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthentificationService {
- 
+
   setLoggedData(response: any) {
     localStorage.setItem('token', response.token);
     //JWT helper service to decode the token
@@ -18,11 +18,11 @@ export class AuthentificationService {
     const decodedToken = helper.decodeToken(response.token);
     localStorage.setItem('user', JSON.stringify(decodedToken));
     //Check if the token is expired
-    const isExpired = helper.isTokenExpired(response.token); 
+    const isExpired = helper.isTokenExpired(response.token);
    }
 
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   logout() {
@@ -38,5 +38,9 @@ export class AuthentificationService {
   }
   getRole(): string {
     return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).role : ''
+  }
+
+  getUserName(): string {
+    return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).username : '';
   }
 }
