@@ -3,7 +3,6 @@ import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, 
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
 import {SujetPFE} from '../models/pfe.model';
-import { saveAs } from 'file-saver';
 import { Status } from '../enums/status.enum';
 @Component({
   selector: 'app-afficher-pfe',

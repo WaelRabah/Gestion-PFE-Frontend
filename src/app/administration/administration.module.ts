@@ -22,6 +22,11 @@ import { ListeComponent } from './session/gestion-soutenance/liste/liste.compone
 import { DetailComponent } from './session/gestion-soutenance/detail/detail.component';
 import { AjouterSoutenanceComponent } from './session/gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
 import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-soutenance/modify-soutenance.component';
+import { GestionPfeComponent } from './gestion-pfe/gestion-pfe.component';
+import { AfficherPfeComponent} from './gestion-pfe/afficher-pfe/afficher-pfe.component';
+import { RefuserPfeComponent} from './gestion-pfe/refuser-pfe/refuser-pfe.component';
+import { AccepterPfeComponent} from './gestion-pfe/accepter-pfe/accepter-pfe.component';
+
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
@@ -42,7 +47,11 @@ import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-s
     ListeComponent,
     DetailComponent,
     AjouterSoutenanceComponent,
-    ModifySoutenanceComponent
+    ModifySoutenanceComponent,
+    GestionPfeComponent,
+    AccepterPfeComponent,
+    AfficherPfeComponent,
+    RefuserPfeComponent
     ],
   imports: [
     FilterPipeModule,
