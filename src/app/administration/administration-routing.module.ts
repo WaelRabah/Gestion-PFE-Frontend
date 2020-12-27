@@ -26,6 +26,11 @@ const routes: Routes = [
       component: GestionEnseignantComponent
     },
     {
+      path: 'gestion-pfe',
+      canActivate: [AdministrationGuard],
+      component: GestionPfeComponent
+    },
+    {
       path: 'session',
       component: SessionComponent, children:[
         { path:"modif/:id" , component:SessionModifComponent },
