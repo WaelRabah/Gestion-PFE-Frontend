@@ -1,0 +1,38 @@
+<table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" class="text-center z-depth-1">
+  <thead class="sticky-top">
+  <tr>
+    <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="elements" [sortBy]="headElements[i]"
+        scope="col">{{head | titlecase}} <mdb-icon fas icon="sort"></mdb-icon>
+    </th>
+  </tr>
+  </thead>
+  <tbody #row>
+  <tr mdbTableCol  *ngFor="let el of elements; let i = index">
+    <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.titre}}</th>
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{el.entreprise}}</td>
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
+    <!--<td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.niveau}}</td>-->
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+      <button (click)="getPDF(el._id)" type="button" mdbBtn class="edit btn-sm waves-light" mdbWavesEffect>
+        <mdb-icon fas icon="file" class="prefix"></mdb-icon>
+      </button>
+    </td>
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+        <button (click)="openAccepterModal(el)" type="button" mdbBtn class="edit btn-sm waves-light" mdbWavesEffect>
+          <i class="far fa-check-square"></i>
+        </button>
+        <button (click)="openRefuserModal(el)" type="button" mdbBtn class="delete btn-sm waves-light" mdbWavesEffect>
+          <i class="fas fa-times"></i>
+        </button>
+    </td>
+
+  </tr>
+  </tbody>
+  <tfoot class="grey lighten-5 w-100">
+  <tr>
+    <td colspan="4">
+      <mdb-table-pagination [tableEl]="tableEl" paginationAlign="" [searchDataSource]="elements"></mdb-table-pagination>
+    </td>
+  </tr>
+  </tfoot>
+</table>
