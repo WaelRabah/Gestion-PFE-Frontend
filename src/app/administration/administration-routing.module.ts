@@ -10,6 +10,7 @@ import { SessionModifComponent} from './session/session-modif/session-modif.comp
 import { GestionSoutenanceComponent } from './session/gestion-soutenance/gestion-soutenance.component';
 import { AjouterSoutenanceComponent } from './session/gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
 import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-soutenance/modify-soutenance.component';
+import { GestionPfeComponent } from './gestion-pfe/gestion-pfe.component';
 
 const routes: Routes = [
   {
