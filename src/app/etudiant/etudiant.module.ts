@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { EtudiantRoutingModule } from './etudiant-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,10 +7,12 @@ import { AjoutSujetComponent } from './ajout-sujet/ajout-sujet.component';
 
 
 
+
 @NgModule({
   declarations: [AncienPfeComponent, AjoutSujetComponent],
   imports: [
     CommonModule,
+    FormsModule,
     EtudiantRoutingModule
   ]
 })

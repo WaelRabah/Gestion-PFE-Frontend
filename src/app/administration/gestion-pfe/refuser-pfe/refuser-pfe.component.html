@@ -1,0 +1,50 @@
+
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header info-color-dark white-text">
+          <h4 class="title">
+              <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+              Voulez vous refuser ce sujet?
+          <button (click)="modalRef.hide()" type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" >
+            <span aria-hidden="true">×</span>
+          </button>
+          </h4>
+        </div>
+        <!--Body-->
+        <div class="modal-body mb-0">
+          <form action="#!" >
+            <div class="md-form form-sm">
+              <input name="sujet" mdbInput type="text" id="sujet" disabled  class="form-control" [value]="data.titre">
+              <label for="sujet">Titre du sujet</label>
+            </div>
+            <div class="md-form form-sm">
+              <input  name="entreprise" mdbInput type="text" id="entreprise" disabled class="form-control" [value]="data.entreprise">
+              <label for="entreprise">Entreprise</label>
+            </div>
+
+              <label for="description">Description</label>
+              <textarea name="description" id="description" disabled class="form-control">{{data.description}}</textarea>
+
+
+            <div class="text-center mt-1-half">
+              <button
+              *ngIf="!submitted"
+              type="submit"
+              mdbBtn
+              (click)="refuser()"
+              class="add info-color-dark mb-2 waves-light"
+              mdbWavesEffect>
+              Refuser
+                  <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>
+              </button>
+
+              <div class="spinner-border m-4" role="status" *ngIf="submitted">
+                <span class="sr-only">Loading...</span>
+              </div>
+
+            </div>
+          </form>
+
+        </div>
+
+      </div>

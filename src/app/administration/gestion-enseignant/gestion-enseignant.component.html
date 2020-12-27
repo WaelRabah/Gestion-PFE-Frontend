@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+      <div class="row">
+          <div class="col-md-12 mx-auto">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="md-form">
+                  <button type="button" mdbBtn class="waves-light add" (click)="openAddModal()" mdbWavesEffect>
+                    Ajouter Enseignant</button>
+                   <button type="button" mdbBtn class="waves-light addCsv" mdbWavesEffect>
+                    Uploader fichier Excel</button>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="md-form">
+
+                  <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchItems()" id="search-input"
+                         mdbInput>
+                  <label for="search-input">Search</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 mx-auto">
+              <app-affiche
+              (editEnseignant)="openEditModal($event)"
+              [refreshTable]="refresh.asObservable()"
+              [search]="search.asObservable()"></app-affiche>
+          </div>
+        </div>
+  </div>
+</div>

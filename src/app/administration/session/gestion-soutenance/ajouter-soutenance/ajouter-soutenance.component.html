@@ -1,0 +1,58 @@
+<h4 style="margin-top:20px;">Creation Soutenance</h4>
+<hr>
+<form  #f="ngForm" (ngSubmit)="onSubmit(f)" class="was-validated">
+  <div class="form-row">
+ 
+    <div class="col">
+      <label for="filiere">Sujet</label>
+      <select class="form-control" id="exampleFormControlSelect2" name="pfe" ngModel required>
+        <option [value]="pfe._id" *ngFor="let pfe of pfes">{{pfe.titre}}</option>
+      </select>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+</div>
+  <div class="form-row">
+    <div class="col">
+      <label for="filiere">Responsable Insat</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="encadrant" ngModel required>
+        <option [value]="enseignant._id" *ngFor="let enseignant of enseignants">{{enseignant.firstname+" "+enseignant.lastname}}</option>
+      </select>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+    <div class="col">
+      <label for="Heure">Heure:</label>
+      <select class="form-control" id="Heure" name="Heure" ngModel required>
+        <option [value]="heure" *ngFor="let heure of heures">{{heure}}</option>
+        
+      </select>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col">
+      <label for="filiere">Rapporteur</label>
+      <select class="form-control" id="exampleFormControlSelect1" name="rapporteur" ngModel required>
+        <option [value]="enseignant._id" *ngFor="let enseignant of enseignants">{{enseignant.firstname+" "+enseignant.lastname}}</option>
+      </select>
+      <div class="valid-feedback">Valid.</div>
+      <div class="invalid-feedback">Please fill out this field.</div>
+    </div>
+  
+  </div>
+<div class="form-row ml-3 mt-2">
+<div class="col form-check">
+    
+  <input type="checkbox" class="form-check-input" id="public"  name="public" ngModel>
+  <label for="public">Soutenance publique ?</label>
+  <div class="valid-feedback">Valid.</div>
+  <div class="invalid-feedback">Please fill out this field.</div>
+</div>
+</div>
+<div class="row" style="margin-top:20px;">
+  <button  class="ml-auto" type="submit" mdbBtn color="primary" [disabled]="!f.valid" mdbWavesEffect>Submit</button>
+  <button  type="button" mdbBtn color="danger" mdbWavesEffect (click)="onClear()">Annuler</button>
+</div>
+</form>

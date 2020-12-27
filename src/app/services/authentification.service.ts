@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
@@ -9,7 +10,20 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthentificationService {
 
-  constructor(private http: HttpClient) { }
+  setLoggedData(response: any) {
+    localStorage.setItem('token', response.token);
+    //JWT helper service to decode the token
+    const helper = new JwtHelperService();
+    //Decoded Token
+    const decodedToken = helper.decodeToken(response.token);
+    localStorage.setItem('user', JSON.stringify(decodedToken));
+    //Check if the token is expired
+    const isExpired = helper.isTokenExpired(response.token);
+   }
+
+
+  constructor(private http: HttpClient) {
+  }
 
   logout() {
     localStorage.removeItem('token');
@@ -24,5 +38,9 @@ export class AuthentificationService {
   }
   getRole(): string {
     return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).role : ''
+  }
+
+  getUserName(): string {
+    return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).username : '';
   }
 }
