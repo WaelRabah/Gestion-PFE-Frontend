@@ -26,6 +26,10 @@ import { GestionPfeComponent } from './gestion-pfe/gestion-pfe.component';
 import { AfficherPfeComponent} from './gestion-pfe/afficher-pfe/afficher-pfe.component';
 import { RefuserPfeComponent} from './gestion-pfe/refuser-pfe/refuser-pfe.component';
 import { AccepterPfeComponent} from './gestion-pfe/accepter-pfe/accepter-pfe.component';
+import { GestionSuggestionComponent } from './gestion-suggestion/gestion-suggestion.component';
+import { AfficherSuggestionsComponent } from './gestion-suggestion/afficher-suggestions/afficher-suggestions.component';
+import { AccepterSuggestionComponent } from './gestion-suggestion/accepter-suggestion/accepter-suggestion.component';
+import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggestion/refuser-suggestion.component';
 
 @NgModule({
   declarations: [AdministrationComponent,
@@ -51,7 +55,11 @@ import { AccepterPfeComponent} from './gestion-pfe/accepter-pfe/accepter-pfe.com
     GestionPfeComponent,
     AccepterPfeComponent,
     AfficherPfeComponent,
-    RefuserPfeComponent
+    RefuserPfeComponent,
+    GestionSuggestionComponent,
+    AfficherSuggestionsComponent,
+    AccepterSuggestionComponent,
+    RefuserSuggestionComponent
     ],
   imports: [
     FilterPipeModule,

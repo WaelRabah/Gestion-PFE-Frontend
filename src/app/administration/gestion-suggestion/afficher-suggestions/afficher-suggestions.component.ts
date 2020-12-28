@@ -1,32 +1,32 @@
-import { PfeService } from './../services/pfe.service';
+import { GestionSuggestionService } from './../gestion-suggestion.service';
+import { SuggestionPFE } from './../models/suggestion-pfe.model';
 import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef, ɵɵqueryRefresh, Input, EventEmitter, Output } from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
-import {SujetPFE} from '../models/pfe.model';
 import { Status } from '../enums/status.enum';
 @Component({
-  selector: 'app-afficher-pfe',
-  templateUrl: './afficher-pfe.component.html',
-  styleUrls: ['./afficher-pfe.component.css']
+  selector: 'app-afficher-suggestions',
+  templateUrl: './afficher-suggestions.component.html',
+  styleUrls: ['./afficher-suggestions.component.css']
 })
-export class AfficherPfeComponent implements OnInit, AfterViewInit {
+export class AfficherSuggestionsComponent implements OnInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('row', { static: true }) row: ElementRef;
 
-  elements: SujetPFE[] = [];
-  allStudents: SujetPFE[] = [];
+  elements: SuggestionPFE[] = [];
+  allStudents: SuggestionPFE[] = [];
 
-  headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Dossier','Action'];
+  headElements = ['Sujet', 'Entreprise', 'Description', 'Fiche de renseignement','Action'];
   searchText: string = '';
   previous: string;
 
   maxVisibleItems: number = 8;
 
-  constructor(private pfeService:PfeService,private cdRef: ChangeDetectorRef){}
+  constructor(private suggestionService :GestionSuggestionService,private cdRef: ChangeDetectorRef){}
 
   refresh(){
-    this.pfeService.getPfesByStatus(Status.Attente).subscribe(
+    this.suggestionService.getSuggestionsByStatus(Status.Attente).subscribe(
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
         this.allStudents=etudiants;
@@ -34,10 +34,10 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
       (error)=>console.log(error)
     )
   }
-  @Output() accepterSujet = new EventEmitter<SujetPFE>();
+  @Output() accepterSuggestion = new EventEmitter<SuggestionPFE>();
 
-  openAccepterModal(sujetPfe:SujetPFE){
-    this.accepterSujet.emit(sujetPfe);
+  openAccepterModal(suggestionPfe:SuggestionPFE){
+    this.accepterSuggestion.emit(suggestionPfe);
   }
   @Input() refreshTable: Subject<boolean> = new Subject<boolean>();
   @Input() search: Subject<string> = new Subject<string>();
@@ -90,8 +90,7 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
   }
 
   getPDF(id: string) {
-    console.log(id);
-    return this.pfeService.getPDF(id).subscribe(
+    return this.suggestionService.getPDF(id).subscribe(
       (response) => {
 
         var file = new Blob([response], {type: 'application/pdf'});
@@ -102,9 +101,9 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
     )
   }
 
-  @Output() refuserSujet = new EventEmitter<SujetPFE>();
+  @Output() refuserSuggestion = new EventEmitter<SuggestionPFE>();
 
-  openRefuserModal(sujetPfe: SujetPFE) {
-    this.refuserSujet.emit(sujetPfe);
+  openRefuserModal(sujetPfe: SuggestionPFE) {
+    this.refuserSuggestion.emit(sujetPfe);
   }
 }

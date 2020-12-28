@@ -22,6 +22,9 @@
       <li *ngIf="role==roles.admin" class="nav-item">
           <a class="nav-link waves-light" routerLink="/Administrateur/gestion-pfe" routerLinkActive="active" mdbWavesEffect>Gestion des PFEs</a>
       </li>
+      <li *ngIf="role==roles.admin" class="nav-item">
+        <a class="nav-link waves-light" routerLink="/Administrateur/gestion-suggestion" routerLinkActive="active" mdbWavesEffect>Gestion des Suggestions</a>
+    </li>
 
       <!-- Enseignant-->
       <li *ngIf="role==roles.enseignant" class="nav-item active">
