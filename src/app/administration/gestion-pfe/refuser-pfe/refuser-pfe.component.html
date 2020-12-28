@@ -25,6 +25,10 @@
               <label for="description">Description</label>
               <textarea name="description" id="description" disabled class="form-control">{{data.description}}</textarea>
 
+              <div class="md-form form-sm">
+                <input  name="nomEncadrantEntreprise" mdbInput type="text" id="nomEncadrantEntreprise" disabled class="form-control" [value]="data.nomEncadrantEntreprise">
+                <label for="nomEncadrantEntreprise">Encadrant dans l'entreprise</label>
+              </div>
 
             <div class="text-center mt-1-half">
               <button

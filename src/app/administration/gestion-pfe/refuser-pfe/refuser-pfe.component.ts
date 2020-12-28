@@ -20,7 +20,6 @@ export class RefuserPfeComponent implements OnInit {
 
   refuser() {
     this.submitted=true;
-    console.log(this.data);
     this.pfeService.changerStatus(this.data._id,Status.Refuse).subscribe(
       (etudiant)=>{this.action.next(etudiant);this.modalRef.hide();this.submitted=false;},
       (error)=>{this.submitted=false;console.log(error);}

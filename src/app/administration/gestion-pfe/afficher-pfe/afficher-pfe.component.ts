@@ -17,7 +17,7 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
   elements: SujetPFE[] = [];
   allStudents: SujetPFE[] = [];
 
-  headElements = ['Sujet', 'Entreprise', 'Description', 'Dossier','Action'];
+  headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Dossier','Action'];
   searchText: string = '';
   previous: string;
 

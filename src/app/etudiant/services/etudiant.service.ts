@@ -15,7 +15,6 @@ export class EtudiantService {
 
 
   ajouterSujet(sujet): Observable<any> {
-
     return this.http.post<SujetPFE>(environment.backendUrl+'pfes',sujet);
   }
 }
