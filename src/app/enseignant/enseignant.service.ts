@@ -13,6 +13,6 @@ export class EnseignantService {
   ) { }
 
   suggererSujet(sujet): Observable<any> {
-    return this.http.post(environment.backendUrl+'pfes/suggerer',sujet);
+    return this.http.post(environment.backendUrl+'suggest-pfe',sujet);
   }
 }
