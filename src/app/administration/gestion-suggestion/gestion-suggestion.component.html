@@ -14,11 +14,11 @@
             </div>
           </div>
           <div class="col-md-12 mx-auto">
-              <app-afficher-pfe
-              (accepterSujet)="openAccepterModal($event)"
-              (refuserSujet)="openRefuserModal($event)"
+              <app-afficher-suggestions
+              (accepterSuggestion)="openAccepterModal($event)"
+              (refuserSuggestion)="openRefuserModal($event)"
               [refreshTable]="refresh.asObservable()"
-              [search]="search.asObservable()"></app-afficher-pfe>
+              [search]="search.asObservable()"></app-afficher-suggestions>
           </div>
         </div>
   </div>

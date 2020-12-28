@@ -1,3 +1,4 @@
+import { GestionSuggestionComponent } from './gestion-suggestion/gestion-suggestion.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdministrationGuard } from '../guards/administration.guard';
@@ -30,6 +31,10 @@ const routes: Routes = [
       path: 'gestion-pfe',
       canActivate: [AdministrationGuard],
       component: GestionPfeComponent
+    },
+    {
+      path: 'gestion-suggestion',
+      component: GestionSuggestionComponent
     },
     {
       path: 'session',
