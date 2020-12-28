@@ -43,4 +43,8 @@ export class AuthentificationService {
   getUserName(): string {
     return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user')).username : '';
   }
+
+  getUserId(): string {
+    return this.isAuthenticated() ? JSON.parse(localStorage.getItem('user'))._id : '';
+  }
 }

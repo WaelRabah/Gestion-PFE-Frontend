@@ -36,6 +36,10 @@
       <li *ngIf="role==roles.enseignant" class="nav-item">
         <a class="nav-link waves-light" routerLink="/Enseignant/suggerer"  routerLinkActive="active" mdbWavesEffect>Suggérer sujet</a>
       </li>
+      <li *ngIf="role==roles.enseignant" class="nav-item">
+        <a class="nav-link waves-light" routerLink="/Enseignant/mes-suggestions"  routerLinkActive="active" mdbWavesEffect>Lister mes suggestions</a>
+      </li>
+
       <!-- Etudiant-->
       <li *ngIf="role==roles.etudiant" class="nav-item active">
         <a class="nav-link waves-light" routerLinkActive="active" mdbWavesEffect>Ancien PFEs<span class="sr-only">(current)</span></a>
