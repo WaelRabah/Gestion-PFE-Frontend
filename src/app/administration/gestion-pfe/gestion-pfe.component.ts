@@ -28,7 +28,7 @@ export class GestionPfeComponent implements OnInit {
         animated: true,
         data: {data:data}
     });
-    this.modalRef.content.action.subscribe( (result: any) => { console.log(result); });
+    this.modalRef.content.action.subscribe( (result: any) => { if(result) this.refresh.next(true); });
   }
   refresh: Subject<boolean> = new Subject<boolean>();
   search: Subject<string | null> = new Subject<string | null>();

@@ -24,6 +24,18 @@
     </div>
   </div>
 
+    <!-- Encadrant Entreprise input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="encadrant">Encadrant dans l'entreprise</label>
+      <input type="text" id="nomEncadrantEntreprise" class="form-control" ngModel name="nomEncadrantEntreprise" #nomEncadrantEntreprise="ngModel" required />
+    </div>
+
+    <div class="alert alert-danger" *ngIf="nomEncadrantEntreprise.invalid&&nomEncadrantEntreprise.touched">
+      <div *ngIf="nomEncadrantEntreprise.errors.required">
+        Veuillez entrer le nom de l'encadrant dans l'entreprise d'acceuil
+      </div>
+    </div>
+
   <!-- Description input -->
   <div class="form-outline mb-4">
     <label class="form-label" for="description">Description du sujet</label>
