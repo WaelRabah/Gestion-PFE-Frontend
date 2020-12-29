@@ -1,4 +1,4 @@
-import { EnseignantService } from '../enseignant.service';
+import { EnseignantService } from '../../enseignant.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthentificationService } from 'src/app/services/authentification.service';

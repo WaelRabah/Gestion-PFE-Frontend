@@ -13,11 +13,8 @@
             </div>
           </div>
           <div class="col-md-12 mx-auto">
-              <app-afficher-suggestions
-              (accepterSuggestion)="openAccepterModal($event)"
-              (refuserSuggestion)="openRefuserModal($event)"
-              [refreshTable]="refresh.asObservable()"
-              [search]="search.asObservable()"></app-afficher-suggestions>
+              <app-afficher-suggestion
+              [search]="search.asObservable()"></app-afficher-suggestion>
           </div>
         </div>
   </div>

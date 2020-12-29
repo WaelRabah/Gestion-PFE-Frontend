@@ -1,8 +1,9 @@
-import { SuggererSujetComponent } from './suggerer-sujet/suggerer-sujet.component';
+import { SuggererSujetComponent } from './suggestion/suggerer-sujet/suggerer-sujet.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { EnseignantComponent } from './enseignant.component';
+import { SuggestionComponent } from './suggestion/suggestion.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'suggerer',
     component: SuggererSujetComponent
+  },
+  {
+    path: 'mes-suggestions',
+    component: SuggestionComponent
   }
 ];
 
