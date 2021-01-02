@@ -2,30 +2,40 @@
   class="card tab-pane fade"
   *ngIf="selectedSoutenance === index"
   [ngClass]="selectedSoutenance === index && 'active show'"
-  style="width: 27.3rem; height: 18.8rem"
+  style="width: 27.3rem; height: 20rem"
 >
   <div class="list-group card-body d-flex" style="width: auto">
-    <div class="list-group-item justify-content-between d-flex" style="width: 27.3rem">
-     <div> {{ item.heure }} </div>
-     <div>
-      <button class="badge badge-primary ml-3" style="border: none" (click)="onNavigateModify()">
-        <mdb-icon
-          style="margin-right: 10px"
-          class="pl-1"
-          fas
-          icon="pencil-alt"
-        ></mdb-icon>
-      </button>
-      <button class="badge badge-danger ml-3" style="border: none" (click)="removeSoutenanceFromSession()" >
-        <mdb-icon
-          style="margin-right: 10px"
-          class="pl-1"
-          fas
-          icon="trash"
-          
-        ></mdb-icon>
-      </button>
-    </div>
+    <div
+      class="list-group-item justify-content-between d-flex"
+      style="width: 27.3rem"
+    >
+      <div>{{ item.heure }}</div>
+      <div>
+        <button
+          class="badge badge-primary ml-3"
+          style="border: none"
+          (click)="openEditSoutenanceModal($event)"
+        >
+          <mdb-icon
+            style="margin-right: 10px"
+            class="pl-1"
+            fas
+            icon="pencil-alt"
+          ></mdb-icon>
+        </button>
+        <button
+          class="badge badge-danger ml-3"
+          style="border: none"
+          (click)="removeSoutenanceFromSession()"
+        >
+          <mdb-icon
+            style="margin-right: 10px"
+            class="pl-1"
+            fas
+            icon="trash"
+          ></mdb-icon>
+        </button>
+      </div>
     </div>
     <div class="mt-3 ml-2">
       <div class="row mb-3 justify-content-between">
@@ -37,11 +47,12 @@
       </div>
       <div class="row mb-3 justify-content-between">
         <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
-        <span class="badge badge-light ml-3" style="height : 20px">Sujet</span>
+        <span class="badge badge-light ml-3" style="height: 20px">Sujet</span>
         <div
           class="badge badge-light ml-3"
           style="width: 200px; white-space: pre-wrap"
-        >{{ item.sujet }}
+        >
+          {{ item.sujet }}
         </div>
       </div>
       <div class="row mb-3 justify-content-between">
@@ -70,6 +81,17 @@
         <span class="badge badge-light ml-3">Examinateur</span>
         <div class="badge badge-light ml-3" style="width: 200px">
           {{ item.Examinateur }}
+        </div>
+      </div>
+      <div class="row mb-3 justify-content-between">
+        <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
+        <span class="badge badge-light ml-3">Publique</span>
+        <div class="badge badge-light ml-3" style="width: 200px">
+          <mdb-icon
+            fas
+            [icon]="item.isItPublic ? 'check' : 'times'"
+            class="prefix"
+          ></mdb-icon>
         </div>
       </div>
     </div>

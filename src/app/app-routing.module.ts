@@ -7,46 +7,62 @@ import { EnseignantGuard } from './guards/enseignant.guard';
 import { EtudiantGuard } from './guards/etudiant.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { MdpOublieComponent } from './mdp-oublie/mdp-oublie.component';
+import { ReinitialiserMdpComponent } from './reinitialiser-mdp/reinitialiser-mdp.component';
 
 const routes: Routes = [
   {
-
     path: 'Etudiant',
     canActivate: [EtudiantGuard],
-    loadChildren: () => import('./etudiant/etudiant.module').then(m => m.EtudiantModule)
+    loadChildren: () =>
+      import('./etudiant/etudiant.module').then((m) => m.EtudiantModule),
   },
   {
     path: 'Enseignant',
     canActivate: [EnseignantGuard],
-    loadChildren: () => import('./enseignant/enseignant.module').then(m => m.EnseignantModule)
+    loadChildren: () =>
+      import('./enseignant/enseignant.module').then((m) => m.EnseignantModule),
   },
   {
     path: 'Administrateur',
     canActivate: [AdministrationGuard],
-    loadChildren: () => import('./administration/administration.module').then(m => m.AdministrationModule)
+    loadChildren: () =>
+      import('./administration/administration.module').then(
+        (m) => m.AdministrationModule
+      ),
   },
   {
     path: 'login',
     canActivate: [AlreadyLoggedinGuard],
-    component: LoginComponent
+    component: LoginComponent,
+  },
+  {
+    path: 'mdp-oublie',
+    canActivate: [AlreadyLoggedinGuard],
+    component: MdpOublieComponent,
+  },
+  {
+    path: 'réinitialisation-mdp/:token',
+    canActivate: [AlreadyLoggedinGuard],
+    component: ReinitialiserMdpComponent,
   },
   {
     path: 'acces-refuse',
-    component: AccesRefuseComponent
+    component: AccesRefuseComponent,
   },
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
-    component: LoginComponent
-  }
+    component: LoginComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

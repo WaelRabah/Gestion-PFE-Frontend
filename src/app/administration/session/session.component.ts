@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { Session } from './session.model';
 import { SessionService } from './session.service';
 import Swal from 'sweetalert2';
+import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
+import { AjouterSoutenanceComponent } from './gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
+import { Subject } from 'rxjs';
+import { ModifySoutenanceComponent } from './gestion-soutenance/modify-soutenance/modify-soutenance.component';
 
 @Component({
   selector: 'app-session',
@@ -14,6 +18,7 @@ export class SessionComponent implements OnInit {
   selectedSession: Session;
   headElements = ['#', 'Filiere', 'Date', 'Actions'];
   searchText: any = {}
+  refresh: Subject<boolean> = new Subject<boolean>();
   constructor(private sessionService: SessionService, private route: Router) { }
 
   ngOnInit(): void {
@@ -36,7 +41,7 @@ export class SessionComponent implements OnInit {
 
     this.selectedSession = this.elements.find(element => element._id == index)
 
-    this.route.navigate(['/Administrateur/session/soutenances/'+this.selectedSession._id])
+    this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
   }
 
   onNavigateCreate() {
@@ -61,6 +66,7 @@ export class SessionComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.sessionService.deleteSession(index);
+        this.route.navigate(["/Administrateur/session"])
         Swal.fire(
           'Supprimée!',
           'La session est supprimé',
