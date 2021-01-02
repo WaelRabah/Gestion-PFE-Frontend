@@ -30,7 +30,13 @@ import { GestionSuggestionComponent } from './gestion-suggestion/gestion-suggest
 import { AfficherSuggestionsComponent } from './gestion-suggestion/afficher-suggestions/afficher-suggestions.component';
 import { AccepterSuggestionComponent } from './gestion-suggestion/accepter-suggestion/accepter-suggestion.component';
 import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggestion/refuser-suggestion.component';
-
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+    
+export function tokenGetter() {
+  console.log("hiiiiiiiiiiiiiiiiiiii");
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
@@ -68,7 +74,18 @@ import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggest
     MatSelectModule,
     ReactiveFormsModule,
     CommonModule,
-    AdministrationRoutingModule
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          console.log("jiiiiiiiiiiiiiiiiiiiiiiii");
+          return localStorage.getItem('token');
+        },
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: [""],
+      }
+    }),
+    AdministrationRoutingModule,
+  
     ],
   entryComponents: [ EditComponent,AjouteComponent, EditEnsComponent, AjouteEnsComponent]
 })
