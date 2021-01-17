@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <div *ngIf="!success">
+  <label class="form-label" for="customFile">Rapport de l'étudiant sous format PDF ne dépassant pas 50MO</label>
+  <input type="file" class="form-control mb-4" id="customFile" ngModel name="file" #file="ngModel"
+    (change)="handleFileInput($event.target.files)" required id="sujet-etudiant-file" />
+
+  <div class="alert alert-danger" *ngIf="fileIsValid==false||(file.invalid&&file.dirty)">
+    <div *ngIf="fileIsValid==false">
+      <div *ngIf="fileSizeError">
+        Le fichier est trop grand
+      </div>
+      <div *ngIf="fileTypeError">
+        Le fichier doit être au format PDF
+      </div>
+    </div>
+    <div *ngIf="file.invalid">
+      Veuillez ajouter votre dossier
+    </div>
+  </div>
+
+  <div *ngIf="fileIsValid" class="pdfContainer">
+    Voulez vous vraiment ajouter ce fichier comme rapport?
+    <ng2-pdfjs-viewer [pdfSrc]="fileToUpload"></ng2-pdfjs-viewer>
+    <button *ngIf="!submitted" type="submit" class="btn btn-primary btn-block mb-4" [disabled]="form.invalid||!fileIsValid">Valider</button>
+    <div class="d-flex justify-content-center">
+    <div id="spinner" class="spinner-border text-danger" role="status" *ngIf="submitted">
+      <span class="sr-only">Loading...</span>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="success" class="alert alert-success">
+  Votre rapport a été ajouté avec succès.
+</div>
+</form>

@@ -30,8 +30,6 @@ export class AjoutSujetComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.submitted = true;
-    const formData = new FormData();
-    formData.append('file',this.fileToUpload,'sujet-pfe-'+this.authService.getUserName());
     this.etudiantService.ajouterSujet(this.convertToFormData(form)).subscribe({
       error: (error) => {
         this.submitted = false;
