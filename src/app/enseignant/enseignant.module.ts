@@ -8,6 +8,7 @@ import { EnseignantRoutingModule } from './enseignant-routing.module';
 import { EnseignantComponent } from './enseignant.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { AfficherSuggestionComponent } from './suggestion/afficher-suggestion/afficher-suggestion.component';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { AfficherSuggestionComponent } from './suggestion/afficher-suggestion/af
     CommonModule,
     FormsModule,
     MDBBootstrapModule,
-    EnseignantRoutingModule
+    EnseignantRoutingModule,
+    PdfJsViewerModule
   ]
 })
 export class EnseignantModule { }

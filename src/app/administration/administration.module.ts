@@ -32,7 +32,8 @@ import { AccepterSuggestionComponent } from './gestion-suggestion/accepter-sugge
 import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggestion/refuser-suggestion.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
-    
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+
 export function tokenGetter() {
   console.log("hiiiiiiiiiiiiiiiiiiii");
   return localStorage.getItem("token");
@@ -85,7 +86,7 @@ export function tokenGetter() {
       }
     }),
     AdministrationRoutingModule,
-  
+    PdfJsViewerModule
     ],
   entryComponents: [ EditComponent,AjouteComponent, EditEnsComponent, AjouteEnsComponent]
 })

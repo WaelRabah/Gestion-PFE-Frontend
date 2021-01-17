@@ -44,3 +44,18 @@ body {
 a{
   color: #273a48 !important;
 }
+
+.pdfViewer .modal-content{
+  min-height: 75vh;
+  height: 90vh;
+  min-width: 90vw;
+}
+
+ .modal.pdfViewer {
+  padding-right: 15vw!important;
+}
+
+ng2-pdfjs-viewer{
+  height: 100%;
+
+}

@@ -23,6 +23,6 @@ export class SuggestionService {
 
 
   getPDF(id: string){
-    return this.http.get(environment.backendUrl+this.userRoute+`pdf/${id}`,{responseType:'arraybuffer'});
+    return this.http.get(environment.backendUrl+this.userRoute+`pdf/${id}`,{responseType:'blob'});
   }
 }

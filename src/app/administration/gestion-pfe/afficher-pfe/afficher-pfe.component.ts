@@ -4,6 +4,9 @@ import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalSe
 import { Subject } from 'rxjs';
 import {SujetPFE} from '../models/pfe.model';
 import { Status } from '../enums/status.enum';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
+
 @Component({
   selector: 'app-afficher-pfe',
   templateUrl: './afficher-pfe.component.html',
@@ -23,7 +26,11 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
 
   maxVisibleItems: number = 8;
 
-  constructor(private pfeService:PfeService,private cdRef: ChangeDetectorRef){}
+  constructor(
+    private pfeService:PfeService,
+    private cdRef: ChangeDetectorRef,
+    private modalService:NgbModal
+    ){}
 
   refresh(){
     this.pfeService.getPfesByStatus(Status.Attente).subscribe(
@@ -90,14 +97,10 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
   }
 
   getPDF(id: string) {
-    console.log(id);
-    return this.pfeService.getPDF(id).subscribe(
-      (response) => {
-
-        var file = new Blob([response], {type: 'application/pdf'});
-        var fileURL = window.URL.createObjectURL(file);
-        window.open(fileURL);
-
+    this.pfeService.getPDF(id).subscribe(
+      (res) => {
+        const modalRef= this.modalService.open(PdfJsViewerComponent,{size:'xl',centered:true,windowClass: 'pdfViewer' });
+        modalRef.componentInstance.pdfSrc=res;
       }
     )
   }
@@ -107,4 +110,7 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
   openRefuserModal(sujetPfe: SujetPFE) {
     this.refuserSujet.emit(sujetPfe);
   }
+
+
+
 }
