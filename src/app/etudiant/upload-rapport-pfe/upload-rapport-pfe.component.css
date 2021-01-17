@@ -1,0 +1,17 @@
+ng2-pdfjs-viewer{
+  height: 50vh!important;
+}
+
+.pdfContainer{
+  min-height: 75vh!important;
+  height: 75vh!important;
+  padding-bottom: 10vh!important;
+
+}
+
+#spinner {
+  margin-bottom: 25px!important
+}
+button{
+  background-color: rgb(156, 13, 3)!important;
+}

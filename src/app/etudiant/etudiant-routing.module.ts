@@ -1,3 +1,4 @@
+import { UploadRapportPfeComponent } from './upload-rapport-pfe/upload-rapport-pfe.component';
 import { AjoutSujetComponent } from './ajout-sujet/ajout-sujet.component';
 import { AncienPfeComponent } from './ancien-pfe/ancien-pfe.component';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'ajouter',
     component: AjoutSujetComponent
+  },
+  {
+    path: 'upload',
+    component: UploadRapportPfeComponent
   }
 ];
 
