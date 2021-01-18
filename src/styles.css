@@ -34,7 +34,7 @@ body {
 }
 
 .add {
-  background-color: #81c784;
+  background-color: #81c784 !important;
   color: white !important;
 }
 .addCsv {

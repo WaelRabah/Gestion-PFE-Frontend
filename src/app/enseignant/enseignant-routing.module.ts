@@ -6,16 +6,17 @@ import { EnseignantComponent } from './enseignant.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: EnseignantComponent
-  },
+
   {
     path: 'suggerer',
     component: SuggererSujetComponent
   },
   {
     path: 'mes-suggestions',
+    component: SuggestionComponent
+  },
+  {
+    path: '**',
     component: SuggestionComponent
   }
 ];

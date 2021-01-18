@@ -7,10 +7,7 @@ import { EtudiantComponent } from './etudiant.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: EtudiantComponent
-  },
+
   {
     path: 'ancien-pfe',
     component: AncienPfeComponent
@@ -22,6 +19,10 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadRapportPfeComponent
+  },
+  {
+    path: '**',
+    component: AncienPfeComponent
   }
 ];
 

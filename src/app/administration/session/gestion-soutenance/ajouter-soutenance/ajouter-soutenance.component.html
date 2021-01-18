@@ -1,5 +1,5 @@
 <div class="modal-content align-items-center justify-content-center rounded">
-  <div class="modal-header rounded black lighten-2 white-text w-75">
+  <div class="modal-header green lighten-2 white-text">
     <h4 class="title">
       <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
       Création Soutenance
@@ -101,33 +101,17 @@
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
       </div>
-      <div
-        class=""
-        style="
-          display: flex;
-          margin-bottom: 20px;
-          justify-content: space-around;
-          width: 100%;
-        "
-      >
-        <button
-          class="ml-auto"
-          type="submit"
-          mdbBtn
-          color="primary"
-          [disabled]="!f.valid"
-          mdbWavesEffect
-        >
-          Submit
-        </button>
-        <button
-          type="button"
-          mdbBtn
-          color="danger"
-          mdbWavesEffect
-          (click)="onClear()"
-        >
-          Annuler
+      
+
+      <div class="text-center mt-1-half">
+        <button 
+        type="submit" 
+        mdbBtn 
+        [disabled]="!f.valid"
+        class="add info-color-dark mb-2 waves-light" 
+        mdbWavesEffect>
+        Ajouter
+            <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>
         </button>
       </div>
     </form>

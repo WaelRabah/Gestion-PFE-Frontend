@@ -4,18 +4,6 @@
       <input
         mdbInput
         type="text"
-        id="form58"
-        class="form-control"
-        [(ngModel)]="searchText.numero"
-      />
-      <label for="form58">Numero</label>
-    </div>
-  </div>
-  <div class="col-md-2">
-    <div class="md-form">
-      <input
-        mdbInput
-        type="text"
         id="form59"
         class="form-control"
         [(ngModel)]="searchText.filiere"
@@ -36,12 +24,11 @@
     </div>
   </div>
   <button
-    class="ml-auto adjust"
+    class="ml-auto adjust add"
     type="button"
     mdbBtn
-    color="success"
     mdbWavesEffect
-    (click)="onNavigateCreate()"
+    (click)="openAddModal()"
   >
     <mdb-icon style="margin-right: 10px" fas icon="plus"></mdb-icon>Ajout
     Session
@@ -50,7 +37,7 @@
 <hr />
 <div class="row">
   <div class="col-md-5">
-    <table mdbTable mdbTableScroll scrollY="true" maxHeight="600">
+    <table mdbTable stickyHeader="true" mdbTableScroll scrollY="true" maxHeight="600" hover="true" class="text-center z-depth-1">
       <thead class="black white-text">
         <tr>
           <th *ngFor="let head of headElements" scope="col">{{ head }}</th>
@@ -58,7 +45,6 @@
       </thead>
       <tbody>
         <tr mdbTableCol *ngFor="let el of elements | filterBy: searchText">
-          <th scope="row">{{ el.numero }}</th>
           <td>{{ el.filiere }}</td>
           <td>{{ el.date | date }}</td>
           <td>
@@ -67,9 +53,7 @@
                 (click)="onClickSession(el._id)"
                 mdbBtn
                 type="button"
-                color="primary"
-                color="success"
-                class="buttontab"
+                class="buttontab add"
                 mdbWavesEffect
               >
                 <mdb-icon fas icon="eye"></mdb-icon>
@@ -80,16 +64,14 @@
                 color="primary"
                 class="buttontab"
                 mdbWavesEffect
-                (click)="onNavigateModif(el._id)"
+                (click)="openEditModal(el)"
               >
                 <mdb-icon fas icon="pencil-alt"></mdb-icon>
               </button>
               <button
                 mdbBtn
                 type="button"
-                color="primary"
-                color="danger"
-                class="buttontab"
+                class="buttontab delete"
                 (click)="onDelete(el._id)"
                 mdbWavesEffect
               >
