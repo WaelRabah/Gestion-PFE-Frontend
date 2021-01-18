@@ -9,7 +9,7 @@ import { environment } from '../../../../environments/environment'
 export class EtudiantService {
 
   constructor(private http:HttpClient) { }
-  
+
   userRoute="utilisateurs/";
 
   getEtudiants():Observable<Etudiant[]>{
@@ -23,5 +23,8 @@ export class EtudiantService {
   }
   deleteEtudiant(id):Observable<Etudiant>{
     return this.http.delete<Etudiant>(environment.backendUrl+this.userRoute+id);
+  }
+  addEtudiants(etudiants:Etudiant[]):Observable<Etudiant[]>{
+    return this.http.post<Etudiant[]>(environment.backendUrl+this.userRoute+"registerAll",etudiants);
   }
 }

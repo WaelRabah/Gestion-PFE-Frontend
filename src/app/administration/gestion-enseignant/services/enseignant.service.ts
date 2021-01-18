@@ -24,4 +24,8 @@ export class EnseignantService {
   deleteEnseignant(id):Observable<Enseignant>{
     return this.http.delete<Enseignant>(environment.backendUrl+this.userRoute+id);
   }
+
+  addEnseignants(enseignants:Enseignant[]):Observable<Enseignant[]>{
+    return this.http.post<Enseignant[]>(environment.backendUrl+this.userRoute+"registerAll",enseignants);
+  }
 }

@@ -1,3 +1,4 @@
+import { AjouteEnsCsvComponent } from './ajouteCsv/ajoute-ens-csv/ajoute-ens-csv.component';
 import { ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
 import { EnseignantService } from './services/enseignant.service';
 import { Subject } from 'rxjs';
@@ -58,5 +59,21 @@ export class GestionEnseignantComponent implements OnInit {
     if(this.searchText=="") this.searchText=null;
     this.search.next(this.searchText);
   }
+  openAddCsv(){
+    this.modalRef = this.modalService.show(AjouteEnsCsvComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true
+  });
+  this.modalRef.content.action.subscribe( (result: any) => {
+    if(result) this.refresh.next(true);
 
+   });
+  }
 }
+
