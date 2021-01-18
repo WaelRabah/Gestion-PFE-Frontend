@@ -9,8 +9,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MdpOublieComponent } from './mdp-oublie/mdp-oublie.component';
 import { ReinitialiserMdpComponent } from './reinitialiser-mdp/reinitialiser-mdp.component';
-
+import { AncienPfesComponent } from './ancien-pfes/ancien-pfes.component';
+import { LoggedinGuard } from './guards/loggedin.guard';
 const routes: Routes = [
+  
+  {
+    path: 'ancien-pfes',
+    component: AncienPfesComponent,
+    canActivate:[LoggedinGuard]
+  },
   {
     path: 'Etudiant',
     canActivate: [EtudiantGuard],
