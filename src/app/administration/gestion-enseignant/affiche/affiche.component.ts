@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef, ɵɵqueryRefresh, Input, EventEmitter, Output } from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
+import Swal from 'sweetalert2';
 import { Enseignant } from '../models/enseignant';
 import {EnseignantService} from '../services/enseignant.service';
 
@@ -26,10 +27,25 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
   constructor(private enseignantService:EnseignantService,private cdRef: ChangeDetectorRef){}
 
   delete(id){
-    this.enseignantService.deleteEnseignant(id).subscribe(
-      (enseignants)=>{this.refresh();},
-      (error)=>console.log(error)
-    )
+   
+    Swal.fire({
+      title: 'Tu es sure?',
+      text: 'Vous ne pourrez pas revenir en arrière!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: "Archiver l'enseignant",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.enseignantService.deleteEnseignant(id).subscribe(
+          (enseignants)=>{this.refresh();},
+          (error)=>console.log(error)
+        )
+        Swal.fire('Supprimée!', "L'enseignant a été archivée", 'success');
+      }
+    });
+    
   }
   refresh(){
     this.enseignantService.getEnseignants().subscribe(

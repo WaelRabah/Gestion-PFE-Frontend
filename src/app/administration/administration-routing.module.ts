@@ -14,10 +14,7 @@ import { ModifySoutenanceComponent } from './session/gestion-soutenance/modify-s
 import { GestionPfeComponent } from './gestion-pfe/gestion-pfe.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AdministrationComponent,
-  },
+
   {
     path: 'gestion-etudiant',
     canActivate: [AdministrationGuard],
@@ -46,6 +43,10 @@ const routes: Routes = [
       { path: 'soutenances/:sessionId', component: GestionSoutenanceComponent },
     ],
   },
+  {
+    path: '**',
+    component: SessionComponent,
+  }
 ];
 
 @NgModule({

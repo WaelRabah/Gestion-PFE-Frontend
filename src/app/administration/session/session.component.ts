@@ -7,6 +7,8 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { AjouterSoutenanceComponent } from './gestion-soutenance/ajouter-soutenance/ajouter-soutenance.component';
 import { Subject } from 'rxjs';
 import { ModifySoutenanceComponent } from './gestion-soutenance/modify-soutenance/modify-soutenance.component';
+import { SessionModifComponent } from './session-modif/session-modif.component';
+import { SessionCreateComponent } from './session-create/session-create.component';
 
 @Component({
   selector: 'app-session',
@@ -16,10 +18,10 @@ import { ModifySoutenanceComponent } from './gestion-soutenance/modify-soutenanc
 export class SessionComponent implements OnInit {
   elements: Session[] = [];
   selectedSession: Session;
-  headElements = ['#', 'Filiere', 'Date', 'Actions'];
+  headElements = ['Filiere', 'Date', 'Actions'];
   searchText: any = {}
   refresh: Subject<boolean> = new Subject<boolean>();
-  constructor(private sessionService: SessionService, private route: Router) { }
+  constructor(private sessionService: SessionService, private route: Router,private modalService: MDBModalService) { }
 
   ngOnInit(): void {
     this.sessionService.fetchSessions().subscribe(data => {
@@ -28,7 +30,7 @@ export class SessionComponent implements OnInit {
       })
       this.sessionService.setSession(data);
       this.elements = this.sessionService.getSessions();
-      console.log(this.elements)
+      this.onClickSession(this.elements[0]._id);
     });
 
     this.sessionService.sessionChanged.subscribe(data => {
@@ -37,6 +39,7 @@ export class SessionComponent implements OnInit {
 
   }
 
+
   onClickSession(index: string) {
 
     this.selectedSession = this.elements.find(element => element._id == index)
@@ -44,16 +47,40 @@ export class SessionComponent implements OnInit {
     this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
   }
 
-  onNavigateCreate() {
-    this.route.navigate(["/Administrateur/session/create"]);
-    console.log("hello")
+  modalRef: MDBModalRef;
+
+  openAddModal() {
+    this.modalRef = this.modalService.show(SessionCreateComponent, {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        class: 'modal-dialog cascading-modal',
+        containerClass: 'largeModal',
+        animated: true
+    });
+    this.modalRef.content.action.subscribe( (result: any) => { 
+      if(result) this.refresh.next(true);
+     });
   }
 
-  onNavigateModif(index: string) {
-    this.onClickSession(index);
-    let element = this.elements.find(element => element._id == index);
-    this.route.navigate(['/Administrateur/session/modif', element._id])
+
+  openEditModal(data) {
+    this.modalRef = this.modalService.show(SessionModifComponent, {
+        backdrop: true,
+        keyboard: true,
+        focus: true,
+        show: false,
+        ignoreBackdropClick: false,
+        class: 'modal-dialog cascading-modal',
+        containerClass: 'largeModal',
+        animated: true,
+        data: {data:data}
+    });
+    this.modalRef.content.action.subscribe( (result: any) => { console.log(result); });
   }
+
   onDelete(index: string) {
     Swal.fire({
       title: 'Tu es sure?',
