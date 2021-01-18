@@ -19,7 +19,8 @@ import localeFr from '@angular/common/locales/fr';
 import { MdpOublieComponent } from './mdp-oublie/mdp-oublie.component';
 import { ReinitialiserMdpComponent } from './reinitialiser-mdp/reinitialiser-mdp.component';
 import { environment } from 'src/environments/environment';
-import { TokenInterceptor } from 'src/app/interceptors/token.interceptor'
+import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
+import { AncienPfesComponent } from './ancien-pfes/ancien-pfes.component'
 registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ registerLocaleData(localeFr, 'fr');
     AccesRefuseComponent,
     MdpOublieComponent,
     ReinitialiserMdpComponent,
+    AncienPfesComponent,
   ],
   imports: [
     BrowserModule,
