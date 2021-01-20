@@ -1,27 +1,64 @@
 <div class="row">
-  <div class="col-md-2">
+
+  <div style="margin-top: 8px" class="col-md-3">
+    <div class="md-form">
+      <select
+        class="browser-default custom-select"
+        id="exampleFormControlSelect2"
+        name="filter-key"
+        (change)="changeFilter($event)"
+        [value]="filter_key"
+      >
+        <option value="default">Filtrer</option>
+        <option value="filiere">Filière</option>
+        <option value="date">Date</option>
+
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2" *ngIf="filter_key === 'filiere'">
     <div class="md-form">
       <input
         mdbInput
         type="text"
         id="form59"
         class="form-control"
-        [(ngModel)]="searchText.filiere"
+        [(ngModel)]="filiere"
       />
       <label for="form59">Filiere</label>
     </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2" *ngIf="filter_key === 'date'">
     <div class="md-form">
       <input
         type="date"
         id="input"
         class="form-control"
         mdbInput
-        [(ngModel)]="searchText.date"
+        [(ngModel)]="date"
       />
       <label for="input">Date</label>
     </div>
+  </div>
+  <div class="md-form" *ngIf="filter_key !== 'default'">
+    <button
+      type="button"
+      mdbBtn
+      class="waves-light btn-primary"
+      (click)="searchItems()"
+      mdbWavesEffect
+    >
+      Recherche
+    </button>
+    <button
+      type="button"
+      mdbBtn
+      class="waves-light"
+      mdbWavesEffect
+      (click)="reset()"
+    >
+      Réinitialiser
+    </button>
   </div>
   <button
     class="ml-auto adjust add"

@@ -1,4 +1,9 @@
-import { ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 import { EnseignantService } from './services/enseignant.service';
 import { Subject } from 'rxjs';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
@@ -8,55 +13,95 @@ import { EditEnsComponent } from './edit/edit.component';
 @Component({
   selector: 'app-gestion-enseignant',
   templateUrl: './gestion-enseignant.component.html',
-  styleUrls: ['./gestion-enseignant.component.css']
+  styleUrls: ['./gestion-enseignant.component.css'],
 })
 export class GestionEnseignantComponent implements OnInit {
-  constructor(private etudiantService:EnseignantService,private modalService: MDBModalService) {}
+  filter_key: string = 'default';
+  nom: string = '';
+  prenom: string = '';
+  grade: string = 'default';
+  email: string = '';
+  departement: string = 'default';
+  constructor(
+    private etudiantService: EnseignantService,
+    private modalService: MDBModalService
+  ) {}
   modalRef: MDBModalRef;
-
-
+  changeFilter(event) {
+    this.filter_key = event.target.value;
+    if(this.filter_key)
+    this.reset()
+  }
   openEditModal(data) {
     this.modalRef = this.modalService.show(EditEnsComponent, {
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-        show: false,
-        ignoreBackdropClick: false,
-        class: 'modal-dialog cascading-modal',
-        containerClass: 'largeModal',
-        animated: true,
-        data: {data:data}
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true,
+      data: { data: data },
     });
-    this.modalRef.content.action.subscribe( (result: any) => { console.log(result); });
+    this.modalRef.content.action.subscribe((result: any) => {
+      console.log(result);
+    });
   }
   refresh: Subject<boolean> = new Subject<boolean>();
-  search: Subject<string | null> = new Subject<string | null>();
-  searchText:string
-  @HostListener('input') oninput() {
-    this.search.next(this.searchText)
-  }
+  search: Subject<{} | null> = new Subject<{} | null>();
+
+
 
   openAddModal() {
     this.modalRef = this.modalService.show(AjouteEnsComponent, {
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-        show: false,
-        ignoreBackdropClick: false,
-        class: 'modal-dialog cascading-modal',
-        containerClass: 'largeModal',
-        animated: true
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true,
     });
-    this.modalRef.content.action.subscribe( (result: any) => {
-      if(result) this.refresh.next(true);
+    this.modalRef.content.action.subscribe((result: any) => {
+      if (result) this.refresh.next(true);
+    });
+  }
+  ngOnInit(): void {}
+  onKey(e) {
+    if (e.key === 'Enter') this.searchItems();
+  }
+  searchItems() {
+    if (
+      this.nom === '' &&
+      this.prenom === '' &&
+      this.email === '' &&
+      this.grade === 'default' &&
+      this.departement === 'default'
+    )
+      return;
 
-     });
+    this.search.next({
+      nom: this.nom,
+      prenom: this.prenom,
+      email: this.email,
+      grade: this.grade,
+     departement: this.departement,
+    });
   }
-  ngOnInit(): void {
+  reset() {
+    this.nom = '';
+    this.prenom = '';
+    this.grade = 'default';
+    this.departement = 'default';
+    this.email = '';
+    this.search.next({
+      nom: this.nom,
+      prenom: this.prenom,
+      email: this.email,
+      grade: this.grade,
+      departement: this.departement,
+    });
   }
-  searchItems(){
-    if(this.searchText=="") this.searchText=null;
-    this.search.next(this.searchText);
-  }
-
 }

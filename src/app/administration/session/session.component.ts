@@ -16,6 +16,14 @@ import { SessionCreateComponent } from './session-create/session-create.componen
   styleUrls: ['./session.component.css']
 })
 export class SessionComponent implements OnInit {
+  filter_key: string = 'default';
+  filiere : string = ''
+  date : string = ''
+  changeFilter(event) {
+    this.filter_key = event.target.value;
+    if(this.filter_key)
+    this.reset()
+  }
   elements: Session[] = [];
   selectedSession: Session;
   headElements = ['Filiere', 'Date', 'Actions'];
@@ -102,5 +110,18 @@ export class SessionComponent implements OnInit {
       }
     })
   }
-
+  searchItems() {
+    this.searchText={
+      date : this.date ,
+      filiere : this.filiere
+    }
+  }
+  reset() {
+    this.date = '';
+    this.filiere = '';
+    this.searchText={
+      date : this.date ,
+      filiere : this.filiere
+    }
+  }
 }
