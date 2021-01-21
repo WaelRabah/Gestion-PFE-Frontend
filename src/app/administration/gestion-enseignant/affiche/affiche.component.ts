@@ -4,7 +4,13 @@ import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
 import { Enseignant } from '../models/enseignant';
 import {EnseignantService} from '../services/enseignant.service';
-
+interface SearchObj {
+  nom: string;
+  prenom: string;
+  email: string;
+  grade: string;
+  departement : string;
+}
 @Component({
   selector: 'app-affiche',
   templateUrl: './affiche.component.html',
@@ -14,12 +20,18 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('row', { static: true }) row: ElementRef;
-
+  searchObj: SearchObj = {
+    nom: '',
+    prenom: '',
+    email: '',
+    grade: 'default',
+    departement : 'default'
+  };
   elements: Enseignant[] = [];
   allTeachers: Enseignant[] = [];
 
   headElements = ['nom', 'prenom', 'departement', 'grade','email','action'];
-  searchText: string = '';
+ 
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -52,6 +64,7 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
       (enseignants)=>{this.elements=enseignants;this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
         this.allTeachers=enseignants;
+  
         this.previous = this.mdbTable.getDataSource();},
       (error)=>console.log(error)
     )
@@ -63,7 +76,7 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
 
   }
   @Input() refreshTable: Subject<boolean> = new Subject<boolean>();
-  @Input() search: Subject<string> = new Subject<string>();
+  @Input() search: Subject<SearchObj> = new Subject<SearchObj>();
 
   ngOnInit() {
     this.refreshTable.subscribe(response => {
@@ -73,8 +86,8 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
     }
    });
    this.search.subscribe(response => {
-      this.searchText=response;
-      this.mdbTablePagination.searchText = response;
+      this.searchObj=response;
+ 
      this.searchItems();
     // Or do whatever operations you need.
 
@@ -89,26 +102,32 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
-
   searchItems() {
-
+    const { nom, prenom, grade, email ,departement} = this.searchObj;
+    const searchEmail = email;
+    const searchGrade = grade;
+    const searchDep = departement;
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
+    if (nom === '' && prenom === '' && email === '' && grade === 'default' && departement === 'default') {
       this.mdbTable.setDataSource(this.allTeachers);
-      this.elements = this.mdbTable.getDataSource();
+      this.elements = this.allTeachers;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.allTeachers.filter((item) => {
+      const { firstname, lastname, grade, email,departement } = item;
+    
+      return (
+        (prenom ? firstname.includes(prenom) : true) &&
+        (nom ? lastname.includes(nom) : true) &&
+        (searchEmail ? email.includes(searchEmail) : true) &&
+        (searchGrade !== 'default' ? grade.includes(searchGrade) : true) &&
+        (searchDep !== 'default' ? departement.includes(searchDep) : true)
+      );
+    });
 
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
 }
