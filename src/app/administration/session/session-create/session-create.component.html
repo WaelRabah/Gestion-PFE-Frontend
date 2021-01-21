@@ -24,7 +24,20 @@
               </div>
             <div class="col">
               <label for="pwd">President:</label>
-              <input type="text" class="form-control" id="president" name="president" ngModel required>
+              <select
+              class="form-control"
+              id="exampleFormControlSelect1"
+              name="presidentId"
+              ngModel
+              required
+            >
+              <option
+                [value]="enseignant._id"
+                *ngFor="let enseignant of enseignants"
+              >
+                {{ enseignant.firstname + " " + enseignant.lastname }}
+              </option>
+            </select>
               <div class="valid-feedback">Valid.</div>
               <div class="invalid-feedback">Please fill out this field.</div>
             </div>
