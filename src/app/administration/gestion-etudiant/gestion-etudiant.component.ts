@@ -1,9 +1,6 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  OnInit,
-} from '@angular/core';
+import { AjouteEtudCsvComponent } from './ajoute-etud-csv/ajoute-etud-csv.component';
+import { ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
 import { AjouteComponent } from './ajoute/ajoute.component';
@@ -27,6 +24,7 @@ export class GestionEtudiantComponent implements OnInit {
     private modalService: MDBModalService
   ) {}
   modalRef: MDBModalRef;
+
 
   changeFilter(event) {
     this.filter_key = event.target.value;
@@ -64,6 +62,7 @@ export class GestionEtudiantComponent implements OnInit {
       containerClass: 'largeModal',
       animated: true,
     });
+
     this.modalRef.content.action.subscribe((result: any) => {
       if (result) this.refresh.next(true);
     });
@@ -96,5 +95,21 @@ export class GestionEtudiantComponent implements OnInit {
       email: this.email,
       filiere: this.filiere,
     });
+  }
+  openAddCsv(){
+    this.modalRef = this.modalService.show(AjouteEtudCsvComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true
+  });
+  this.modalRef.content.action.subscribe( (result: any) => {
+    if(result) this.refresh.next(true);
+
+   });
   }
 }

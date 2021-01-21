@@ -30,6 +30,8 @@ import { GestionSuggestionComponent } from './gestion-suggestion/gestion-suggest
 import { AfficherSuggestionsComponent } from './gestion-suggestion/afficher-suggestions/afficher-suggestions.component';
 import { AccepterSuggestionComponent } from './gestion-suggestion/accepter-suggestion/accepter-suggestion.component';
 import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggestion/refuser-suggestion.component';
+import { AjouteEnsCsvComponent } from './gestion-enseignant/ajouteCsv/ajoute-ens-csv/ajoute-ens-csv.component';
+import { AjouteEtudCsvComponent } from './gestion-etudiant/ajoute-etud-csv/ajoute-etud-csv.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
@@ -66,7 +68,9 @@ export function tokenGetter() {
     GestionSuggestionComponent,
     AfficherSuggestionsComponent,
     AccepterSuggestionComponent,
-    RefuserSuggestionComponent
+    RefuserSuggestionComponent,
+    AjouteEnsCsvComponent,
+    AjouteEtudCsvComponent
     ],
   imports: [
     FilterPipeModule,

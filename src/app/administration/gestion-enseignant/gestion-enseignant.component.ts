@@ -1,9 +1,6 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  OnInit,
-} from '@angular/core';
+import { AjouteEnsCsvComponent } from './ajouteCsv/ajoute-ens-csv/ajoute-ens-csv.component';
+import { ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+
 import { EnseignantService } from './services/enseignant.service';
 import { Subject } from 'rxjs';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
@@ -72,6 +69,22 @@ export class GestionEnseignantComponent implements OnInit {
   onKey(e) {
     if (e.key === 'Enter') this.searchItems();
   }
+  openAddCsv(){
+    this.modalRef = this.modalService.show(AjouteEnsCsvComponent, {
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true
+  });
+  this.modalRef.content.action.subscribe( (result: any) => {
+    if(result) this.refresh.next(true);
+
+   });
+  }
   searchItems() {
     if (
       this.nom === '' &&
@@ -105,3 +118,4 @@ export class GestionEnseignantComponent implements OnInit {
     });
   }
 }
+

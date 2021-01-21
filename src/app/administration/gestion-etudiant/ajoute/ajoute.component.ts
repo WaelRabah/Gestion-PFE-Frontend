@@ -14,7 +14,7 @@ export class AjouteComponent implements OnInit {
   submitted = false;
 
   constructor(private etudiantService:EtudiantService,public modalRef: MDBModalRef) {}
-  
+
   add(etudiantForm: NgForm) {
     this.submitted=true;
     etudiantForm.value.role="Etudiant";
@@ -25,7 +25,7 @@ export class AjouteComponent implements OnInit {
       (error)=>{this.submitted=false;console.log(error);}
     )
   }
- 
+
   ngOnInit(): void {
   }
 

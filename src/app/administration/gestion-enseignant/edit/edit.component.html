@@ -32,7 +32,7 @@
 
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-graduate" class="prefix select"></mdb-icon>
-              <select required ngModel #departement="ngModel"  name="departement" class="browser-default custom-select">
+              <select required [(ngModel)]="data.departement" #departement="ngModel"  name="departement" class="browser-default custom-select">
                 <option selected>Département</option>
                 <option value="Génie Physique et Instrumentation">Génie Physique et Instrumentation</option>
                 <option value="Génie Informatique et Mathématique">Génie Informatique et Mathématique</option>
@@ -46,7 +46,7 @@
             <div class="md-form form-sm">
               <mdb-icon fas icon="user-tie" class="prefix select"></mdb-icon>
               <select required [(ngModel)]="data.grade" #grade="ngModel"  name="grade" class="browser-default custom-select">
-                <option selected>Grade</option>
+
                 <option value="Professeur">Professeur</option>
                 <option value="Maître de Conférences">Maître de Conférences</option>
                 <option value=">Maître-assistant">Maître-assistant</option>

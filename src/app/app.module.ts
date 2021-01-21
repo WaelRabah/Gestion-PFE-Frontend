@@ -14,6 +14,11 @@ import { AccesRefuseComponent } from './acces-refuse/acces-refuse.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
+
+export function tokenGetter(){
+  return localStorage.getItem("token");
+}
 import { registerLocaleData } from '@angular/common'
 import localeFr from '@angular/common/locales/fr';
 import { MdpOublieComponent } from './mdp-oublie/mdp-oublie.component';
@@ -36,6 +41,7 @@ registerLocaleData(localeFr, 'fr');
   ],
   imports: [
     BrowserModule,
+    NgxCsvParserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
