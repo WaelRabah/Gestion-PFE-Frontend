@@ -1,50 +1,78 @@
-
 <div class="login-panel row align-items-center">
   <div class="col-md-6 col-12">
-    <img class="img-responsive" style="width:100%" src="assets/insatlogopng.png" alt="">
+    <img
+      class="img-responsive"
+      style="width: 100%"
+      src="assets/insatlogopng.png"
+      alt=""
+    />
   </div>
   <div class="col-md-6 col-12">
-    <form fxLayout="column" fxLayoutAlign="space-evenly center" #loginForm="ngForm" class="z-depth-2 text-center border border-light p-5 rounded" action="#!">
-
+    <form
+      fxLayout="column"
+      fxLayoutAlign="space-evenly center"
+      #loginForm="ngForm"
+      class="z-depth-2 text-center border border-light p-5 rounded"
+      action="#!"
+    >
       <p class="title h4 mb-4 display-4">Bienvenue</p>
 
       <!-- Email -->
       <div class="email-container mb-4 mt-5">
-        <input email type="email" ngModel name="email" required #emailInput="ngModel" class="form-control mb-1" placeholder="E-mail" autofocus>
+        <input
+          email
+          type="email"
+          ngModel
+          name="email"
+          required
+          #emailInput="ngModel"
+          class="form-control mb-1"
+          placeholder="E-mail"
+          autofocus
+        />
         <div *ngIf="emailInput.invalid && emailInput.dirty">
           L'email doit être valide
         </div>
       </div>
       <!-- Password -->
       <div class="pass-container mb-5 mt-4">
-        <input type="password" minlength="4" name="password" ngModel required #pwdInput="ngModel" class="form-control mb-1" placeholder="Password">
+        <input
+          type="password"
+          minlength="4"
+          name="password"
+          ngModel
+          required
+          #pwdInput="ngModel"
+          class="form-control mb-1"
+          placeholder="Password"
+        />
         <div *ngIf="pwdInput.invalid && pwdInput.dirty">
           Le mot de passe doit avoir au moins 4 caractères
         </div>
       </div>
 
-      <div class="d-flex justify-content-around  mt-4">
-          <div>
-              <!-- Forgot password -->
-              <a href="">Mot de passe oublié?</a>
-          </div>
+      <div class="d-flex justify-content-around mt-4">
+        <div>
+          <!-- Forgot password -->
+          <a routerLink="/mdp-oublie">Mot de passe oublié?</a>
+        </div>
       </div>
 
       <!-- Sign in button -->
-      <button 
-      *ngIf="!submitted"
-      id="login"
-      (click)="login(loginForm)" 
-      class="btn btn-block my-4" 
-      type="submit"
-      [disabled]="loginForm.invalid"
-      >Login</button>
+      <button
+        *ngIf="!submitted"
+        id="login"
+        (click)="login(loginForm)"
+        class="btn btn-block my-4"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
 
       <div class="spinner-border m-4" role="status" *ngIf="submitted">
         <span class="sr-only">Loading...</span>
       </div>
-
-
     </form>
   </div>
 </div>

@@ -5,6 +5,8 @@ import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, 
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
 import { Status } from '../../enums/status.enum';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 @Component({
   selector: 'app-afficher-suggestion',
@@ -28,7 +30,8 @@ export class AfficherSuggestionComponent implements OnInit {
   constructor(
     private enseignantSuggestionService :SuggestionService,
     private cdRef: ChangeDetectorRef,
-    private authService: AuthentificationService
+    private authService: AuthentificationService,
+    private modalService:NgbModal
     ){}
 
   refresh(){
@@ -89,9 +92,8 @@ export class AfficherSuggestionComponent implements OnInit {
     return this.enseignantSuggestionService.getPDF(id).subscribe(
       (response) => {
 
-        var file = new Blob([response], {type: 'application/pdf'});
-        var fileURL = window.URL.createObjectURL(file);
-        window.open(fileURL);
+        const modalRef= this.modalService.open(PdfJsViewerComponent,{size:'xl',centered:true,windowClass: 'pdfViewer' });
+        modalRef.componentInstance.pdfSrc=response;
 
       }
     )

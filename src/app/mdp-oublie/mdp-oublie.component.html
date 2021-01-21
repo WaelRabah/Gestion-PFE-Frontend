@@ -1,0 +1,56 @@
+<div class="login-panel row align-items-center">
+  <div class="col-md-6 col-12">
+    <img
+      class="img-responsive"
+      style="width: 100%"
+      src="assets/insatlogopng.png"
+      alt=""
+    />
+  </div>
+  <div class="col-md-6 col-12">
+    <form
+      fxLayout="column"
+      fxLayoutAlign="space-evenly center"
+      #loginForm="ngForm"
+      class="z-depth-2 text-center border border-light p-5 rounded"
+      action="#!"
+    >
+      <p class="title h2 mb-4 display-5">Récupération du mot de passe</p>
+
+      <!-- Email -->
+      <div class="email-container mb-4 mt-5">
+        <input
+          email
+          type="email"
+          ngModel
+          name="email"
+          required
+          #emailInput="ngModel"
+          class="form-control mb-1"
+          placeholder="E-mail"
+          autofocus
+        />
+        <div *ngIf="emailInput.invalid && emailInput.dirty">
+          L'email doit être valide
+        </div>
+      </div>
+      <!-- Password -->
+
+      <!-- Sign in button -->
+      <button
+        *ngIf="!submitted"
+        id="login"
+        (click)="recover(loginForm)"
+        class="btn btn-block my-4"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Récupérer votre mot de passe
+      </button>
+
+      <div class="spinner-border m-4" role="status" *ngIf="submitted">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </form>
+  </div>
+</div>

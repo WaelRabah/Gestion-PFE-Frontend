@@ -32,7 +32,14 @@ import { AccepterSuggestionComponent } from './gestion-suggestion/accepter-sugge
 import { RefuserSuggestionComponent } from './gestion-suggestion/refuser-suggestion/refuser-suggestion.component';
 import { AjouteEnsCsvComponent } from './gestion-enseignant/ajouteCsv/ajoute-ens-csv/ajoute-ens-csv.component';
 import { AjouteEtudCsvComponent } from './gestion-etudiant/ajoute-etud-csv/ajoute-etud-csv.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 
+export function tokenGetter() {
+  console.log("hiiiiiiiiiiiiiiiiiiii");
+  return localStorage.getItem("token");
+}
 @NgModule({
   declarations: [AdministrationComponent,
     SessionComponent,
@@ -72,7 +79,18 @@ import { AjouteEtudCsvComponent } from './gestion-etudiant/ajoute-etud-csv/ajout
     MatSelectModule,
     ReactiveFormsModule,
     CommonModule,
-    AdministrationRoutingModule
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          console.log("jiiiiiiiiiiiiiiiiiiiiiiii");
+          return localStorage.getItem('token');
+        },
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: [""],
+      }
+    }),
+    AdministrationRoutingModule,
+    PdfJsViewerModule
     ],
   entryComponents: [ EditComponent,AjouteComponent, EditEnsComponent, AjouteEnsComponent]
 })

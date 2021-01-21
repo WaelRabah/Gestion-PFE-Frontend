@@ -12,15 +12,17 @@
     <span class="badge badge-dark ml-3"
       >Filiere : {{ selectedSession.filiere }}</span
     >
-    <span class="badge badge-dark ml-3">Date : {{ selectedSession.date }}</span>
+    <span class="badge badge-dark ml-3"
+      >Date : {{ selectedSession.date | date }}</span
+    >
   </div>
-  <div class="row mb-3 justify-content-between">
+  <div class="row h-25 mb-3 justify-content-between">
     <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
 
     <button
-      class="badge badge-primary ml-3"
+      class="badge add ml-3"
       style="border: none"
-      (click)="onNavigateCreate()"
+      (click)="openAddSoutenanceModal($event)"
     >
       Ajouter Soutenance
       <mdb-icon
@@ -30,6 +32,24 @@
         icon="plus"
       ></mdb-icon>
     </button>
+    <div class="col-md-3">
+      <input
+        class="form-control"
+        type="text"
+        id="form60"
+        [(ngModel)]="searchTerm"
+        placeholder="Recherche..."
+      />
+    </div>
+    <div class="form-check mt-2">
+      <input
+        class="form-check-input mt-2 mr-1"
+        type="checkbox"
+        id="check"
+        [(ngModel)]="isItPublic"
+      />
+      <label class="form-check-label" for="check">publique</label>
+    </div>
     <button
       class="badge badge-light d-flex align-items-center mr-3"
       style="border-color: black"
@@ -50,5 +70,7 @@
   <app-liste
     [sessionId]="sessionId"
     [selectedSession]="selectedSession"
+    [searchTerm]="searchTerm"
+    [isItPublic]="isItPublic"
   ></app-liste>
 </div>

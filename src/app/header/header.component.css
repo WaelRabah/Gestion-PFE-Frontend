@@ -1,4 +1,11 @@
 .navbar-brand{
     max-width: 150px;
+}
+.sign-out{
+    font-size: 30px;
+    color: #273a48 !important;
+}
+nav{
+    background-color: #e4e4e4 !important;
 
 }

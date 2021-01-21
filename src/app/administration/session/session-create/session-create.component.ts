@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MDBModalRef } from 'angular-bootstrap-md';
 import { Session } from '../session.model';
 import { SessionService } from '../session.service';
 
@@ -11,7 +12,7 @@ import { SessionService } from '../session.service';
 })
 export class SessionCreateComponent implements OnInit {
   @ViewChild('f') form:NgForm;
-  constructor( private sessionService:SessionService , private route : Router ) { }
+  constructor( private sessionService:SessionService , private route : Router,public modalRef: MDBModalRef ) { }
 
   ngOnInit(): void {
   }
@@ -22,7 +23,7 @@ export class SessionCreateComponent implements OnInit {
       this.form.reset();
       data.date = data.date.slice(0,10);
       this.sessionService.addSession(data)
-      this.route.navigate(["/Administrateur/session"]);
+      this.modalRef.hide();
     });
   }
 

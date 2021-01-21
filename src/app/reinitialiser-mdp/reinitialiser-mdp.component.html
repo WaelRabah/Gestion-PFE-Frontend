@@ -1,0 +1,75 @@
+<div class="login-panel row align-items-center">
+  <div class="col-md-6 col-12">
+    <img
+      class="img-responsive"
+      style="width: 100%"
+      src="assets/insatlogopng.png"
+      alt=""
+    />
+  </div>
+  <div class="col-md-6 col-12">
+    <form
+      fxLayout="column"
+      fxLayoutAlign="space-evenly center"
+      #loginForm="ngForm"
+      class="z-depth-2 text-center border border-light p-5 rounded"
+      action="#!"
+    >
+      <p class="title h2 mb-4 display-5">Réinitialisation du mot de passe</p>
+
+      <!-- Email -->
+      <div class="pass-container mb-5 mt-4">
+        <input
+          type="password"
+          minlength="4"
+          name="password"
+          ngModel
+          required
+          #pwdInput="ngModel"
+          class="form-control mb-1"
+          placeholder="Password"
+        />
+        <div *ngIf="pwdInput.invalid && pwdInput.dirty">
+          Le mot de passe doit avoir au moins 4 caractères
+        </div>
+      </div>
+      <div class="pass-container mb-5 mt-4">
+        <input
+          type="password"
+          minlength="4"
+          name="confirmed_password"
+          ngModel
+          required
+          #pwdConfInput="ngModel"
+          class="form-control mb-1"
+          placeholder="Confirm password"
+        />
+        <div
+          *ngIf="
+            pwdConfInput.invalid &&
+            pwdConfInput.dirty &&
+            pwdConfInput.value != pwdInput.value
+          "
+        >
+          La confirmation du mot de passe doit avoir au moins 4 caractères et
+          égale au mot de passe
+        </div>
+      </div>
+
+      <button
+        *ngIf="!submitted"
+        id="login"
+        (click)="recover(loginForm)"
+        class="btn btn-block my-4"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Récupérer votre mot de passe
+      </button>
+
+      <div class="spinner-border m-4" role="status" *ngIf="submitted">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </form>
+  </div>
+</div>

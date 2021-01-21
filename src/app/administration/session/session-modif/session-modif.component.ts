@@ -4,6 +4,7 @@ import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MDBModalRef } from 'angular-bootstrap-md';
 import { Session } from '../session.model';
 import { SessionService } from '../session.service';
 
@@ -16,29 +17,18 @@ export class SessionModifComponent implements OnInit  {
   id:number;
   session: Session;
   @ViewChild('form') form: NgForm;
-  constructor(private sessionService: SessionService, private router: Router , private route: ActivatedRoute) { }
+  constructor(private sessionService: SessionService, private router: Router , private route: ActivatedRoute,public modalRef: MDBModalRef ) { }
+  data:any;
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params : Params) => {
-        this.id = params['id'];
-        this.session = this.sessionService.getSessionById(this.id.toString())
-        setTimeout(() => {
-          this.form.setValue({
-            numero: this.session.numero,
-            president: this.session.president,
-            filiere : this.session.filiere,
-            date: this.session.date
-          });
-        });
-      }
-    )
+    this.session = this.data;
 
   }
 
 
   onSubmit(form:NgForm){
     this.sessionService.UpdateSession(form,this.id.toString())
+    this.modalRef.hide();
   }
 
   onClear(){
