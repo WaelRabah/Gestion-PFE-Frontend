@@ -18,8 +18,7 @@ export class GestionPfeComponent implements OnInit {
   modalRef: MDBModalRef;
   changeFilter(event) {
     this.filter_key = event.target.value;
-    if(this.filter_key)
-    this.reset()
+
   }
 
   openAccepterModal(data) {
