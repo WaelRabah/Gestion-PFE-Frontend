@@ -21,8 +21,7 @@ export class SessionComponent implements OnInit {
   date : string = ''
   changeFilter(event) {
     this.filter_key = event.target.value;
-    if(this.filter_key)
-    this.reset()
+  
   }
   elements: Session[] = [];
   selectedSession: Session;

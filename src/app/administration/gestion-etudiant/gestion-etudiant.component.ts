@@ -28,8 +28,7 @@ export class GestionEtudiantComponent implements OnInit {
 
   changeFilter(event) {
     this.filter_key = event.target.value;
-    if(this.filter_key)
-    this.reset()
+
   }
   openEditModal(data) {
     this.modalRef = this.modalService.show(EditComponent, {
