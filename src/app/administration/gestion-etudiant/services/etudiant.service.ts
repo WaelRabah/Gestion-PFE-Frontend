@@ -16,7 +16,7 @@ export class EtudiantService {
     return this.http.get<Etudiant[]>(environment.backendUrl+this.userRoute+'Etudiant');
   }
   addEtudiant(etudiant:Etudiant):Observable<Etudiant>{
-    return this.http.post<Etudiant>(environment.backendUrl+this.userRoute+"register",etudiant);
+    return this.http.post<Etudiant>(environment.backendUrl+this.userRoute+"newEtudiant",etudiant);
   }
   updateEtudiant(etudiant:Etudiant):Observable<Etudiant>{
     return this.http.put<Etudiant>(environment.backendUrl+this.userRoute+etudiant._id,etudiant);

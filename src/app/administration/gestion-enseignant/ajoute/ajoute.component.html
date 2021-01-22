@@ -69,14 +69,6 @@
                 required
               </div>
             </div>
-            <div class="md-form form-sm">
-              <mdb-icon fas icon="key" class="prefix"></mdb-icon>
-              <input required  ngModel #password="ngModel"  mdbInput type="password" id="password" name="password" class="form-control">
-              <label for="password">password</label>
-              <div *ngIf="password.invalid && password.dirty">
-                required
-              </div>
-            </div>
             <div class="text-center mt-1-half">
               <button
               *ngIf="!submitted"

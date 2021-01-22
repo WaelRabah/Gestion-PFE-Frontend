@@ -35,7 +35,7 @@ import { AjouteEtudCsvComponent } from './gestion-etudiant/ajoute-etud-csv/ajout
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export function tokenGetter() {
   console.log("hiiiiiiiiiiiiiiiiiiii");
   return localStorage.getItem("token");
@@ -73,6 +73,7 @@ export function tokenGetter() {
     AjouteEtudCsvComponent
     ],
   imports: [
+    MatProgressSpinnerModule,
     FilterPipeModule,
     MDBBootstrapModule,
     FormsModule,

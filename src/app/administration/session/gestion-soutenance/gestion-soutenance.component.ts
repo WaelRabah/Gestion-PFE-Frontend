@@ -23,6 +23,7 @@ export class GestionSoutenanceComponent implements OnInit {
   selectedSession: Session;
   searchTerm: string = '';
   isItPublic: boolean = true;
+  pdfLoading = false;
   constructor(
     private route: ActivatedRoute,
     private readonly sessionService: SessionService,
@@ -55,5 +56,20 @@ export class GestionSoutenanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchTerm = '';
+  }
+
+  onDownload(){
+    this.pdfLoading = true;
+    this.sessionService.downloadPDF(this.sessionId).subscribe( (data:any) => {
+      var a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.href = `http://localhost:3000/uploads/sessions/${data.filename}`;
+      a.target ="_blank"
+      setTimeout ( () => {
+        a.click();
+        this.pdfLoading = false;
+      },2000);
+    });
   }
 }

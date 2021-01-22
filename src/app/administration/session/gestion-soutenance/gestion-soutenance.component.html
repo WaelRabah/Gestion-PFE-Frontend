@@ -53,14 +53,18 @@
     <button
       class="badge badge-light d-flex align-items-center mr-3"
       style="border-color: black"
+      (click)="onDownload()"
     >
-      Télécharger PDF
-      <mdb-icon
+      <span>Télécharger PDF</span>
+      <mdb-icon *ngIf="!this.pdfLoading"
         style="margin-right: 10px"
         class="pl-1"
         fas
         icon="arrow-down"
       ></mdb-icon>
+      <div class="spinner-border spinner-border-sm m-1" role="status" *ngIf="this.pdfLoading">
+        <span class="sr-only">Loading...</span>
+      </div>
     </button>
   </div>
 
