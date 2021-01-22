@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient  } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Session } from './session.model'
 import { environment } from '../../../environments/environment'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +66,8 @@ export class SessionService {
     })
   }
 
-
+  downloadPDF(id: string){
+    return this.http.get<Blob>(`${environment.backendUrl}sessions/pdf/${id}`);
+}
 
 }

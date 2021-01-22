@@ -49,9 +49,9 @@ registerLocaleData(localeFr, 'fr');
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MDBBootstrapModule.forRoot(),
-    
+
   ],
- 
+
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: LOCALE_ID, useValue: 'fr' }
