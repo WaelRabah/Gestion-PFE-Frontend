@@ -37,7 +37,6 @@ import { environment } from 'src/environments/environment';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export function tokenGetter() {
-  console.log("hiiiiiiiiiiiiiiiiiiii");
   return localStorage.getItem("token");
 }
 @NgModule({

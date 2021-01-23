@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AjoutSujetComponent } from './ajout-sujet/ajout-sujet.component';
 import { UploadRapportPfeComponent } from './upload-rapport-pfe/upload-rapport-pfe.component';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -15,7 +16,8 @@ import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
     CommonModule,
     FormsModule,
     EtudiantRoutingModule,
-    PdfJsViewerModule
+    PdfJsViewerModule,
+    NgMultiSelectDropDownModule.forRoot()
   ]
 })
 export class EtudiantModule { }
