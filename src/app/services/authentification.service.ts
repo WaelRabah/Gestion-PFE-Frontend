@@ -58,7 +58,7 @@ export class AuthentificationService {
 
   getUserId(): string {
     return this.isAuthenticated()
-      ? JSON.parse(localStorage.getItem('user'))._id
+      ? JSON.parse(localStorage.getItem('user')).id
       : '';
   }
 }

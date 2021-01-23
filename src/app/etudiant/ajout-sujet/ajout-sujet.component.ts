@@ -1,3 +1,4 @@
+import { EnseignantModel } from '../models/enseignant.model';
 import { ToastrService } from 'ngx-toastr';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 import { EtudiantService } from './../services/etudiant.service';
@@ -18,6 +19,10 @@ export class AjoutSujetComponent implements OnInit {
   fileSizeError : boolean = null;
   fileTypeError : boolean = null;
 
+  dropdownList = [];
+  selectedItems = [];
+  dropdownSettings = {};
+
   success = false;
   constructor(
     private etudiantService: EtudiantService,
@@ -26,6 +31,26 @@ export class AjoutSujetComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.etudiantService.getEnseignants().subscribe(
+      {
+        next: (data: EnseignantModel[]) => {
+          this.dropdownList = data.map((x: EnseignantModel) => {
+            return {item_id: x._id, item_text: x.firstname+' '+x.lastname}
+
+          }
+          )
+        }
+      }
+    );
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'item_id',
+      textField: 'item_text',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      limitSelection: 2,
+      maxHeight: 100
+    };
   }
 
   onSubmit(form: NgForm) {
@@ -54,6 +79,7 @@ export class AjoutSujetComponent implements OnInit {
     for (var key in form.value){
       formData.append(key,form.value[key])
     }
+    formData.append('enseignantsEncadrants',JSON.stringify(this.selectedItems.map(x => x.item_id)));
     formData.set('file',this.fileToUpload,'sujet-pfe-'+this.authService.getUserName());
 
     return formData;

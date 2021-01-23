@@ -49,6 +49,16 @@
     </div>
   </div>
 
+  <label class="form-label" for="description">Les enseignants encadrants</label>
+  <ng-multiselect-dropdown
+  [placeholder]="'Sélectionnez les enseignants encadrants (2 maximum)'"
+  [data]="dropdownList"
+  [(ngModel)]="selectedItems"
+  [settings]="dropdownSettings"
+  [ngModelOptions]="{standalone: true}"
+>
+</ng-multiselect-dropdown>
+
   <label class="form-label" for="customFile">Dossier de l'étudiant sous format PDF</label>
   <input type="file" class="form-control mb-4" id="customFile" ngModel name="file" #file="ngModel"
     (change)="handleFileInput($event.target.files)" required id="sujet-etudiant-file" />
