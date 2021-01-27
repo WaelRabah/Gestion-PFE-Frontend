@@ -1,3 +1,4 @@
+import { EncadrementComponent } from './encadrement/encadrement.component';
 import { SuggererSujetComponent } from './suggestion/suggerer-sujet/suggerer-sujet.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'mes-suggestions',
     component: SuggestionComponent
+  },
+  {
+    path: 'encadrements',
+    component: EncadrementComponent
   },
   {
     path: '**',

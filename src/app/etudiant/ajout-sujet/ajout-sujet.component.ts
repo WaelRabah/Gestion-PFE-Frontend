@@ -27,7 +27,7 @@ export class AjoutSujetComponent implements OnInit {
   constructor(
     private etudiantService: EtudiantService,
     private authService : AuthentificationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
   ) { }
 
   ngOnInit(): void {

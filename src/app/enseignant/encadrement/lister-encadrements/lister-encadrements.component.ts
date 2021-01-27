@@ -1,52 +1,53 @@
-import { AuthentificationService } from './../../../services/authentification.service';
-import { SuggestionService } from './../suggestion.service';
-import { SuggestionPFE } from './../../models/suggestion-pfe.model';
+import { EnseignantService } from './../../enseignant.service';
 import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef, ɵɵqueryRefresh, Input, EventEmitter, Output } from '@angular/core';
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
-import { Status } from '../../enums/status.enum';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 
 @Component({
-  selector: 'app-afficher-suggestion',
-  templateUrl: './afficher-suggestion.component.html',
-  styleUrls: ['./afficher-suggestion.component.css']
+  selector: 'app-lister-encadrements',
+  templateUrl: './lister-encadrements.component.html',
+  styleUrls: ['./lister-encadrements.component.css']
 })
-export class AfficherSuggestionComponent implements OnInit {
+export class ListerEncadrementsComponent implements OnInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild('row', { static: true }) row: ElementRef;
 
-  elements: SuggestionPFE[] = [];
-  allSuggestions: SuggestionPFE[] = [];
+  elements = [];
+  allEncadrements = [];
 
-  headElements = ['Sujet', 'Entreprise', 'Description', 'Fiche de renseignement','Statut'];
+  headElements = ['Sujet','Description', 'Entreprise', 'Etudiant'];
   searchText: string = '';
   previous: string;
 
   maxVisibleItems: number = 8;
 
   constructor(
-    private enseignantSuggestionService :SuggestionService,
     private cdRef: ChangeDetectorRef,
-    private authService: AuthentificationService,
-    private modalService:NgbModal
-    ){}
+    private enseignantService: EnseignantService
+  ) { }
+
 
   refresh(){
-    this.enseignantSuggestionService.getSuggestionsByEnseignantId(this.authService.getUserId()).subscribe(
-      (suggestions)=>{this.elements=suggestions;this.mdbTable.setDataSource(this.elements);
+    this.enseignantService.getEncadrement().subscribe(
+      (encadrements)=>{this.elements=encadrements;this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
-        this.allSuggestions=suggestions;
+        this.allEncadrements=encadrements;
         this.previous = this.mdbTable.getDataSource();},
       (error)=>console.log(error)
     )
   }
 
+  @Input() refreshTable: Subject<boolean> = new Subject<boolean>();
   @Input() search: Subject<string> = new Subject<string>();
 
   ngOnInit() {
+    this.refreshTable.subscribe(response => {
+      if(response){
+       this.refresh();
+      // Or do whatever operations you need.
+    }
+   });
    this.search.subscribe(response => {
       this.searchText=response;
       this.mdbTablePagination.searchText = response;
@@ -69,7 +70,7 @@ export class AfficherSuggestionComponent implements OnInit {
 
     const prev = this.mdbTable.getDataSource();
     if (!this.searchText) {
-      this.mdbTable.setDataSource(this.allSuggestions);
+      this.mdbTable.setDataSource(this.allEncadrements);
       this.elements = this.mdbTable.getDataSource();
     }
 
@@ -86,17 +87,5 @@ export class AfficherSuggestionComponent implements OnInit {
       this.mdbTablePagination.calculateLastItemIndex();
     });
   }
-
-  getPDF(id: string) {
-    return this.enseignantSuggestionService.getPDF(id).subscribe(
-      (response) => {
-
-        const modalRef= this.modalService.open(PdfJsViewerComponent,{size:'xl',centered:true,windowClass: 'pdfViewer' });
-        modalRef.componentInstance.pdfSrc=response;
-
-      }
-    )
-  }
-
 
 }

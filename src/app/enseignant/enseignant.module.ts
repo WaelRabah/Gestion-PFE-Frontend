@@ -9,10 +9,12 @@ import { EnseignantComponent } from './enseignant.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { AfficherSuggestionComponent } from './suggestion/afficher-suggestion/afficher-suggestion.component';
 import { PdfJsViewerModule } from 'ng2-pdfjs-viewer';
+import { EncadrementComponent } from './encadrement/encadrement.component';
+import { ListerEncadrementsComponent } from './encadrement/lister-encadrements/lister-encadrements.component';
 
 
 @NgModule({
-  declarations: [EnseignantComponent, SuggererSujetComponent, SuggestionComponent, AfficherSuggestionComponent],
+  declarations: [EnseignantComponent, SuggererSujetComponent, SuggestionComponent, AfficherSuggestionComponent, EncadrementComponent, ListerEncadrementsComponent],
   imports: [
     CommonModule,
     FormsModule,
