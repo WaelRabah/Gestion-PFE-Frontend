@@ -16,15 +16,18 @@ export class DetailComponent implements OnInit {
   @Input() index: number;
   @Input() selectedSoutenance: number;
   @Input() selectedSession: Session;
-  @Input() item: Soutenance;
+  @Input() item: any;
   @Input() original: any;
   @Input() sessionId: string;
+  displayable : any
   refresh: Subject<boolean> = new Subject<boolean>();
   constructor(
     private router: Router,
     private service: SoutenanceService,
     private modalService: MDBModalService
-  ) {}
+  ) {
+   
+  }
   modalRef: MDBModalRef;
   openEditSoutenanceModal() {
     this.modalRef = this.modalService.show(ModifySoutenanceComponent, {
@@ -61,5 +64,8 @@ export class DetailComponent implements OnInit {
       }
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.selectedSession,this.item,this.original,this.index)
+
+  }
 }

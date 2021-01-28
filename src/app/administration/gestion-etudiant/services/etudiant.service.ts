@@ -10,21 +10,21 @@ export class EtudiantService {
 
   constructor(private http:HttpClient) { }
 
-  userRoute="utilisateurs/";
+  userRoute="utilisateurs";
 
   getEtudiants():Observable<Etudiant[]>{
-    return this.http.get<Etudiant[]>(environment.backendUrl+this.userRoute+'Etudiant');
+    return this.http.get<Etudiant[]>(environment.backendUrl+this.userRoute+'?role=Etudiant');
   }
   addEtudiant(etudiant:Etudiant):Observable<Etudiant>{
-    return this.http.post<Etudiant>(environment.backendUrl+this.userRoute+"newEtudiant",etudiant);
+    return this.http.post<Etudiant>(environment.backendUrl+this.userRoute+"/newEtudiant",etudiant);
   }
   updateEtudiant(etudiant:Etudiant):Observable<Etudiant>{
-    return this.http.put<Etudiant>(environment.backendUrl+this.userRoute+etudiant._id,etudiant);
+    return this.http.put<Etudiant>(environment.backendUrl+this.userRoute+'/'+etudiant._id,etudiant);
   }
   deleteEtudiant(id):Observable<Etudiant>{
-    return this.http.delete<Etudiant>(environment.backendUrl+this.userRoute+id);
+    return this.http.delete<Etudiant>(environment.backendUrl+this.userRoute+'/'+id);
   }
   addEtudiants(etudiants:Etudiant[]):Observable<Etudiant[]>{
-    return this.http.post<Etudiant[]>(environment.backendUrl+this.userRoute+"registerAll",etudiants);
+    return this.http.post<Etudiant[]>(environment.backendUrl+this.userRoute+"/registerAll",etudiants);
   }
 }

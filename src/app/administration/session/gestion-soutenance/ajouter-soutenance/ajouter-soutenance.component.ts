@@ -30,6 +30,7 @@ export class AjouterSoutenanceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.enseignantService.getEnseignants().subscribe((data) => {
       this.enseignants = data;
     });
@@ -43,20 +44,22 @@ export class AjouterSoutenanceComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const pfe = this.pfes.find((item) => item._id === form.value.pfe);
-
+    const encadrant = this.enseignants.find((item) => item._id === form.value.encadrant);
+    const rapporteur = this.enseignants.find((item) => item._id === form.value.rapporteur);
+ 
     const body = {
-      encadrantId: form.value.encadrant,
+      encadrant: encadrant,
       heure: form.value.Heure,
-      presidentId: this.selectedSession.presidentId,
-      rapporteurId: form.value.rapporteur,
+      president: this.selectedSession.president,
+      rapporteur: rapporteur,
       isItPublic: form.value.public !== '',
-      studentId: pfe.studentId,
-      sessionId: this.sessionId,
-      pfeId: pfe._id,
+      student: pfe.student,
+      pfe: pfe,
     };
-    this.soutenanceService.addSoutenanceToSession(body).subscribe((data) => {});
+    this.soutenanceService.addSoutenanceToSession(body,this.sessionId).subscribe((data) => {});
     this.form.reset();
     this.modalRef.hide();
+    this.router.navigate([`/Administrateur/session`]);
   }
 
   onClear() {

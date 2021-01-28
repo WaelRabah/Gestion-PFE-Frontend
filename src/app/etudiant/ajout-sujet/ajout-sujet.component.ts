@@ -21,6 +21,7 @@ export class AjoutSujetComponent implements OnInit {
 
   dropdownList = [];
   selectedItems = [];
+  enseignants= [];
   dropdownSettings = {};
 
   success = false;
@@ -34,6 +35,7 @@ export class AjoutSujetComponent implements OnInit {
     this.etudiantService.getEnseignants().subscribe(
       {
         next: (data: EnseignantModel[]) => {
+          this.enseignants=data
           this.dropdownList = data.map((x: EnseignantModel) => {
             return {item_id: x._id, item_text: x.firstname+' '+x.lastname}
 
@@ -53,9 +55,22 @@ export class AjoutSujetComponent implements OnInit {
     };
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
+    const ids=this.selectedItems.map((item)=>{
+      return item.item_id
+    })
+    this.selectedItems=this.enseignants
+    .filter(item=>ids.includes(item._id))
+   
+    const decodedToken= this.etudiantService.getDecodedToken()
+    const student =await  this.etudiantService.getEtudiant(decodedToken.id)
+    .toPromise()
+    const body = {
+      ...form.value,student
+    }
+
     this.submitted = true;
-    this.etudiantService.ajouterSujet(this.convertToFormData(form)).subscribe({
+    this.etudiantService.ajouterSujet(this.convertToFormData(body)).subscribe({
       error: (error) => {
         this.submitted = false;
         this.toastr.error("Veuillez réssayer ultérieurement",'Une erreur est survenue',{positionClass:'toast-bottom-right'});
@@ -74,13 +89,20 @@ export class AjoutSujetComponent implements OnInit {
 
   }
 
-  convertToFormData(form:NgForm) {
+  convertToFormData(body) {
+
     const formData = new FormData();
-    for (var key in form.value){
-      formData.append(key,form.value[key])
+    for (var key in body){
+      if (key=='student')
+      formData.set(key,JSON.stringify(body[key]))
+      else
+      formData.set(key,body[key])
+     
     }
-    formData.append('enseignantsEncadrants',JSON.stringify(this.selectedItems.map(x => x.item_id)));
+    
+    formData.append('enseignantsEncadrants',JSON.stringify(this.selectedItems.map(x => x)));
     formData.set('file',this.fileToUpload,'sujet-pfe-'+this.authService.getUserName());
+    
 
     return formData;
   }
