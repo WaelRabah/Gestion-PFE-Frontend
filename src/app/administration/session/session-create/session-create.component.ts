@@ -24,7 +24,6 @@ export class SessionCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.enseignantService.getEnseignants().subscribe((data) => {
-      console.log(data)
       this.enseignants = data;
     });
   }

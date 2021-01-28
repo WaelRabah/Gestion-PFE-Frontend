@@ -16,16 +16,24 @@
       </select>
     </div>
   </div>
-  <div class="col-md-2" *ngIf="filter_key === 'filiere'">
+  <div class="col-md-2" *ngIf="filter_key === 'filiere'" style="margin-top: 8px">
     <div class="md-form">
-      <input
-        mdbInput
-        type="text"
-        id="form59"
-        class="form-control"
-        [(ngModel)]="filiere"
-      />
-      <label for="form59">Filiere</label>
+      <select
+      required
+      ngModel
+      [(ngModel)]="filiere"
+      name="filiere"
+      class="browser-default custom-select"
+      id="search-input-filiere"
+    >
+      <option value="default">Filiere</option>
+      <option value="GL">GL</option>
+      <option value="RT">RT</option>
+      <option value="IIA">IIA</option>
+      <option value="IMI">IMI</option>
+      <option value="CH">CH</option>
+      <option value="BIO">BIO</option>
+    </select>
     </div>
   </div>
   <div class="col-md-2" *ngIf="filter_key === 'date'">

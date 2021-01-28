@@ -43,7 +43,7 @@ export class GestionEtudiantComponent implements OnInit {
       data: { data: data },
     });
     this.modalRef.content.action.subscribe((result: any) => {
-      console.log(result);
+ 
     });
   }
   refresh: Subject<boolean> = new Subject<boolean>();

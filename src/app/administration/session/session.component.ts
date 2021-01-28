@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Session } from './session.model';
 import { SessionService } from './session.service';
 import Swal from 'sweetalert2';
@@ -17,18 +17,19 @@ import { SessionCreateComponent } from './session-create/session-create.componen
 })
 export class SessionComponent implements OnInit {
   filter_key: string = 'default';
-  filiere : string = ''
-  date : string = ''
+  filiere: string = 'default'
+  date: string = ''
   changeFilter(event) {
     this.filter_key = event.target.value;
-  
+
   }
   elements: Session[] = [];
   selectedSession: Session;
   headElements = ['Filiere', 'Date', 'Actions'];
   searchText: any = {}
   refresh: Subject<boolean> = new Subject<boolean>();
-  constructor(private sessionService: SessionService, private route: Router,private modalService: MDBModalService) { }
+  constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) { 
+  }
 
   ngOnInit(): void {
     this.sessionService.fetchSessions().subscribe(data => {
@@ -44,8 +45,14 @@ export class SessionComponent implements OnInit {
 
 
   onClickSession(index: string) {
-
-    this.selectedSession = this.elements.find(element => element._id == index)
+    
+    this.sessionService.fetchSessionById(this.elements.find(element => element._id == index)._id)
+    .subscribe(
+      (data)=>{
+        this.selectedSession = data
+      }
+    )
+     
 
     this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
   }
@@ -54,34 +61,34 @@ export class SessionComponent implements OnInit {
 
   openAddModal() {
     this.modalRef = this.modalService.show(SessionCreateComponent, {
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-        show: false,
-        ignoreBackdropClick: false,
-        class: 'modal-dialog cascading-modal',
-        containerClass: 'largeModal',
-        animated: true
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true
     });
-    this.modalRef.content.action.subscribe( (result: any) => { 
-      if(result) this.refresh.next(true);
-     });
+    this.modalRef.content.action.subscribe((result: any) => {
+      if (result) this.refresh.next(true);
+    });
   }
 
 
   openEditModal(data) {
     this.modalRef = this.modalService.show(SessionModifComponent, {
-        backdrop: true,
-        keyboard: true,
-        focus: true,
-        show: false,
-        ignoreBackdropClick: false,
-        class: 'modal-dialog cascading-modal',
-        containerClass: 'largeModal',
-        animated: true,
-        data: {data:data}
+      backdrop: true,
+      keyboard: true,
+      focus: true,
+      show: false,
+      ignoreBackdropClick: false,
+      class: 'modal-dialog cascading-modal',
+      containerClass: 'largeModal',
+      animated: true,
+      data: { data: data }
     });
-    this.modalRef.content.action.subscribe( (result: any) => { console.log(result); });
+    this.modalRef.content.action.subscribe((result: any) => { console.log(result); });
   }
 
   onDelete(index: string) {
@@ -107,17 +114,17 @@ export class SessionComponent implements OnInit {
     })
   }
   searchItems() {
-    this.searchText={
-      date : this.date ,
-      filiere : this.filiere
+    this.searchText = {
+      date: this.date,
+      filiere: this.filiere
     }
   }
   reset() {
     this.date = '';
-    this.filiere = '';
-    this.searchText={
-      date : this.date ,
-      filiere : this.filiere
+    this.filiere = 'default';
+    this.searchText = {
+      date: this.date,
+      filiere: this.filiere
     }
   }
 }

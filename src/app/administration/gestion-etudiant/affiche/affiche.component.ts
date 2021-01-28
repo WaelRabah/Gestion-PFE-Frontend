@@ -135,7 +135,7 @@ export class AfficheComponent implements OnInit, AfterViewInit {
 
     this.elements = this.allStudents.filter((item) => {
       const { firstname, lastname, filiere, email } = item;
-
+      console.log(item)
       return (
         (prenom ? firstname.includes(prenom) : true) &&
         (nom ? lastname.includes(nom) : true) &&

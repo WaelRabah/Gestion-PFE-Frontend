@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { EnseignantService } from 'src/app/administration/gestion-enseignant/services/enseignant.service';
+import { PfeService } from 'src/app/administration/gestion-pfe/services/pfe.service';
 import { Session } from '../../session.model';
 import { SessionService } from '../../session.service';
 import { SoutenanceService } from '../services/soutenance.service';
@@ -32,6 +33,7 @@ export class ModifySoutenanceComponent implements OnInit {
     private readonly sessionService: SessionService,
     private readonly enseignantService: EnseignantService,
     private readonly soutenanceService: SoutenanceService,
+    private readonly pfeService: PfeService,
     private router: Router,
     public modalRef: MDBModalRef
   ) {}
@@ -45,7 +47,8 @@ export class ModifySoutenanceComponent implements OnInit {
     this.enseignantService.getEnseignants().subscribe((data) => {
       this.enseignants = data;
     });
-    this.soutenanceService.getUnassignedPfes().subscribe((data) => {
+    this.pfeService.getPfes().subscribe((data) => {
+   
       this.pfes = data;
     });
     this.sessionService.fetchSessionById(this.sessionId).subscribe((data) => {
@@ -53,34 +56,32 @@ export class ModifySoutenanceComponent implements OnInit {
     });
     setTimeout(() => {
       this.form.setValue({
-        pfe: this.soutenance.pfeId,
-        encadrant: this.soutenance.encadrantId,
-        rapporteur: this.soutenance.rapporteurId,
+        rapporteur: this.soutenance.rapporteur._id,
         heure: this.soutenance.heure,
         public: this.soutenance.isItPublic,
       });
-    }, 1000);
+    }, 800);
   }
 
   onSubmit(form: NgForm) {
-    const pfe = this.pfes.find((item) => item._id === form.value.pfe);
-
+    const pfe = this.soutenance.pfe
+    const encadrants = pfe.enseignantsEncadrants
+    const rapporteur = this.enseignants.find((item) => item._id === form.value.rapporteur);
     const body = {
-      encadrantId: form.value.encadrant,
+      enseignantsEncadrants: encadrants,
       heure: form.value.heure,
-      presidentId: this.selectedSession.president,
-      rapporteurId: form.value.rapporteur,
-      isItPublic: form.value.public,
-      studentId: pfe.studentId,
-      sessionId: this.sessionId,
-      pfeId: pfe._id,
+      president: this.selectedSession.president,
+      rapporteur: rapporteur,
+      isItPublic: form.value.public !== '' && form.value.public,
+      student:this.soutenance.student,
+      pfe: pfe,
     };
-
     this.soutenanceService
       .updateSoutenance(body, this.soutenance._id)
       .subscribe((data) => {});
     this.form.reset();
     this.modalRef.hide();
+    this.router.navigate([`/Administrateur/session`]);
   }
 
   onClear() {

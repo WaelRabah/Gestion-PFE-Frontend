@@ -19,14 +19,13 @@ export class EditComponent implements OnInit {
     etudiantForm.value._id=this.data._id;
     this.submitted=true;
     etudiantForm.value.username=etudiantForm.value.firstname+etudiantForm.value.lastname;
-    console.log(etudiantForm.value);
+
     this.etudiantService.updateEtudiant(etudiantForm.value).subscribe(
       (etudiant)=>{this.action.next(etudiant);this.modalRef.hide();this.submitted=false;},
       (error)=>{this.submitted=false;console.log(error);}
     )
   }
   ngOnInit(){
-    console.log(this.data);
   }
 
 }
