@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {SujetPFE} from '../models/sujet-pfe.model';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +27,10 @@ export class EtudiantService {
   }
 
   getEnseignants():Observable<any> {
-    return this.http.get(environment.backendUrl+"utilisateurs/"+Role.enseignant)
+    return this.http.get(environment.backendUrl+"utilisateurs?role="+Role.enseignant)
+  }
+  getEtudiant(id):Observable<any> {
+    return this.http.get(environment.backendUrl+"utilisateurs/"+id)
   }
 
   getSujetStatus():Observable<any> {
@@ -36,5 +39,12 @@ export class EtudiantService {
 
   getRapportStatus():Observable<any> {
     return this.http.get(environment.backendUrl+this.userRoute+"check-ajouter-rapport/"+this.authService.getUserId());
+  }
+  getDecodedToken(){
+    const token =localStorage.getItem('token');
+    
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    return decodedToken
   }
 }

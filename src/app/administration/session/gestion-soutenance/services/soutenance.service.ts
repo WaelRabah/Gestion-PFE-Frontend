@@ -31,8 +31,8 @@ export class SoutenanceService {
       }
     });
   }
-  addSoutenanceToSession(data): Observable<any> {
-    return this.http.post<any>(environment.backendUrl + "soutenances", data);
+  addSoutenanceToSession(data,sessionId): Observable<any> {
+    return this.http.post<any>(environment.backendUrl + "soutenances/"+sessionId, data);
   }
   updateSoutenance(data, id: string): Observable<any> {
     return this.http.put<any>(environment.backendUrl + "soutenances/" + id, data);

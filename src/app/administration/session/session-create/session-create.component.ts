@@ -24,6 +24,7 @@ export class SessionCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.enseignantService.getEnseignants().subscribe((data) => {
+      console.log(data)
       this.enseignants = data;
     });
   }
@@ -31,7 +32,8 @@ export class SessionCreateComponent implements OnInit {
   onSubmit(form: NgForm) {
     const {presidentId} =form.value
     const president =this.enseignants.find(item=>item._id===presidentId)
-    const body= {...form.value , president : president.firstname+" "+president.lastname}
+    const body= {...form.value , president}
+    delete body.presidentId
     
     this.sessionService.storeSession(body).subscribe((data: Session) => {
       this.form.reset();
