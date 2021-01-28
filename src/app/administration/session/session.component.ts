@@ -35,14 +35,10 @@ export class SessionComponent implements OnInit {
       data.map(session => {
         session.date = session.date.slice(0, 10);
       })
-      this.sessionService.setSession(data);
-      this.elements = this.sessionService.getSessions();
+      this.elements = data;
       this.onClickSession(this.elements[0]._id);
     });
 
-    this.sessionService.sessionChanged.subscribe(data => {
-      this.elements = this.sessionService.getSessions();
-    })
 
   }
 
@@ -99,7 +95,8 @@ export class SessionComponent implements OnInit {
       confirmButtonText: 'Oui, Supprime la session!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.sessionService.deleteSession(index);
+        this.sessionService.deleteSession(index).subscribe(response => {
+        });
         this.route.navigate(["/Administrateur/session"])
         Swal.fire(
           'Supprimée!',

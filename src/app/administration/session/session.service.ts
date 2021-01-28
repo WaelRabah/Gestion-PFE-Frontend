@@ -10,8 +10,6 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class SessionService {
-  sessions: Session[] = [];
-  sessionChanged = new Subject<Session[]>();
 
   constructor(
     private http: HttpClient
@@ -25,30 +23,15 @@ export class SessionService {
     return this.http.get<Session>(`${environment.backendUrl}sessions/${id}`);
 
   }
-  getSessionById(index: string) {
-    return this.sessions.find(element => element._id == index);
-  }
-
-  getSessions() {
-    return this.sessions.slice();
-  }
-  setSession(session: Session[]) {
-    this.sessions = session
-  }
+ 
 
   storeSession(session: Session) {
     return this.http.post(environment.backendUrl + "sessions", session)
   }
 
-  addSession(session: Session) {
-    this.sessions.push(session);
-    this.sessionChanged.next(this.sessions.slice())
-  }
+
   deleteSession(index: string) {
-    this.http.delete(`${environment.backendUrl}sessions/${index}`).subscribe(response => {
-      this.sessions = this.sessions.filter(element => element._id != index);
-      this.sessionChanged.next(this.sessions.slice())
-    })
+    return this.http.delete(`${environment.backendUrl}sessions/${index}`);
   }
 
   UpdateSession(doc, index: string) {
@@ -60,9 +43,6 @@ export class SessionService {
     }
     this.http.put(environment.backendUrl + index, update).subscribe((data: Session) => {
       data.date = data.date.slice(0, 10);
-      let idx = this.sessions.indexOf(this.getSessionById(index))
-      this.sessions[idx] = data
-      this.sessionChanged.next(this.sessions.slice())
     })
   }
 
