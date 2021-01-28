@@ -38,7 +38,6 @@ export class SessionCreateComponent implements OnInit {
     this.sessionService.storeSession(body).subscribe((data: Session) => {
       this.form.reset();
       data.date = data.date.slice(0, 10);
-      this.sessionService.addSession(data);
       this.modalRef.hide();
     });
   }

@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Session } from '../session.model';
 import { SessionService } from '../session.service';
 import { AjouterSoutenanceComponent } from './ajouter-soutenance/ajouter-soutenance.component';
@@ -64,7 +65,7 @@ export class GestionSoutenanceComponent implements OnInit {
       var a = document.createElement('a');
       document.body.appendChild(a);
       a.setAttribute('style', 'display: none');
-      a.href = `http://localhost:3000/uploads/sessions/${data.filename}`;
+      a.href = `${environment.backendUrl}uploads/sessions/${data.filename}`;
       a.target ="_blank"
       setTimeout ( () => {
         a.click();
