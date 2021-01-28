@@ -13,7 +13,7 @@ export class EnseignantService {
   userRoute="utilisateurs/";
 
   getEnseignants():Observable<Enseignant[]>{
-    return this.http.get<Enseignant[]>(environment.backendUrl+this.userRoute+'Enseignant');
+    return this.http.get<Enseignant[]>(environment.backendUrl+this.userRoute+'?role=Enseignant');
   }
   addEnseignant(enseignant:Enseignant):Observable<Enseignant>{
     return this.http.post<Enseignant>(environment.backendUrl+this.userRoute+"newEnseignant",enseignant);

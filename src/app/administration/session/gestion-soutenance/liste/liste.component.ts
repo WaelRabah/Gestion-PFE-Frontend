@@ -13,10 +13,13 @@ import { SoutenanceService } from '../services/soutenance.service';
   templateUrl: './liste.component.html',
   styleUrls: ['./liste.component.css'],
 })
-export class ListeComponent implements OnInit {
+export class ListeComponent implements OnInit , OnChanges {
   constructor(private readonly _service: SoutenanceService) { }
-  fetchedSoutenances: any[];
+
+  @Input()
   soutenances: any[];
+  @Input()
+  originals: any[];
   selectedSoutenance: number = -1;
 
   private _sessionId: string;
@@ -26,10 +29,6 @@ export class ListeComponent implements OnInit {
   set sessionId(value: string) {
     if (value !== this._sessionId) {
       this._sessionId = value;
-      this._service.getSoutenancesBySessionId(value).subscribe((data) => {
-        this.fetchedSoutenances = data;
-        this.soutenances = data;
-      });
       this.selectedSoutenance = -1;
     }
   }
@@ -44,7 +43,7 @@ export class ListeComponent implements OnInit {
     this.selectedSoutenance = -1;
     if (value === "") {
 
-      this.soutenances = this.fetchedSoutenances
+      this.soutenances = this.originals
 
     }
     if (value !== this._searchTerm) {
@@ -80,7 +79,7 @@ export class ListeComponent implements OnInit {
     this.selectedSoutenance = -1;
     if (this.soutenances) {
       this._isItPublic = !this._isItPublic;
-      this.soutenances = this.fetchedSoutenances.filter((item) => {
+      this.soutenances = this.originals.filter((item) => {
         const {
           isItPublic
         } = item.displayable;
@@ -101,5 +100,48 @@ export class ListeComponent implements OnInit {
   setSelected(idx) {
     this.selectedSoutenance = idx;
   }
-  ngOnInit(): void { }
+  ngOnChanges( changes : SimpleChanges){
+    
+ if (changes.soutenances)
+    this.soutenances= changes.soutenances
+    .currentValue
+    .map(item => {
+      
+      return {
+        original : item , 
+        displayable : {
+          Examinateur: item.president.firstname + " " + item.president.lastname,
+          candidat: item.student.firstname + " " + item.student.lastname,
+          entreprise: item.pfe.entreprise,
+          heure: item.heure,
+          respEntreprise: item.pfe.nomEncadrantEntreprise,
+          respInsat: item.pfe.enseignantsEncadrants.map(item => item.firstname + " " + item.lastname),
+          sujet: item.pfe.titre,
+          isItPublic: item.isItPublic
+        }
+      }
+    })
+  }
+  ngOnInit(): void {
+    if (this.soutenances)
+    return
+    this.soutenances= this.soutenances
+      .map(item => {
+
+        return {
+          original : item , 
+          displayable : {
+            Examinateur: item.president.firstname + " " + item.president.lastname,
+            candidat: item.student.firstname + " " + item.student.lastname,
+            entreprise: item.pfe.entreprise,
+            heure: item.heure,
+            respEntreprise: item.pfe.nomEncadrantEntreprise,
+            respInsat: item.pfe.enseignantsEncadrants.map(item => item.firstname + " " + item.lastname),
+            sujet: item.pfe.titre,
+            isItPublic: item.isItPublic
+          }
+        }
+      })
+     
+  }
 }

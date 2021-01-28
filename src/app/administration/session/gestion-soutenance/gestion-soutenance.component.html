@@ -7,7 +7,7 @@
     <!-- <app-ges tion-soutenance *ngIf="selectedSession"></app-ges> -->
     <span class="badge badge-dark ml-3">Salle : 2B6</span>
     <span class="badge badge-dark ml-3"
-      >President : {{ selectedSession.president }}</span
+      >President : {{ selectedSession.president.firstname+" "+selectedSession.president.lastname }}</span
     >
     <span class="badge badge-dark ml-3"
       >Filiere : {{ selectedSession.filiere }}</span
@@ -76,5 +76,7 @@
     [selectedSession]="selectedSession"
     [searchTerm]="searchTerm"
     [isItPublic]="isItPublic"
+    [soutenances]="selectedSession.soutenances"
+    [originals]="selectedSession.soutenances"
   ></app-liste>
 </div>
