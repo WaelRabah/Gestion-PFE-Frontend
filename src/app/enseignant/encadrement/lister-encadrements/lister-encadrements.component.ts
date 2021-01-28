@@ -3,6 +3,10 @@ import { Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, 
 import { MdbTablePaginationComponent, MdbTableDirective, MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
 
+interface SearchObj {
+  sujet: string;
+  entreprise: string;
+}
 @Component({
   selector: 'app-lister-encadrements',
   templateUrl: './lister-encadrements.component.html',
@@ -16,8 +20,11 @@ export class ListerEncadrementsComponent implements OnInit {
   elements = [];
   allEncadrements = [];
 
-  headElements = ['Sujet','Description', 'Entreprise', 'Etudiant'];
-  searchText: string = '';
+  headElements = ['Sujet', 'Description', 'Entreprise', 'Etudiant'];
+  searchObj: SearchObj = {
+    sujet: '',
+    entreprise: ''
+  };
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -28,33 +35,35 @@ export class ListerEncadrementsComponent implements OnInit {
   ) { }
 
 
-  refresh(){
+  refresh() {
     this.enseignantService.getEncadrement().subscribe(
-      (encadrements)=>{this.elements=encadrements;this.mdbTable.setDataSource(this.elements);
+      (encadrements) => {
+        this.elements = encadrements; this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
-        this.allEncadrements=encadrements;
-        this.previous = this.mdbTable.getDataSource();},
-      (error)=>console.log(error)
+        this.allEncadrements = encadrements;
+        this.previous = this.mdbTable.getDataSource();
+      },
+      (error) => console.log(error)
     )
   }
 
   @Input() refreshTable: Subject<boolean> = new Subject<boolean>();
-  @Input() search: Subject<string> = new Subject<string>();
+  @Input() search: Subject<SearchObj> = new Subject<SearchObj>();
 
   ngOnInit() {
     this.refreshTable.subscribe(response => {
-      if(response){
-       this.refresh();
+      if (response) {
+        this.refresh();
+        // Or do whatever operations you need.
+      }
+    });
+    this.search.subscribe(response => {
+      this.searchObj = response;
+      
+      this.searchItems();
       // Or do whatever operations you need.
-    }
-   });
-   this.search.subscribe(response => {
-      this.searchText=response;
-      this.mdbTablePagination.searchText = response;
-     this.searchItems();
-    // Or do whatever operations you need.
 
- });
+    });
     this.refresh();
   }
 
@@ -67,25 +76,28 @@ export class ListerEncadrementsComponent implements OnInit {
 
 
   searchItems() {
-
+    const { sujet , entreprise } = this.searchObj;
+    const searchSujet = sujet;
+    const searchEntreprise = entreprise;
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
+    if (sujet === '' && entreprise === '') {
       this.mdbTable.setDataSource(this.allEncadrements);
-      this.elements = this.mdbTable.getDataSource();
+      this.elements = this.allEncadrements;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.allEncadrements.filter((item) => {
+      const { titre , entreprise } = item;
+      console.log(item)
+      return (
+        (searchSujet ? titre.includes(searchSujet) : true) &&
+        (searchEntreprise !== 'default' ? entreprise.includes(searchEntreprise) : true)
+      );
+    });
 
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
 
 }

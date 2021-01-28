@@ -17,11 +17,13 @@ export class ListeComponent implements OnInit , OnChanges {
   constructor(private readonly _service: SoutenanceService) { }
 
   @Input()
-  soutenances: any[];
-  @Input()
+  passedSoutenances: any[];
+
+
+
   originals: any[];
   selectedSoutenance: number = -1;
-
+  soutenances: any[];
   private _sessionId: string;
   private _searchTerm: string = '';
   private _isItPublic: boolean = true;
@@ -40,15 +42,19 @@ export class ListeComponent implements OnInit , OnChanges {
 
   @Input()
   set searchTerm(value: string) {
+    
     this.selectedSoutenance = -1;
     if (value === "") {
 
       this.soutenances = this.originals
 
     }
+    else
     if (value !== this._searchTerm) {
       this._searchTerm = value;
-      this.soutenances = this.soutenances.filter((item) => {
+   
+      this.soutenances = this.originals.filter((item) => {
+    
         const {
           Examinateur,
           candidat,
@@ -68,8 +74,10 @@ export class ListeComponent implements OnInit , OnChanges {
           respInsat.includes(value) ||
           sujet.includes(value)
         );
-      });
+      })
+      
     }
+
   }
   get searchTerm(): string {
     return this._searchTerm;
@@ -99,11 +107,12 @@ export class ListeComponent implements OnInit , OnChanges {
   }
   setSelected(idx) {
     this.selectedSoutenance = idx;
+  
   }
   ngOnChanges( changes : SimpleChanges){
-    
- if (changes.soutenances)
-    this.soutenances= changes.soutenances
+
+ if (changes.passedSoutenances)
+{    this.originals= changes.passedSoutenances
     .currentValue
     .map(item => {
       
@@ -121,11 +130,27 @@ export class ListeComponent implements OnInit , OnChanges {
         }
       }
     })
+    
+    this.soutenances=[...this.originals.filter((item) => {
+      const {
+        isItPublic
+      } = item.displayable;
+
+      return (
+        isItPublic === this._isItPublic
+      );
+    })]
+
+  }
+    
+    
+
   }
   ngOnInit(): void {
-    if (this.soutenances)
+   
+    if (!this.passedSoutenances)
     return
-    this.soutenances= this.soutenances
+    this.originals= this.passedSoutenances
       .map(item => {
 
         return {
@@ -143,5 +168,14 @@ export class ListeComponent implements OnInit , OnChanges {
         }
       })
      
+     this.soutenances=[...this.originals.filter((item) => {
+      const {
+        isItPublic
+      } = item.displayable;
+
+      return (
+        isItPublic === this._isItPublic
+      );
+    })]
   }
 }

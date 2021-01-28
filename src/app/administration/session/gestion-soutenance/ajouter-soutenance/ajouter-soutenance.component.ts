@@ -19,7 +19,7 @@ export class AjouterSoutenanceComponent implements OnInit {
   enseignants: any[];
   pfes: any[];
   heures: any[] = ['9:00', '10:00', '11:00', '12:00', '14:00', '15:00'];
-  add: string;
+
   constructor(
     private route: ActivatedRoute,
     private readonly sessionService: SessionService,
@@ -44,11 +44,11 @@ export class AjouterSoutenanceComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const pfe = this.pfes.find((item) => item._id === form.value.pfe);
-    const encadrant = this.enseignants.find((item) => item._id === form.value.encadrant);
+    const encadrants = pfe.enseignantsEncadrants
     const rapporteur = this.enseignants.find((item) => item._id === form.value.rapporteur);
  
     const body = {
-      encadrant: encadrant,
+      enseignantsEncadrants: encadrants,
       heure: form.value.Heure,
       president: this.selectedSession.president,
       rapporteur: rapporteur,

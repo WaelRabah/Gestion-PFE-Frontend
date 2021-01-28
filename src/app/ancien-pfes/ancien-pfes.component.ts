@@ -17,14 +17,19 @@ export class AncienPfesComponent implements OnInit {
   @ViewChild('row', { static: true }) row: ElementRef;
 
   elements: SujetPFE[] = [];
-  allStudents: SujetPFE[] = [];
+  anciensPfes: SujetPFE[] = [];
 
   headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Dossier'];
-  searchText: string = '';
   previous: string;
 
   maxVisibleItems: number = 8;
+  filter_key: string = 'default';
+  sujet: string = '';
+  entreprise: string = '';
+  changeFilter(event) {
+    this.filter_key = event.target.value;
 
+  }
   constructor(
     private pfeService:PfeService,
     private cdRef: ChangeDetectorRef,
@@ -35,7 +40,7 @@ export class AncienPfesComponent implements OnInit {
     this.pfeService.getPfesByStatus(Status.Accepte).subscribe(
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
-        this.allStudents=etudiants;
+        this.anciensPfes=etudiants;
         this.previous = this.mdbTable.getDataSource();},
       (error)=>console.log(error)
     )
@@ -53,29 +58,42 @@ export class AncienPfesComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-
+  onKey(e){
+    
+    if (e.key==='Enter')
+      this.searchItems()
+    
+  }
   searchItems() {
 
+
+
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
-      this.mdbTable.setDataSource(this.allStudents);
-      this.elements = this.mdbTable.getDataSource();
+    if (this.sujet === '' && this.entreprise === '') {
+      this.mdbTable.setDataSource(this.anciensPfes);
+      this.elements = this.anciensPfes;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.anciensPfes.filter((item) => {
+      const { titre,entreprise } = item;
+      
+      return (
+        (this.sujet ? titre.includes(this.sujet) : true) &&
+        (this.entreprise ? entreprise.includes(this.entreprise) : true)
+    
+      );
+    });
 
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
-
+  reset() {
+    this.sujet = '';
+    this.entreprise = '';
+    this.searchItems()
+  }
   getPDF(id: string) {
     this.pfeService.getPDF(id).subscribe(
       (res) => {

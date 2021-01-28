@@ -18,7 +18,6 @@ export class AjouteEnsComponent implements OnInit {
     this.submitted=true;
     enseignantForm.value.role="Enseignant";
     enseignantForm.value.username=enseignantForm.value.firstname+enseignantForm.value.lastname;
-    console.log(enseignantForm.value);
     this.enseignantService.addEnseignant(enseignantForm.value).subscribe(
       (enseignant)=>{this.submitted=false;this.action.next(enseignant);this.modalRef.hide();},
       (error)=>{this.submitted=false;console.log(error);}

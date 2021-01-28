@@ -65,7 +65,6 @@ export class DetailComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    console.log(this.selectedSession,this.item,this.original,this.index)
 
   }
 }

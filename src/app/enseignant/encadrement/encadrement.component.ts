@@ -15,13 +15,34 @@ export class EncadrementComponent implements OnInit {
   ngOnInit(): void {
   }
   refresh: Subject<boolean> = new Subject<boolean>();
-  search: Subject<string | null> = new Subject<string | null>();
-  searchText:string
-  @HostListener('input') oninput() {
-    this.search.next(this.searchText)
+  search: Subject<{} | null> = new Subject<{} | null>();
+  filter_key: string = 'default';
+  sujet: string = '';
+  entreprise: string = '';
+  changeFilter(event) {
+    this.filter_key = event.target.value;
+
   }
-  searchItems(){
-    if(this.searchText=="") this.searchText=null;
-    this.search.next(this.searchText);
+  onKey(e){
+    
+    if (e.key==='Enter')
+      this.searchItems()
+    
+  }
+  searchItems() {
+    if (this.sujet==='' && this.entreprise==='') return
+
+    this.search.next({
+      sujet: this.sujet,
+      entreprise: this.entreprise,
+    });
+  }
+  reset() {
+    this.sujet = '';
+    this.entreprise = '';
+    this.search.next({
+      sujet: this.sujet,
+      entreprise: this.entreprise,
+    });
   }
 }

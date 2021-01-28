@@ -1,17 +1,11 @@
-<div class="modal-content align-items-center justify-content-center rounded">
-  <div class="modal-header green lighten-2 white-text">
+<div class="modal-content  rounded" >
+  <div class="modal-header  info-color-dark">
     <h4 class="title">
-      <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
-      Création Soutenance
-      <button
-        type="button"
-        class="close waves-effect waves-light"
-        data-dismiss="modal"
-        aria-label="Close"
-        (click)="modalRef.hide()"
-      >
-        <span aria-hidden="true">×</span>
-      </button>
+        <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+        Création Soutenance
+    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true" style="color : black">×</span>
+    </button>
     </h4>
   </div>
   <hr />
@@ -36,25 +30,7 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col">
-          <label for="filiere">Responsable Insat</label>
-          <select
-            class="form-control"
-            id="exampleFormControlSelect1"
-            name="encadrant"
-            ngModel
-            required
-          >
-            <option
-              [value]="enseignant._id"
-              *ngFor="let enseignant of enseignants"
-            >
-              {{ enseignant.firstname + " " + enseignant.lastname }}
-            </option>
-          </select>
-          <div class="valid-feedback">Valid.</div>
-          <div class="invalid-feedback">Please fill out this field.</div>
-        </div>
+
         <div class="col">
           <label for="Heure">Heure:</label>
           <select class="form-control" id="Heure" name="Heure" ngModel required>
@@ -108,7 +84,7 @@
         type="submit" 
         mdbBtn 
         [disabled]="!f.valid"
-        class="add info-color-dark mb-2 waves-light" 
+        class="btn info-color-dark mb-2 waves-light" 
         mdbWavesEffect>
         Ajouter
             <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>

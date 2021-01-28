@@ -7,7 +7,10 @@ import { Subject } from 'rxjs';
 import { Status } from '../../enums/status.enum';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
-
+interface SearchObj {
+  sujet: string;
+  entreprise: string;
+}
 @Component({
   selector: 'app-afficher-suggestion',
   templateUrl: './afficher-suggestion.component.html',
@@ -22,7 +25,10 @@ export class AfficherSuggestionComponent implements OnInit {
   allSuggestions: SuggestionPFE[] = [];
 
   headElements = ['Sujet', 'Entreprise', 'Description', 'Fiche de renseignement','Statut'];
-  searchText: string = '';
+  searchObj: SearchObj = {
+    sujet: '',
+    entreprise: ''
+  };
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -44,12 +50,12 @@ export class AfficherSuggestionComponent implements OnInit {
     )
   }
 
-  @Input() search: Subject<string> = new Subject<string>();
+  @Input() search: Subject<SearchObj> = new Subject<SearchObj>();
 
   ngOnInit() {
    this.search.subscribe(response => {
-      this.searchText=response;
-      this.mdbTablePagination.searchText = response;
+      this.searchObj=response;
+   
      this.searchItems();
     // Or do whatever operations you need.
 
@@ -66,25 +72,28 @@ export class AfficherSuggestionComponent implements OnInit {
 
 
   searchItems() {
-
+    const { sujet , entreprise } = this.searchObj;
+    const searchSujet = sujet;
+    const searchEntreprise = entreprise;
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
+    if (sujet === '' && entreprise === '') {
       this.mdbTable.setDataSource(this.allSuggestions);
-      this.elements = this.mdbTable.getDataSource();
+      this.elements = this.allSuggestions;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.allSuggestions.filter((item) => {
+      const { titre , entreprise } = item;
+      console.log(item)
+      return (
+        (searchSujet ? titre.includes(searchSujet) : true) &&
+        (searchEntreprise !== 'default' ? entreprise.includes(searchEntreprise) : true)
+      );
+    });
 
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
 
   getPDF(id: string) {

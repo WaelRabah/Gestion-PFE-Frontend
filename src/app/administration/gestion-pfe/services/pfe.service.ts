@@ -14,18 +14,21 @@ export class PfeService {
     private http: HttpClient
   ) { }
 
-  userRoute="pfes/";
+  route="pfes/";
 
 
   getPfesByStatus(status: Status): Observable<SujetPFE[]>{
-    return this.http.post<SujetPFE[]>(environment.backendUrl+this.userRoute+'search',{status});
+    return this.http.post<SujetPFE[]>(environment.backendUrl+this.route+'search',{status});
+  }
+  getPfes(): Observable<SujetPFE[]>{
+    return this.http.get<SujetPFE[]>(environment.backendUrl+this.route);
   }
 
   changerStatus(id: string, status: string): Observable<any> {
-    return this.http.put(environment.backendUrl+this.userRoute+`valider/${id}`,{status});
+    return this.http.put(environment.backendUrl+this.route+`valider/${id}`,{status});
   }
 
   getPDF(id: string){
-    return this.http.get(environment.backendUrl+this.userRoute+`pdf/${id}`,{responseType:'blob'});
+    return this.http.get(environment.backendUrl+this.route+`pdf/${id}`,{responseType:'blob'});
   }
 }

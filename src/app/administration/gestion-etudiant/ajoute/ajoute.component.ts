@@ -19,7 +19,7 @@ export class AjouteComponent implements OnInit {
     this.submitted=true;
     etudiantForm.value.role="Etudiant";
     etudiantForm.value.username=etudiantForm.value.firstname+etudiantForm.value.lastname;
-    console.log(etudiantForm.value);
+
     this.etudiantService.addEtudiant(etudiantForm.value).subscribe(
       (etudiant)=>{this.submitted=false;this.action.next(etudiant);this.modalRef.hide();},
       (error)=>{this.submitted=false;console.log(error);}

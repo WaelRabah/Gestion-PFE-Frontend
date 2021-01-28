@@ -7,6 +7,8 @@ import { SuggestionPFE } from 'src/app/enseignant/models/suggestion-pfe.model';
 import { SuggestionsService } from './suggestions.service';
 import { AuthentificationService } from 'src/app/services/authentification.service';
 
+
+
 @Component({
   selector: 'app-suggestions',
   templateUrl: './suggestions.component.html',
@@ -20,9 +22,14 @@ export class SuggestionsComponent implements OnInit {
 
   elements: SuggestionPFE[] = [];
   allSuggestions: SuggestionPFE[] = [];
+  filter_key: string = 'default';
+  sujet: string = '';
+  entreprise: string = '';
+  changeFilter(event) {
+    this.filter_key = event.target.value;
 
+  }
   headElements = ['Sujet', 'Entreprise', 'Description', 'Fiche de renseignement','contact'];
-  searchText: string = '';
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -43,17 +50,14 @@ export class SuggestionsComponent implements OnInit {
       (error)=>console.log(error)
     )
   }
-
-  @Input() search: Subject<string> = new Subject<string>();
-
+  onKey(e){
+    
+    if (e.key==='Enter')
+      this.searchItems()
+    
+  }
   ngOnInit() {
-   this.search.subscribe(response => {
-      this.searchText=response;
-      this.mdbTablePagination.searchText = response;
-     this.searchItems();
-    // Or do whatever operations you need.
 
- });
     this.refresh();
   }
 
@@ -67,26 +71,34 @@ export class SuggestionsComponent implements OnInit {
 
   searchItems() {
 
+
+
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
+    if (this.sujet === '' && this.entreprise === '') {
       this.mdbTable.setDataSource(this.allSuggestions);
-      this.elements = this.mdbTable.getDataSource();
+      this.elements = this.allSuggestions;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.allSuggestions.filter((item) => {
+      const { titre,entreprise } = item;
+      
+      return (
+        (this.sujet ? titre.includes(this.sujet) : true) &&
+        (this.entreprise ? entreprise.includes(this.entreprise) : true)
+    
+      );
+    });
 
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
-
+  reset() {
+    this.sujet = '';
+    this.entreprise = '';
+    this.searchItems()
+  }
   getPDF(id: string) {
     return this.suggestionService.getPDF(id).subscribe(
       (response) => {
