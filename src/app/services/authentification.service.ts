@@ -61,4 +61,12 @@ export class AuthentificationService {
       ? JSON.parse(localStorage.getItem('user')).id
       : '';
   }
+
+  checkToken(){
+    const expirationTime = JSON.parse(localStorage.getItem('user')).exp *1000;
+    if (Date.now() > expirationTime){
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    }
+  }
 }
