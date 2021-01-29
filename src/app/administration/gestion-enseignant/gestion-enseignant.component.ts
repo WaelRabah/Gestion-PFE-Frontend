@@ -81,7 +81,6 @@ export class GestionEnseignantComponent implements OnInit {
   });
   this.modalRef.content.action.subscribe( (result: any) => {
     if(result) this.refresh.next(true);
-
    });
   }
   searchItems() {
