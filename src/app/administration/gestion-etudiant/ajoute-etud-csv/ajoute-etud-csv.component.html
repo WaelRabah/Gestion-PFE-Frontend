@@ -1,28 +1,67 @@
+        <div class="modal-content">
 
-      <div class="modal-content">
+          <div class="modal-header green lighten-2 white-text">
+            <h4 class="title">
+                <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
+                Ajouter des etudiants
+            <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+            </h4>
+          </div>
+          <div class="modal-body mb-3">
+            <form action="#!" #enseignantCsvForm="ngForm">
+              <div class="md-form form-sm">
+                <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
+                <input required  ngModel #file name="file" mdbInput type="file" id="file"  class="form-control" (change)="fileChangeListener($event)" accept=".csv">
 
-        <div class="modal-header green lighten-2 white-text">
-          <h4 class="title">
-              <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
-              Ajouter des etudiants
-          <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">×</span>
-          </button>
-          </h4>
-        </div>
-        <div class="modal-body mb-0">
-          <form action="#!" #enseignantCsvForm="ngForm">
-            <div class="md-form form-sm">
-              <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
-              <input required  ngModel #file="ngModel" name="file" mdbInput type="file" id="file"  class="form-control" (change)="fileChangeListener($event)" accept=".csv">
-              <div *ngIf="file.invalid && file.dirty">
-                required
+                <div>
+                  <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+                    <thead>
+                    <tr>
+                      <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let el of elements; let i = index">
+                      <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+                          scope="row">{{el.nom}}</th>
+                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.prenom}}</td>
+                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.filiere}}</td>
+                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.niveau}}</td>
+                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.email}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="grey lighten-5 w-100">
+                    <tr>
+                      <td colspan="4">
+                        <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+                      </td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+          <button
+          type="button"
+          mdbBtn
+          class="waves-light add"
+          (click)="valider()"
+          mdbWavesEffect
+        >
+          Valider Enseignats
+        </button>
+                <div *ngIf="file.invalid && file.dirty">
+                  required
+                </div>
               </div>
-            </div>
-              <div class="spinner-border m-4" role="status" *ngIf="submitted">
-                <span class="sr-only">Loading...</span>
-              </div>
-          </form>
+                <div class="spinner-border m-4" role="status" *ngIf="submitted">
+                  <span class="sr-only">Loading...</span>
+                </div>
+            </form>
 
-        </div>
-        </div>
+
+          </div>
+          </div>
+

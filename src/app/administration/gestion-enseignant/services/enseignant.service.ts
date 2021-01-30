@@ -26,6 +26,6 @@ export class EnseignantService {
   }
 
   addEnseignants(enseignants:Enseignant[]):Observable<Enseignant[]>{
-    return this.http.post<Enseignant[]>(environment.backendUrl+this.userRoute+"registerAll",enseignants);
+    return this.http.post<Enseignant[]>(environment.backendUrl+this.userRoute+"newEnseignants",enseignants);
   }
 }

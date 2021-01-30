@@ -25,6 +25,6 @@ export class EtudiantService {
     return this.http.delete<Etudiant>(environment.backendUrl+this.userRoute+'/'+id);
   }
   addEtudiants(etudiants:Etudiant[]):Observable<Etudiant[]>{
-    return this.http.post<Etudiant[]>(environment.backendUrl+this.userRoute+"/registerAll",etudiants);
+    return this.http.post<Etudiant[]>(environment.backendUrl+this.userRoute+"/newEtudiants",etudiants);
   }
 }
