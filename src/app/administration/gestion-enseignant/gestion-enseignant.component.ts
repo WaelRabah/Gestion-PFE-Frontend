@@ -75,7 +75,7 @@ export class GestionEnseignantComponent implements OnInit {
       focus: true,
       show: false,
       ignoreBackdropClick: false,
-      class: 'modal-dialog cascading-modal',
+      class: 'modal-dialog cascading-modal  modal-lg',
       containerClass: 'largeModal',
       animated: true
   });

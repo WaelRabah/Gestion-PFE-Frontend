@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+<form class="min" (ngSubmit)="onSubmit(form)" #form="ngForm">
   <div *ngIf="!success">
     <!-- Title input -->
     <div class="form-outline mb-4">
@@ -56,9 +56,9 @@
     </div>
 
     <!-- Submit button -->
-    <button *ngIf="!submitted" type="submit" class="btn btn-primary btn-block mb-4" [disabled]="form.invalid||!fileIsValid">Envoyer</button>
+    <button *ngIf="!submitted" type="submit" class="btn add btn-block mb-4" [disabled]="form.invalid||!fileIsValid">Envoyer</button>
     <div class="d-flex justify-content-center">
-    <div class="spinner-border m-2 text-danger" role="status" *ngIf="submitted">
+    <div class="spinner-border m-2" role="status" *ngIf="submitted">
       <span class="sr-only">Loading...</span>
     </div>
   </div>

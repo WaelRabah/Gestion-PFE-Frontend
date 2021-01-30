@@ -21,7 +21,7 @@
   <div *ngIf="fileIsValid" class="pdfContainer">
     Voulez vous vraiment ajouter ce fichier comme rapport?
     <ng2-pdfjs-viewer [pdfSrc]="fileToUpload"></ng2-pdfjs-viewer>
-    <button *ngIf="!submitted" type="submit" class="btn btn-primary btn-block mb-4" [disabled]="form.invalid||!fileIsValid">Valider</button>
+    <button *ngIf="!submitted" type="submit" class="btn add btn-block mb-4" [disabled]="form.invalid||!fileIsValid">Valider</button>
     <div class="d-flex justify-content-center">
     <div id="spinner" class="spinner-border text-danger" role="status" *ngIf="submitted">
       <span class="sr-only">Loading...</span>

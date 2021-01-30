@@ -50,7 +50,7 @@
                   <button
                     type="button"
                     mdbBtn
-                    class="waves-light btn-primary"
+                    class="waves-light add"
                     (click)="searchItems()"
                     mdbWavesEffect
                   >
@@ -87,7 +87,10 @@
                           <mdb-icon fas icon="file" class="prefix"></mdb-icon>
                         </button>
                       </td>
-                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">get in touch</td>
+                      <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                        <button type="button" mdbBtn class="add btn-sm waves-light" mdbWavesEffect>get in touch</button>
+
+                        </td>
                   
                     </tr>
                     </tbody>
