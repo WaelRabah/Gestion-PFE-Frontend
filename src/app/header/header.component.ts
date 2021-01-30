@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
     this.role=this.authentificationService.getRole();
     if(this.role==this.roles.etudiant){
       this.etudiantService.getSujetStatus().subscribe({
-        next: data => {this.showAjouterSujet = data ;}
+        next: data => {this.showAjouterSujet = data }
       });
 
       this.etudiantService.getRapportStatus().subscribe({
