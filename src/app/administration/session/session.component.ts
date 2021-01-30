@@ -49,12 +49,12 @@ export class SessionComponent implements OnInit {
     this.sessionService.fetchSessionById(this.elements.find(element => element._id == index)._id)
     .subscribe(
       (data)=>{
-        this.selectedSession = data
+        this.selectedSession = data;
+        this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
       }
     )
      
-
-    this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
+      
   }
 
   modalRef: MDBModalRef;

@@ -16,7 +16,12 @@
         <mdb-icon fas icon="file" class="prefix"></mdb-icon>
       </button>
     </td>
-    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.status}}</td>
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+      <span *ngIf="el.status=='Accepté'" class="badge badge-success">{{el.status}}</span>
+      <span *ngIf="el.status=='Refusé'" class="badge badge-danger">{{el.status}}</span>
+      <span *ngIf="el.status=='En Attente'" class="badge badge-warning">{{el.status}}</span>
+
+    </td>
 
   </tr>
   </tbody>

@@ -1,5 +1,5 @@
 <div class="modal-content  rounded" >
-  <div class="modal-header  info-color-dark">
+  <div class="modal-header green lighten-2 white-text">
     <h4 class="title">
         <mdb-icon fas icon="pencil-alt" class="prefix"></mdb-icon>
         Création Soutenance
@@ -72,7 +72,7 @@
             name="public"
             ngModel
           />
-          <label for="public">Soutenance publique ?</label>
+          <label for="public">Soutenance public ?</label>
           <div class="valid-feedback">Valid.</div>
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
@@ -84,9 +84,9 @@
         type="submit" 
         mdbBtn 
         [disabled]="!f.valid"
-        class="btn info-color-dark mb-2 waves-light" 
+        class="btn add mb-2 waves-light" 
         mdbWavesEffect>
-        Ajouter
+        Submit
             <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>
         </button>
       </div>

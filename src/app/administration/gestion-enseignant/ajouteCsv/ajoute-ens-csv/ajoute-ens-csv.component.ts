@@ -56,6 +56,8 @@ ngAfterViewInit() {
 
 
 afficher(): void{
+  this.elements=[];
+
   for (var i = 0; i < this.csvRecords.length; i++)
   {
   this.elements.push({nom: this.csvRecords[i].lastname, prenom: this.csvRecords[i].firstname, departement: this.csvRecords[i].departement, grade: this.csvRecords[i].grade ,email: this.csvRecords[i].email });

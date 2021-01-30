@@ -13,10 +13,9 @@
         <div class="modal-body mb-3">
           <form action="#!" #enseignantCsvForm="ngForm">
             <div class="md-form form-sm">
-              <mdb-icon fas icon="user-alt" class="prefix"></mdb-icon>
               <input required  ngModel #file name="file" mdbInput type="file" id="file"  class="form-control" (change)="fileChangeListener($event)" accept=".csv">
 
-              <div>
+              <div class="md-form form-sm">
                 <table mdbTable #tableEl="mdbTable" class="z-depth-1">
                   <thead>
                   <tr>
@@ -43,6 +42,7 @@
                   </tfoot>
                 </table>
               </div>
+              <div class="text-center mt-1-half" *ngIf="csvRecords.length>0">
 
         <button
         type="button"
@@ -51,10 +51,11 @@
         (click)="valider()"
         mdbWavesEffect
       >
-        Valider Enseignats
+        Valider Enseignants
       </button>
               <div *ngIf="file.invalid && file.dirty">
                 required
+              </div>
               </div>
             </div>
               <div class="spinner-border m-4" role="status" *ngIf="submitted">

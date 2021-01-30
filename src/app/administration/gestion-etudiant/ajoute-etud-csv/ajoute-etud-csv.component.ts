@@ -26,6 +26,8 @@ export class AjouteEtudCsvComponent implements OnInit {
     };
 
     fileChangeListener($event): void{
+      this.csvRecords= [];
+
       this.files = $event.srcElement.files;
       this.ngxCsvParser.parse(this.files[0], { header: this.header, delimiter: ',' })
       .pipe().subscribe((result: Array<any>) => {
@@ -46,7 +48,6 @@ export class AjouteEtudCsvComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
-
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
@@ -54,6 +55,7 @@ export class AjouteEtudCsvComponent implements OnInit {
 
 
   afficher(): void{
+    this.elements=[];
     for (var i = 0; i < this.csvRecords.length; i++)
     {
     this.elements.push({nom: this.csvRecords[i].lastname, prenom: this.csvRecords[i].firstname, filiere: this.csvRecords[i].filiere, niveau: this.csvRecords[i].niveau ,email: this.csvRecords[i].email });

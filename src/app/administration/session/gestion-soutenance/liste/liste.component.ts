@@ -107,7 +107,6 @@ export class ListeComponent implements OnInit , OnChanges {
   }
   setSelected(idx) {
     this.selectedSoutenance = idx;
-  
   }
   ngOnChanges( changes : SimpleChanges){
 
@@ -176,6 +175,7 @@ export class ListeComponent implements OnInit , OnChanges {
       return (
         isItPublic === this._isItPublic
       );
-    })]
+    })];
+    this.setSelected(0);
   }
 }
