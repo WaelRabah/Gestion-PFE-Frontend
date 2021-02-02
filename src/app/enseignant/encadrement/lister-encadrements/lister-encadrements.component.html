@@ -1,3 +1,6 @@
+<div  *ngIf="loading" class="loadData spinner-border text-success m-4" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
 <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" class="text-center z-depth-1">
   <thead class="sticky-top">
   <tr>
@@ -16,6 +19,9 @@
   </tr>
   </tbody>
   <tfoot class="grey lighten-5 w-100">
+    <tr *ngIf="elements.length==0">
+      <td colspan='4'>Pas de données!</td>
+    </tr>
   <tr>
     <td colspan="4">
       <mdb-table-pagination [tableEl]="tableEl" paginationAlign="" [searchDataSource]="elements"></mdb-table-pagination>

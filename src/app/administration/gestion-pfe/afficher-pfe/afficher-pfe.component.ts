@@ -39,10 +39,12 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
     private cdRef: ChangeDetectorRef,
     private modalService:NgbModal
     ){}
-
+loading=false;
   refresh(){
+    this.loading=true;
     this.pfeService.getPfesByStatus(Status.Attente).subscribe(
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
+        this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.allStudents=etudiants;
         this.previous = this.mdbTable.getDataSource();},

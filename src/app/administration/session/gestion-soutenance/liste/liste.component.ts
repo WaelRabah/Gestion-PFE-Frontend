@@ -151,8 +151,8 @@ export class ListeComponent implements OnInit , OnChanges {
 
   }
   ngOnInit(): void {
-   
     if (!this.passedSoutenances)
+
     return
     this.originals= this.passedSoutenances
       .map(item => {
@@ -171,6 +171,7 @@ export class ListeComponent implements OnInit , OnChanges {
           }
         }
       })
+    
      
      this.soutenances=[...this.originals.filter((item) => {
       const {

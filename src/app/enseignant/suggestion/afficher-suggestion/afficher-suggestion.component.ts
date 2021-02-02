@@ -39,10 +39,12 @@ export class AfficherSuggestionComponent implements OnInit {
     private authService: AuthentificationService,
     private modalService:NgbModal
     ){}
-
+    loading=false;
   refresh(){
+    this.loading=true;
     this.enseignantSuggestionService.getSuggestionsByEnseignantId(this.authService.getUserId()).subscribe(
       (suggestions)=>{this.elements=suggestions;this.mdbTable.setDataSource(this.elements);
+      this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.allSuggestions=suggestions;
         this.previous = this.mdbTable.getDataSource();},

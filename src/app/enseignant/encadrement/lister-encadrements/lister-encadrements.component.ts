@@ -34,10 +34,12 @@ export class ListerEncadrementsComponent implements OnInit {
     private enseignantService: EnseignantService
   ) { }
 
-
+    loading=false;
   refresh() {
+    this.loading=true;
     this.enseignantService.getEncadrement().subscribe(
       (encadrements) => {
+        this.loading=false;
         this.elements = encadrements; this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
         this.allEncadrements = encadrements;

@@ -79,9 +79,12 @@ export class AfficheComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  loading=false;
   refresh() {
+    this.loading  = true;
     this.etudiantService.getEtudiants().subscribe(
       (etudiants) => {
+        this.loading=false;
         this.elements = etudiants;
         this.mdbTable.setDataSource(this.elements);
         this.elements = this.mdbTable.getDataSource();
