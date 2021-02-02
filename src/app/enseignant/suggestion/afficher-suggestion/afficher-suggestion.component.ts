@@ -86,7 +86,7 @@ export class AfficherSuggestionComponent implements OnInit {
 
     this.elements = this.allSuggestions.filter((item) => {
       const { titre , entreprise } = item;
-      console.log(item)
+
       return (
         (searchSujet ? titre.includes(searchSujet) : true) &&
         (searchEntreprise !== 'default' ? entreprise.includes(searchEntreprise) : true)

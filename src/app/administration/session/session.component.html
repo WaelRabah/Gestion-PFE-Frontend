@@ -93,7 +93,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr mdbTableCol *ngFor="let el of elements | filterBy: searchText">
+        <tr mdbTableCol *ngFor="let el of elements">
           <td>{{ el.filiere }}</td>
           <td>{{ el.date | date }}</td>
           <td>

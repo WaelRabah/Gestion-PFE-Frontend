@@ -35,13 +35,14 @@ export class SessionService {
   }
 
   UpdateSession(doc, index: string) {
+    console.log(doc)
     let update = {
-      numero: doc.value.numero.toString(),
-      filiere: doc.value.filiere,
-      president: doc.value.president,
-      date: doc.value.date
+      numero: doc.numero.toString(),
+      filiere: doc.filiere,
+      president: doc.president,
+      date: doc.date
     }
-    this.http.put(environment.backendUrl + index, update).subscribe((data: Session) => {
+    this.http.put(environment.backendUrl+'sessions/' + index, update).subscribe((data: Session) => {
       data.date = data.date.slice(0, 10);
     })
   }

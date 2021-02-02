@@ -13,20 +13,20 @@ import { SessionCreateComponent } from './session-create/session-create.componen
 @Component({
   selector: 'app-session',
   templateUrl: './session.component.html',
-  styleUrls: ['./session.component.css']
+  styleUrls: ['./session.component.css'],
 })
 export class SessionComponent implements OnInit {
   filter_key: string = 'default';
-  filiere: string = 'default'
-  date: string = ''
+  filiere: string = 'default';
+  date: string = '';
   changeFilter(event) {
     this.filter_key = event.target.value;
-
   }
   elements: Session[] = [];
+  allSessions: Session[] = [];
   selectedSession: Session;
   headElements = ['Filiere', 'Date', 'Actions'];
-  searchText: any = {}
+  searchText: any = {};
   refresh: Subject<boolean> = new Subject<boolean>();
   constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) { 
   }
@@ -36,27 +36,26 @@ this.loading=true;
     this.sessionService.fetchSessions().subscribe(data => {
       this.loading=false;
       data.map(session => {
+
         session.date = session.date.slice(0, 10);
-      })
+      });
       this.elements = data;
+      this.allSessions = data;
       this.onClickSession(this.elements[0]._id);
     });
-
-
   }
 
-
   onClickSession(index: string) {
-    
-    this.sessionService.fetchSessionById(this.elements.find(element => element._id == index)._id)
-    .subscribe(
-      (data)=>{
+    this.sessionService
+      .fetchSessionById(
+        this.elements.find((element) => element._id == index)._id
+      )
+      .subscribe((data) => {
         this.selectedSession = data;
-        this.route.navigate(['/Administrateur/session/soutenances/' + this.selectedSession._id])
-      }
-    )
-     
-      
+        this.route.navigate([
+          '/Administrateur/session/soutenances/' + this.selectedSession._id,
+        ]);
+      });
   }
 
   modalRef: MDBModalRef;
@@ -70,13 +69,12 @@ this.loading=true;
       ignoreBackdropClick: false,
       class: 'modal-dialog cascading-modal',
       containerClass: 'largeModal',
-      animated: true
+      animated: true,
     });
     this.modalRef.content.action.subscribe((result: any) => {
       if (result) this.refresh.next(true);
     });
   }
-
 
   openEditModal(data) {
     this.modalRef = this.modalService.show(SessionModifComponent, {
@@ -88,45 +86,53 @@ this.loading=true;
       class: 'modal-dialog cascading-modal',
       containerClass: 'largeModal',
       animated: true,
-      data: { data: data }
+      data: { data: data , id : this.selectedSession._id },
     });
-    this.modalRef.content.action.subscribe((result: any) => { console.log(result); });
+    this.modalRef.content.action.subscribe((result: any) => {
+      console.log(result);
+    });
   }
 
   onDelete(index: string) {
     Swal.fire({
       title: 'Tu es sure?',
-      text: "Vous ne pourrez pas revenir en arrière!",
+      text: 'Vous ne pourrez pas revenir en arrière!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, Supprime la session!'
+      confirmButtonText: 'Oui, Supprime la session!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.sessionService.deleteSession(index).subscribe(response => {
-        });
-        this.route.navigate(["/Administrateur/session"])
-        Swal.fire(
-          'Supprimée!',
-          'La session est supprimé',
-          'success'
-        )
+        this.sessionService.deleteSession(index).subscribe((response) => {});
+        this.route.navigate(['/Administrateur/session']);
+        Swal.fire('Supprimée!', 'La session est supprimé', 'success');
       }
-    })
+    });
   }
   searchItems() {
     this.searchText = {
       date: this.date,
-      filiere: this.filiere
-    }
+      filiere: this.filiere,
+    };
+
+    this.elements = this.allSessions.filter((item) => {
+      const { date , filiere } = item;
+      return (
+        (this.date ? date.includes(this.date) : true) &&
+        (this.filiere  ? filiere.includes(this.filiere) : true)
+      );
+    });
+  
   }
   reset() {
     this.date = '';
     this.filiere = 'default';
     this.searchText = {
       date: this.date,
-      filiere: this.filiere
-    }
+      filiere: this.filiere,
+    };
+    this.elements=this.allSessions
+
   }
 }
