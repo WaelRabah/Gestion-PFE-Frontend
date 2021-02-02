@@ -46,35 +46,14 @@ export class ListeComponent implements OnInit , OnChanges {
     this.selectedSoutenance = -1;
     if (value === "") {
 
-      this.soutenances = this.originals
+      this.filter()
 
     }
     else
     if (value !== this._searchTerm) {
       this._searchTerm = value;
    
-      this.soutenances = this.originals.filter((item) => {
-    
-        const {
-          Examinateur,
-          candidat,
-          entreprise,
-          heure,
-          respEntreprise,
-          respInsat,
-          sujet,
-        } = item.displayable;
-
-        return (
-          Examinateur.includes(value) ||
-          candidat.includes(value) ||
-          entreprise.includes(value) ||
-          heure.includes(value) ||
-          respEntreprise.includes(value) ||
-          respInsat.includes(value) ||
-          sujet.includes(value)
-        );
-      })
+      this.filter()
       
     }
 
@@ -84,10 +63,46 @@ export class ListeComponent implements OnInit , OnChanges {
   }
   @Input()
   set isItPublic(value: boolean) {
+
+    this._isItPublic=value
+    this.filter()
+
+
+  }
+  get isItPublic(): boolean {
+    return this._isItPublic;
+  }
+  setSelected(idx) {
+    this.selectedSoutenance = idx;
+  }
+  filter(){
     this.selectedSoutenance = -1;
+    this.soutenances = this.originals.filter((item) => {
+    
+      const {
+        Examinateur,
+        candidat,
+        entreprise,
+        heure,
+        respEntreprise,
+        respInsat,
+        sujet,
+      } = item.displayable;
+
+      return (
+        Examinateur.includes(this._searchTerm) ||
+        candidat.includes(this._searchTerm) ||
+        entreprise.includes(this._searchTerm) ||
+        heure.includes(this._searchTerm) ||
+        respEntreprise.includes(this._searchTerm) ||
+        respInsat.includes(this._searchTerm) ||
+        sujet.includes(this._searchTerm)
+      );
+    })
+    
     if (this.soutenances) {
-      this._isItPublic = !this._isItPublic;
-      this.soutenances = this.originals.filter((item) => {
+    
+      this.soutenances = this.soutenances.filter((item) => {
         const {
           isItPublic
         } = item.displayable;
@@ -97,16 +112,6 @@ export class ListeComponent implements OnInit , OnChanges {
         );
       });
     }
-
-
-
-
-  }
-  get isItPublic(): boolean {
-    return this._isItPublic;
-  }
-  setSelected(idx) {
-    this.selectedSoutenance = idx;
   }
   ngOnChanges( changes : SimpleChanges){
 
