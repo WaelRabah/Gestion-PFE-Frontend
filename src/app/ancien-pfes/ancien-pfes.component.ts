@@ -35,10 +35,12 @@ export class AncienPfesComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private modalService:NgbModal
     ){}
-
+    loading=false;
   refresh(){
+    this.loading=true;
     this.pfeService.getPfesByStatus(Status.Accepte).subscribe(
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
+        this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.anciensPfes=etudiants;
         this.previous = this.mdbTable.getDataSource();},

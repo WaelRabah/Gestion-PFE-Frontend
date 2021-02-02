@@ -59,9 +59,12 @@ export class AfficheEnsComponent  implements OnInit, AfterViewInit {
     });
     
   }
+  loading=false;
   refresh(){
+    this.loading=true;
     this.enseignantService.getEnseignants().subscribe(
       (enseignants)=>{this.elements=enseignants;this.mdbTable.setDataSource(this.elements);
+        this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.allTeachers=enseignants;
   

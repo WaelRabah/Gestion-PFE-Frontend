@@ -30,9 +30,11 @@ export class SessionComponent implements OnInit {
   refresh: Subject<boolean> = new Subject<boolean>();
   constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) { 
   }
-
+loading=false;
   ngOnInit(): void {
+this.loading=true;
     this.sessionService.fetchSessions().subscribe(data => {
+      this.loading=false;
       data.map(session => {
         session.date = session.date.slice(0, 10);
       })
