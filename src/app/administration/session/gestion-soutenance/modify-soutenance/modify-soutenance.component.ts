@@ -60,7 +60,7 @@ export class ModifySoutenanceComponent implements OnInit {
         heure: this.soutenance.heure,
         public: this.soutenance.isItPublic,
       });
-    }, 800);
+    }, 560);
   }
 
   onSubmit(form: NgForm) {
