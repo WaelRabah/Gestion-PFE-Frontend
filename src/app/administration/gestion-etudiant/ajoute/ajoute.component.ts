@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
 import { EtudiantService } from '../services/etudiant.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'ajoute',
   templateUrl: './ajoute.component.html',
@@ -13,7 +13,9 @@ export class AjouteComponent implements OnInit {
   action: Subject<any> = new Subject();
   submitted = false;
 
-  constructor(private etudiantService:EtudiantService,public modalRef: MDBModalRef) {}
+  constructor(private etudiantService:EtudiantService,
+    private toastr: ToastrService,
+    public modalRef: MDBModalRef) {}
 
   add(etudiantForm: NgForm) {
     this.submitted=true;
@@ -22,7 +24,9 @@ export class AjouteComponent implements OnInit {
 
     this.etudiantService.addEtudiant(etudiantForm.value).subscribe(
       (etudiant)=>{this.submitted=false;this.action.next(etudiant);this.modalRef.hide();},
-      (error)=>{this.submitted=false;console.log(error);}
+      (error)=>{
+        this.toastr.error('L\'étudiant existe',"Echec",{positionClass:'toast-bottom-left'});
+        this.submitted=false;}
     )
   }
 
