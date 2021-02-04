@@ -42,7 +42,10 @@ export class AjouteEtudCsvComponent implements OnInit {
       .pipe().subscribe((result: Array<any>) => {
         this.etudiantService.addEtudiants(result).subscribe(
           (result)=>{this.submitted=false;this.modalRef.hide();},
-          (error)=>{this.submitted=false;console.log(error);}
+          (error)=>{
+            console.log("Mochkla")
+            this.submitted=false;
+            console.log(error);}
         )
       });
   }
