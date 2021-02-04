@@ -17,11 +17,11 @@
   </div>
   <hr />
   <div class="modal-body mb-0">
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="was-validated">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)"  class="needs-validation" novalidate>
       <div class="form-row">
         <div class="col">
           <label for="heure">Heure:</label>
-    
+
           <select class="form-control" id="heure" name="heure" ngModel required>
             <option [value]="heure" *ngFor="let heure of heures">
               {{ heure }}
@@ -66,13 +66,13 @@
           <div class="invalid-feedback">Please fill out this field.</div>
         </div>
       </div>
-      
+
       <div class="text-center mt-1-half">
-        <button 
-        type="submit" 
-        mdbBtn 
+        <button
+        type="submit"
+        mdbBtn
         [disabled]="!f.valid"
-        class="btn info-color-dark white-text mb-2 waves-light" 
+        class="btn info-color-dark white-text mb-2 waves-light"
         mdbWavesEffect>
         Modifier
             <mdb-icon fas icon="check" class="prefix ml-1"></mdb-icon>

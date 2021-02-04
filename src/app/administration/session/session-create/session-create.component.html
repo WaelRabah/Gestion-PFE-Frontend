@@ -1,7 +1,7 @@
 
       <!--Content-->
       <div class="modal-content">
-  
+
         <!--Header-->
         <div class="modal-header green lighten-2 white-text">
           <h4 class="title">
@@ -14,7 +14,7 @@
         </div>
         <!--Body-->
         <div class="modal-body mb-0">
-          <form  #f="ngForm" (ngSubmit)="onSubmit(f)" class="was-validated">
+          <form  #f="ngForm" (ngSubmit)="onSubmit(f)" class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col">
                 <label for="numero">Numero:</label>
@@ -67,7 +67,6 @@
             <button  class="ml-auto add" type="submit" mdbBtn  [disabled]="!f.valid" mdbWavesEffect>Submit</button>
           </div>
           </form>
-  
+
         </div>
         </div>
-     
