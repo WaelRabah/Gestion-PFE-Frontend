@@ -15,6 +15,7 @@ export class AjouteEtudCsvComponent implements OnInit {
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective
     constructor(private cdRef: ChangeDetectorRef, private ngxCsvParser: NgxCsvParser, private etudiantService:EtudiantService, public modalRef: MDBModalRef) { }
+    action: Subject<any> = new Subject();
     csvRecords: any[] = [];
     header = true;
     submitted = false;
@@ -27,23 +28,20 @@ export class AjouteEtudCsvComponent implements OnInit {
 
     fileChangeListener($event): void{
       this.csvRecords= [];
-
       this.files = $event.srcElement.files;
       this.ngxCsvParser.parse(this.files[0], { header: this.header, delimiter: ',' })
       .pipe().subscribe((result: Array<any>) => {
         this.csvRecords = result;
         this.afficher();
-      });
-
+      })
     }
 
   valider(): void{
     this.ngxCsvParser.parse(this.files[0], { header: this.header, delimiter: ',' })
       .pipe().subscribe((result: Array<any>) => {
         this.etudiantService.addEtudiants(result).subscribe(
-          (result)=>{this.submitted=false;this.modalRef.hide();},
+          (result)=>{this.submitted=false;this.modalRef.hide();this.action.next(result);},
           (error)=>{
-            console.log("Mochkla")
             this.submitted=false;
             console.log(error);}
         )
