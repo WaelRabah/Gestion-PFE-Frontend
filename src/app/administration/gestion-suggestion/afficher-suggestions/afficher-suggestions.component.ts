@@ -7,6 +7,11 @@ import { Status } from '../enums/status.enum';
 import { PdfJsViewerComponent } from 'ng2-pdfjs-viewer';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+interface SearchObj {
+  sujet: string;
+  entreprise: string;
+
+}
 @Component({
   selector: 'app-afficher-suggestions',
   templateUrl: './afficher-suggestions.component.html',
@@ -18,10 +23,13 @@ export class AfficherSuggestionsComponent implements OnInit {
   @ViewChild('row', { static: true }) row: ElementRef;
 
   elements: SuggestionPFE[] = [];
-  allStudents: SuggestionPFE[] = [];
+  allSuggestions: SuggestionPFE[] = [];
 
   headElements = ['Sujet', 'Entreprise', 'Description', 'Fiche de renseignement','Action'];
-  searchText: string = '';
+  searchObj: SearchObj = {
+    sujet : '',
+    entreprise  :''
+  };
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -38,7 +46,7 @@ export class AfficherSuggestionsComponent implements OnInit {
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
         this.loading=false;
         this.elements = this.mdbTable.getDataSource();
-        this.allStudents=etudiants;
+        this.allSuggestions=etudiants;
         this.previous = this.mdbTable.getDataSource();},
       (error)=>console.log(error)
     )
@@ -49,7 +57,7 @@ export class AfficherSuggestionsComponent implements OnInit {
     this.accepterSuggestion.emit(suggestionPfe);
   }
   @Input() refreshTable: Subject<boolean> = new Subject<boolean>();
-  @Input() search: Subject<string> = new Subject<string>();
+  @Input() search: Subject<SearchObj> = new Subject<SearchObj>();
 
   ngOnInit() {
     this.refreshTable.subscribe(response => {
@@ -59,9 +67,9 @@ export class AfficherSuggestionsComponent implements OnInit {
     }
    });
    this.search.subscribe(response => {
-      this.searchText=response;
-      this.mdbTablePagination.searchText = response;
-     this.searchItems();
+    this.searchObj=response;
+
+    this.searchItems();
     // Or do whatever operations you need.
 
  });
@@ -77,25 +85,29 @@ export class AfficherSuggestionsComponent implements OnInit {
 
 
   searchItems() {
-
+    const { sujet ,entreprise} = this.searchObj;
+    const searchSujet = sujet;
+    const searchEntreprise = entreprise;
     const prev = this.mdbTable.getDataSource();
-    if (!this.searchText) {
-      this.mdbTable.setDataSource(this.allStudents);
-      this.elements = this.mdbTable.getDataSource();
+    if (sujet === '' && entreprise === '' ) {
+      this.mdbTable.setDataSource(this.allSuggestions);
+      this.elements = this.allSuggestions;
+      return;
     }
 
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
+    this.elements = this.allSuggestions.filter((item) => {
+      const { titre ,entreprise} = item;
 
+      return (
+        (searchSujet ? titre.includes(searchSujet) : true) &&
+        (searchEntreprise ? entreprise.includes(searchEntreprise) : true)
+
+      );
+    });
+
+    this.mdbTable.setDataSource(this.elements);
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
 
   getPDF(id: string) {

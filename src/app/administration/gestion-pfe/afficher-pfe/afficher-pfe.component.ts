@@ -23,7 +23,7 @@ export class AfficherPfeComponent implements OnInit, AfterViewInit {
   @ViewChild('row', { static: true }) row: ElementRef;
 
   elements: SujetPFE[] = [];
-  allStudents: SujetPFE[] = [];
+  allPfes: SujetPFE[] = [];
 
   headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Dossier','Action'];
   searchObj: SearchObj = {
@@ -46,7 +46,7 @@ loading=false;
       (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);console.log(etudiants);
         this.loading=false;
         this.elements = this.mdbTable.getDataSource();
-        this.allStudents=etudiants;
+        this.allPfes=etudiants;
         this.previous = this.mdbTable.getDataSource();},
       (error)=>console.log(error)
     )
@@ -90,12 +90,12 @@ loading=false;
     const searchEntreprise = entreprise;
     const prev = this.mdbTable.getDataSource();
     if (sujet === '' && entreprise === '' ) {
-      this.mdbTable.setDataSource(this.allStudents);
-      this.elements = this.allStudents;
+      this.mdbTable.setDataSource(this.allPfes);
+      this.elements = this.allPfes;
       return;
     }
 
-    this.elements = this.allStudents.filter((item) => {
+    this.elements = this.allPfes.filter((item) => {
       const { titre ,entreprise} = item;
 
       return (
