@@ -26,7 +26,9 @@
               <input  name="nomEncadrantEntreprise" mdbInput type="text" id="nomEncadrantEntreprise" disabled class="form-control" [value]="data.nomEncadrantEntreprise">
               <label for="nomEncadrantEntreprise">Encadrant dans l'entreprise</label>
             </div>
-
+            <div class="md-form form-sm">
+              <p>Nom encadrant a l'insat : <span *ngFor="let ens of data.enseignantsEncadrants" class="badge badge-pill badge-primary">{{ens.username}}</span> </p>
+            </div>
               <label for="description">Description</label>
               <textarea name="description" id="description" disabled class="form-control">{{data.description}}</textarea>
 

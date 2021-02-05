@@ -3,5 +3,6 @@ export class SujetPFE{
   entreprise: string;
   description: string;
   nomEncadrantEntreprise: string;
+  enseignantsEncadrants:Array<any>;
   _id : string;
 }
