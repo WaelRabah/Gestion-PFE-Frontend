@@ -17,8 +17,8 @@ export class SuggestionService {
   userRoute="suggest-pfe/";
 
 
-  getSuggestionsByEnseignantId(enseignantId: string): Observable<SuggestionPFE[]>{
-    return this.http.post<SuggestionPFE[]>(environment.backendUrl+this.userRoute+'search',{enseignantId});
+  getSuggestionsByEnseignantId(enseignant: string): Observable<SuggestionPFE[]>{
+    return this.http.post<SuggestionPFE[]>(environment.backendUrl+this.userRoute+'search',{enseignant});
   }
 
 

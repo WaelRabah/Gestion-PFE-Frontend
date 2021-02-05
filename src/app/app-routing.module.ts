@@ -1,7 +1,6 @@
 import { AlreadyLoggedinGuard } from './guards/already-loggedin.guard';
 import { AccesRefuseComponent } from './acces-refuse/acces-refuse.component';
 import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
 import { AdministrationGuard } from './guards/administration.guard';
 import { EnseignantGuard } from './guards/enseignant.guard';
 import { EtudiantGuard } from './guards/etudiant.guard';
@@ -12,7 +11,7 @@ import { ReinitialiserMdpComponent } from './reinitialiser-mdp/reinitialiser-mdp
 import { AncienPfesComponent } from './ancien-pfes/ancien-pfes.component';
 import { LoggedinGuard } from './guards/loggedin.guard';
 const routes: Routes = [
-  
+
   {
     path: 'ancien-pfes',
     component: AncienPfesComponent,
