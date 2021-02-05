@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EtudiantService } from './../services/etudiant.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +23,8 @@ export class UploadRapportPfeComponent implements OnInit {
   constructor(
     private etudiantService: EtudiantService,
     private authService : AuthentificationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -40,13 +42,18 @@ export class UploadRapportPfeComponent implements OnInit {
     this.submitted = true;
     const formData = new FormData();
     formData.append('file',this.fileToUpload,'rapport-pfe-'+this.authService.getUserName());
-    this.etudiantService.ajouterSujet(formData).subscribe({
+    this.etudiantService.uploadRapport(formData).subscribe({
       error: (error) => {
         this.submitted = false;
         this.toastr.error("Veuillez réssayer ultérieurement",'Une erreur est survenue',{positionClass:'toast-bottom-right'});
         console.log(error)
       },
-      complete: () => this.success = true,
+      complete: () => {
+        this.success = true;
+        setTimeout(()=>{
+          this.etudiantService.showUploadRapportSubject.next(false);
+          this.router.navigate(['ancien-pfes']);
+        },3000)}
     }
     )
   }

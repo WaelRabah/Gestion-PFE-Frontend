@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { EnseignantModel } from '../models/enseignant.model';
 import { ToastrService } from 'ngx-toastr';
 import { AuthentificationService } from 'src/app/services/authentification.service';
@@ -28,6 +29,7 @@ export class AjoutSujetComponent implements OnInit {
     private etudiantService: EtudiantService,
     private authService : AuthentificationService,
     private toastr: ToastrService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,7 +67,12 @@ export class AjoutSujetComponent implements OnInit {
         this.toastr.error("Veuillez réssayer ultérieurement",'Une erreur est survenue',{positionClass:'toast-bottom-right'});
         console.log(error)
       },
-      complete: () => this.success = true,
+      complete: () => {
+        this.success = true;
+        setTimeout(()=>{
+          this.etudiantService.showAjouterSujetSubject.next(false);
+          this.router.navigate(['ancien-pfes']);
+        },3000)}
     }
     )
   }

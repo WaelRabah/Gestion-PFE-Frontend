@@ -43,7 +43,7 @@ export class AfficherSuggestionComponent implements OnInit {
   refresh(){
     this.loading=true;
     this.enseignantSuggestionService.getSuggestionsByEnseignantId(this.authService.getUserId()).subscribe(
-      (suggestions)=>{this.elements=suggestions;this.mdbTable.setDataSource(this.elements);
+      (suggestions)=>{this.elements=suggestions;this.mdbTable.setDataSource(this.elements); console.log(suggestions);
       this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.allSuggestions=suggestions;
@@ -57,7 +57,7 @@ export class AfficherSuggestionComponent implements OnInit {
   ngOnInit() {
    this.search.subscribe(response => {
       this.searchObj=response;
-   
+
      this.searchItems();
     // Or do whatever operations you need.
 

@@ -43,7 +43,7 @@ loading=false;
   refresh(){
     this.loading=true;
     this.pfeService.getPfesByStatus(Status.Attente).subscribe(
-      (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);
+      (etudiants)=>{this.elements=etudiants;this.mdbTable.setDataSource(this.elements);console.log(etudiants);
         this.loading=false;
         this.elements = this.mdbTable.getDataSource();
         this.allStudents=etudiants;
@@ -68,7 +68,7 @@ loading=false;
    });
    this.search.subscribe(response => {
       this.searchObj=response;
- 
+
      this.searchItems();
     // Or do whatever operations you need.
 
@@ -97,10 +97,10 @@ loading=false;
 
     this.elements = this.allStudents.filter((item) => {
       const { titre ,entreprise} = item;
-    
+
       return (
         (searchSujet ? titre.includes(searchSujet) : true) &&
-        (searchEntreprise ? entreprise.includes(searchEntreprise) : true) 
+        (searchEntreprise ? entreprise.includes(searchEntreprise) : true)
 
       );
     });

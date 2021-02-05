@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.role=this.authentificationService.getRole();
-    if(this.role==this.roles.etudiant){
+    /*if(this.role==this.roles.etudiant){
       this.etudiantService.getSujetStatus().subscribe({
         next: data => {this.showAjouterSujet = data }
       });
@@ -31,6 +31,15 @@ export class HeaderComponent implements OnInit {
       this.etudiantService.getRapportStatus().subscribe({
         next: data => {this.showUploadRapport = data;}
       })
+    }*/
+    if(this.role==this.roles.etudiant){
+      this.etudiantService.showAjouterSujetSubject.subscribe(
+        next => this.showAjouterSujet=next
+      )
+      this.etudiantService.showUploadRapportSubject.subscribe(
+        next => this.showUploadRapport=next
+      )
+      this.etudiantService.refreshSubjects();
     }
 
   }

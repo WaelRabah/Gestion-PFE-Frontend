@@ -2,7 +2,7 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 import { Role } from './../../guards/role.enum';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {SujetPFE} from '../models/sujet-pfe.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -10,6 +10,9 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class EtudiantService {
+
+  showAjouterSujetSubject = new Subject<boolean>();
+  showUploadRapportSubject = new Subject<boolean>();
 
   constructor(
     private http: HttpClient,
@@ -42,9 +45,18 @@ export class EtudiantService {
   }
   getDecodedToken(){
     const token =localStorage.getItem('token');
-    
+
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     return decodedToken
+  }
+
+  refreshSubjects(){
+    this.getSujetStatus().subscribe(
+      next => this.showAjouterSujetSubject.next(next)
+    );
+    this.getRapportStatus().subscribe(
+      next => this.showUploadRapportSubject.next(next)
+    )
   }
 }
