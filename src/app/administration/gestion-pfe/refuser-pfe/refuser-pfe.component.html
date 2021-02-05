@@ -22,8 +22,7 @@
               <label for="entreprise">Entreprise</label>
             </div>
 
-              <label for="description">Description</label>
-              <textarea name="description" id="description" disabled class="form-control">{{data.description}}</textarea>
+
 
               <div class="md-form form-sm">
                 <input  name="nomEncadrantEntreprise" mdbInput type="text" id="nomEncadrantEntreprise" disabled class="form-control" [value]="data.nomEncadrantEntreprise">
@@ -32,6 +31,8 @@
               <div class="md-form form-sm">
                 <p>Nom encadrant a l'insat : <span *ngFor="let ens of data.enseignantsEncadrants" class="badge badge-pill badge-primary">{{ens.username}}</span> </p>
               </div>
+			                <label for="description">Description</label>
+              <textarea name="description" id="description" disabled class="form-control">{{data.description}}</textarea>
             <div class="text-center mt-1-half">
               <button
               *ngIf="!submitted"
