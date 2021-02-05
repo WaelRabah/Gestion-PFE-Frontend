@@ -31,4 +31,8 @@ export class PfeService {
   getPDF(id: string){
     return this.http.get(environment.backendUrl+this.route+`pdf/${id}`,{responseType:'blob'});
   }
+
+  getRapport(id: string){
+    return this.http.get(environment.backendUrl+this.route+`rapport/${id}`,{responseType:'blob'});
+  }
 }

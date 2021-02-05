@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 mx-auto">
               <div class="row">
-                
+
                 <div style="margin-top: 8px;" class="col-md-2">
                   <div class="md-form">
                     <select
@@ -16,7 +16,7 @@
                       <option value="default">Filtrer</option>
                       <option value="sujet">Sujet</option>
                       <option value="entreprise">Entreprise</option>
-           
+
                     </select>
                   </div>
                 </div>
@@ -71,7 +71,7 @@
             <div class="col-md-12 mx-auto">
               <div  *ngIf="loading" class="loadData spinner-border text-success m-4" role="status">
                 <span class="sr-only">Loading...</span>
-              </div>          
+              </div>
             <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" class="text-center z-depth-1">
                 <thead class="sticky-top">
                 <tr>
@@ -87,12 +87,13 @@
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.nomEncadrantEntreprise}}</td>
                 <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-                    <button (click)="getPDF(el._id)" type="button" mdbBtn class="edit btn-sm waves-light" mdbWavesEffect>
+                    <button (click)="getPDF(el._id)" type="button" mdbBtn class="edit btn-sm waves-light" mdbWavesEffect *ngIf="el.rapportFilepath">
                     <mdb-icon fas icon="file" class="prefix"></mdb-icon>
                     </button>
+                    {{el.rapportFilepath? '':'indisponible'}}
                 </td>
-             
-            
+
+
                 </tr>
                 </tbody>
                 <tfoot class="grey lighten-5 w-100">
@@ -106,9 +107,9 @@
                 </tr>
                 </tfoot>
             </table>
-            
+
             </div>
           </div>
     </div>
   </div>
-  
+

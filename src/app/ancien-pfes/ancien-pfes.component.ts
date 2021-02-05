@@ -19,7 +19,7 @@ export class AncienPfesComponent implements OnInit {
   elements: SujetPFE[] = [];
   anciensPfes: SujetPFE[] = [];
 
-  headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Dossier'];
+  headElements = ['Sujet', 'Entreprise', 'Description', "Encadrant dans l'entreprise",'Rapport'];
   previous: string;
 
   maxVisibleItems: number = 8;
@@ -61,10 +61,10 @@ export class AncienPfesComponent implements OnInit {
   }
 
   onKey(e){
-    
+
     if (e.key==='Enter')
       this.searchItems()
-    
+
   }
   searchItems() {
 
@@ -79,11 +79,11 @@ export class AncienPfesComponent implements OnInit {
 
     this.elements = this.anciensPfes.filter((item) => {
       const { titre,entreprise } = item;
-      
+
       return (
         (this.sujet ? titre.includes(this.sujet) : true) &&
         (this.entreprise ? entreprise.includes(this.entreprise) : true)
-    
+
       );
     });
 
@@ -97,7 +97,7 @@ export class AncienPfesComponent implements OnInit {
     this.searchItems()
   }
   getPDF(id: string) {
-    this.pfeService.getPDF(id).subscribe(
+    this.pfeService.getRapport(id).subscribe(
       (res) => {
         const modalRef= this.modalService.open(PdfJsViewerComponent,{size:'xl',centered:true,windowClass: 'pdfViewer' });
         modalRef.componentInstance.pdfSrc=res;

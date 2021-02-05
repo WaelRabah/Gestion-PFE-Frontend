@@ -5,4 +5,5 @@ export class SujetPFE{
   nomEncadrantEntreprise: string;
   enseignantsEncadrants:Array<any>;
   _id : string;
+  rapportFilepath: string;
 }

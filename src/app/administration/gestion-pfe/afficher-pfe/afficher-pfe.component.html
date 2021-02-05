@@ -13,7 +13,7 @@
   <tr mdbTableCol  *ngFor="let el of elements; let i = index">
     <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" scope="row">{{el.titre}}</th>
     <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex" >{{el.entreprise}}</td>
-    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
+    <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.student.firstname}} {{el.student.lastname}}</td>
     <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.nomEncadrantEntreprise}}</td>
     <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
       <button (click)="getPDF(el._id)" type="button" mdbBtn class="edit btn-sm waves-light" mdbWavesEffect>
