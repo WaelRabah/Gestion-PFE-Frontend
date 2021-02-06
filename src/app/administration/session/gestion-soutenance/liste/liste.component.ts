@@ -78,6 +78,8 @@ export class ListeComponent implements OnInit , OnChanges {
     this.selectedSoutenance = idx;
   }
   filter(){
+    if (this.originals)
+    {
     this.soutenances = this.originals.filter((item) => {
 
       const {
@@ -113,6 +115,7 @@ export class ListeComponent implements OnInit , OnChanges {
         );
       });
     }
+  }
   }
   ngOnChanges( changes : SimpleChanges){
 
