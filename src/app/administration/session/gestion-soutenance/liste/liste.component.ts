@@ -46,7 +46,7 @@ export class ListeComponent implements OnInit , OnChanges {
     this.selectedSoutenance = -1;
     if (value === "") {
 
-      this.filter()
+      this.soutenances=this.originals
 
     }
     else
@@ -76,7 +76,6 @@ export class ListeComponent implements OnInit , OnChanges {
     this.selectedSoutenance = idx;
   }
   filter(){
-    this.selectedSoutenance = -1;
     this.soutenances = this.originals.filter((item) => {
     
       const {

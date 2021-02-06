@@ -31,18 +31,23 @@ export class SessionComponent implements OnInit {
   constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) { 
   }
 loading=false;
-  ngOnInit(): void {
-this.loading=true;
-    this.sessionService.fetchSessions().subscribe(data => {
-      this.loading=false;
-      data.map(session => {
+fetchSessions(){
+  this.loading=true;
+  this.sessionService.fetchSessions().subscribe(data => {
+    this.loading=false;
+    data.map(session => {
 
-        session.date = session.date.slice(0, 10);
-      });
-      this.elements = data;
-      this.allSessions = data;
-      this.onClickSession(this.elements[0]._id);
+      session.date = session.date.slice(0, 10);
     });
+    this.elements = data;
+    this.allSessions = data;
+    this.onClickSession(this.elements[0]._id);
+  });
+}
+  ngOnInit(): void {
+      this.fetchSessions()
+
+      this.modalService.closed.subscribe(()=>   this.fetchSessions())
   }
 
   onClickSession(index: string) {
@@ -72,8 +77,10 @@ this.loading=true;
       animated: true,
     });
     this.modalRef.content.action.subscribe((result: any) => {
+      
       if (result) this.refresh.next(true);
     });
+ 
   }
 
   openEditModal(data) {
@@ -86,41 +93,46 @@ this.loading=true;
       class: 'modal-dialog cascading-modal',
       containerClass: 'largeModal',
       animated: true,
-      data: { data: data , id : this.selectedSession._id },
+      data: { data: data , id : data._id },
     });
-    this.modalRef.content.action.subscribe((result: any) => {
-      console.log(result);
-    });
+   
+    this.modalRef.content.onClose.subscribe(result => {
+      console.log('results', result);
+  })
+   
   }
 
   onDelete(index: string) {
     Swal.fire({
-      title: 'Tu es sure?',
-      text: 'Vous ne pourrez pas revenir en arrière!',
+      title: 'Archiver la session',
+      text: 'Tu es sur ?!!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Oui, Supprime la session!',
+      confirmButtonText: 'Oui, archiver la session!',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.sessionService.deleteSession(index).subscribe((response) => {});
+        this.sessionService.archiveSession(index).subscribe((response) => {this.fetchSessions()});
         this.route.navigate(['/Administrateur/session']);
-        Swal.fire('Supprimée!', 'La session est supprimé', 'success');
+        Swal.fire('Archivée!', 'La session est archivée', 'success');
+        
       }
     });
+    
   }
   searchItems() {
     this.searchText = {
       date: this.date,
       filiere: this.filiere,
     };
-
+    
     this.elements = this.allSessions.filter((item) => {
       const { date , filiere } = item;
+      
       return (
-        (this.date ? date.includes(this.date) : true) &&
-        (this.filiere  ? filiere.includes(this.filiere) : true)
+        (this.date ? date===this.date : true) &&
+        (this.filiere!=='default'  ? filiere.includes(this.filiere) : true)
       );
     });
   

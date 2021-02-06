@@ -39,6 +39,7 @@ export class SessionCreateComponent implements OnInit {
       data.date = data.date.slice(0, 10);
       this.modalRef.hide();
     });
+    this.route.navigate(['/Administrateur/session'])
   }
 
   onClear() {

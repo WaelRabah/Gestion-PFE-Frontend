@@ -30,12 +30,11 @@ export class SessionService {
   }
 
 
-  deleteSession(index: string) {
-    return this.http.delete(`${environment.backendUrl}sessions/${index}`);
+  archiveSession(index: string) {
+    return this.http.get(`${environment.backendUrl}sessions/archive/${index}`);
   }
 
   UpdateSession(doc, index: string) {
-    console.log(doc)
     let update = {
       numero: doc.numero.toString(),
       filiere: doc.filiere,
