@@ -41,13 +41,10 @@ fetchSessions(){
     });
     this.elements = data;
     this.allSessions = data;
-    this.onClickSession(this.elements[0]._id);
   });
 }
   ngOnInit(): void {
       this.fetchSessions()
-
-      this.modalService.closed.subscribe(()=>   this.fetchSessions())
   }
 
  onClickSession(index: string) {
@@ -60,7 +57,7 @@ fetchSessions(){
         this.route.navigate([
           '/Administrateur/session/soutenances/' + this.selectedSession._id,
         ]);
-      }).unsubscribe();
+      });
   }
 
   modalRef: MDBModalRef;

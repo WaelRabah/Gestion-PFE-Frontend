@@ -23,15 +23,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.role=this.authentificationService.getRole();
-    /*if(this.role==this.roles.etudiant){
-      this.etudiantService.getSujetStatus().subscribe({
-        next: data => {this.showAjouterSujet = data }
-      });
 
-      this.etudiantService.getRapportStatus().subscribe({
-        next: data => {this.showUploadRapport = data;}
-      })
-    }*/
     if(this.role==this.roles.etudiant){
       this.etudiantService.showAjouterSujetSubject.subscribe(
         next => this.showAjouterSujet=next
