@@ -60,7 +60,7 @@ fetchSessions(){
         this.route.navigate([
           '/Administrateur/session/soutenances/' + this.selectedSession._id,
         ]);
-      }).unsubscribe();
+      });
   }
 
   modalRef: MDBModalRef;
