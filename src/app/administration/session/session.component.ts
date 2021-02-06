@@ -45,6 +45,7 @@ fetchSessions(){
 }
   ngOnInit(): void {
       this.fetchSessions()
+      
   }
 
  onClickSession(index: string) {
