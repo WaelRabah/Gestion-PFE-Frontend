@@ -28,7 +28,7 @@ export class SessionComponent implements OnInit {
   headElements = ['Filiere', 'Date', 'Actions'];
   searchText: any = {};
   refresh: Subject<boolean> = new Subject<boolean>();
-  constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) { 
+  constructor(private sessionService: SessionService , activated : ActivatedRoute, private route: Router, private modalService: MDBModalService) {
   }
 loading=false;
 fetchSessions(){
@@ -50,7 +50,7 @@ fetchSessions(){
       this.modalService.closed.subscribe(()=>   this.fetchSessions())
   }
 
-  onClickSession(index: string) {
+ onClickSession(index: string) {
     this.sessionService
       .fetchSessionById(
         this.elements.find((element) => element._id == index)._id
@@ -60,7 +60,7 @@ fetchSessions(){
         this.route.navigate([
           '/Administrateur/session/soutenances/' + this.selectedSession._id,
         ]);
-      });
+      }).unsubscribe();
   }
 
   modalRef: MDBModalRef;
@@ -77,10 +77,10 @@ fetchSessions(){
       animated: true,
     });
     this.modalRef.content.action.subscribe((result: any) => {
-      
+
       if (result) this.refresh.next(true);
     });
- 
+
   }
 
   openEditModal(data) {
@@ -95,11 +95,11 @@ fetchSessions(){
       animated: true,
       data: { data: data , id : data._id },
     });
-   
+
     this.modalRef.content.onClose.subscribe(result => {
       console.log('results', result);
   })
-   
+
   }
 
   onDelete(index: string) {
@@ -116,26 +116,26 @@ fetchSessions(){
         this.sessionService.archiveSession(index).subscribe((response) => {this.fetchSessions()});
         this.route.navigate(['/Administrateur/session']);
         Swal.fire('Archivée!', 'La session est archivée', 'success');
-        
+
       }
     });
-    
+
   }
   searchItems() {
     this.searchText = {
       date: this.date,
       filiere: this.filiere,
     };
-    
+
     this.elements = this.allSessions.filter((item) => {
       const { date , filiere } = item;
-      
+
       return (
         (this.date ? date===this.date : true) &&
         (this.filiere!=='default'  ? filiere.includes(this.filiere) : true)
       );
     });
-  
+
   }
   reset() {
     this.date = '';

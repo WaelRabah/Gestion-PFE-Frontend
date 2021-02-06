@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MDBModalRef } from 'angular-bootstrap-md';
 import { Subject } from 'rxjs';
+import { Etudiant } from '../models/etudiant';
 import { EtudiantService } from '../services/etudiant.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { EtudiantService } from '../services/etudiant.service';
 })
 export class EditComponent implements OnInit {
   data:any;
-  action: Subject<any> = new Subject();
+  action: Subject<Etudiant> = new Subject();
   constructor(private etudiantService:EtudiantService,public modalRef: MDBModalRef) {}
   submitted=false;
   edit(etudiantForm: NgForm) {
