@@ -44,10 +44,11 @@ export class SessionModifComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    const president = this.enseignants.find(item=>item._id=form.value.president)
+    const president = this.enseignants.find(item=>item._id===form.value.president)
     const body = {...form.value , president}
     this.sessionService.UpdateSession(body, this.id.toString());
     this.modalRef.hide();
+    this.router.navigate(['/Administrateur/session']);
   }
 
   onClear() {
